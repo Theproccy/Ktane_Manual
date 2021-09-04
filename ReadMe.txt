@@ -9,13 +9,11 @@ Currently, the program is capable of:
 -Wire Sequences
 
 Current Feature Being worked on:
-todo
--Mazes
+Look under Projects then Main
+
 
 Planed Features
--GUI
--Sequences todo add images
-- add pause button to exit in case of mistake
+Look under Projects then Main
 
 
 Known issues:

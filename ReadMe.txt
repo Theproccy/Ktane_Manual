@@ -1,24 +1,21 @@
-This program aims to be a quick manual to allow for speedie runs by removeing the ineficany of using a pc
+This program is an automated manual for the game Keep Talking Nobody Explodes
 
-Completed tasks:
--data input
--simple wires
--button
--simon says
--memory
--complex wires
-- passwords
--wire seqences
+Currently, the program is capable of:
+-Wires
+-Buttons
+-Simon Says
+-Memory
+-Complex Wires
+-Wire Sequences
 
-Remaining Tasks
-- create maze data todo
-- mazes todo
+Current Feature Being worked on:
+todo
+-Mazes
 
+Planed Features
 
+-Sequences todo add images
+- add pause button to exit in case of mistake
 
-deferd:
-
--keypads todo add images
-- add pause button to exit incase of mistake
 Known issues:
 

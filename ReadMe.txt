@@ -13,9 +13,10 @@ todo
 -Mazes
 
 Planed Features
-
+-GUI
 -Sequences todo add images
 - add pause button to exit in case of mistake
+
 
 Known issues:
 

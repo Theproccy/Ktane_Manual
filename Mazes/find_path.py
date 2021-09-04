@@ -1,56 +1,66 @@
-def solve_maze(start_cord: list[list[int]], current_cord: list[list[int]], end_cord: list[list[int]],
-               explored_cord: list,  maze: dict) -> list:
-    if current_cord == end_cord:
-        return [current_cord]
-    elif current_cord in explored_cord:
+def solve_maze(start_coordinates: list[list[int]], current_coordinates: list[list[int]], end_coordinates: list[list[int]],
+               explored_coordinates: list, maze: dict) -> list:
+    """this will find a path to solve the maze.
+    Args:
+        start_coordinates (list[list[int]]): the starting pos of the player
+        current_coordinates (list[list[int]]): the current pos which is used for recursion
+        end_coordinates (list[list[int]]): the destination pos
+        explored_coordinates (list): a list of cords which has been travelled by the code
+        maze (dict): a dict with all the info about the maze that
+    Returns:
+        list: contains a list of cords which is the path from the start to end
+    """
+    if current_coordinates == end_coordinates:  # check if we have reached the destination
+        return [current_coordinates]
+    elif current_coordinates in explored_coordinates:  # check if we have explored the cord
         return
     else:
-        explored_cord.append(current_cord)
+        explored_coordinates.append(current_coordinates)
 
         # check if we can move to top of the current box
-        if current_cord[1] >= 1:
-            if not(maze["horizontal_wall"][current_cord[1]-1][current_cord[0]]):
-                ans = solve_maze(start_cord, [current_cord[0], current_cord[1]-1],
-                                 end_cord, explored_cord, maze)
-                if ans and start_cord == current_cord:
-                    ans.append(current_cord)
-                    return ans
+        if current_coordinates[1] >= 1:
+            if not (maze["horizontal_wall"][current_coordinates[1] - 1][current_coordinates[0]]):
+                ans = solve_maze(start_coordinates, [current_coordinates[0], current_coordinates[1] - 1],
+                                 end_coordinates, explored_coordinates, maze)
+                if ans and start_coordinates == current_coordinates:
+                    ans.append(current_coordinates)
+                    return ans[::-1]
                 elif ans:
-                    ans.append(current_cord)
+                    ans.append(current_coordinates)
                     return ans
 
         # check if we can move to bottom of the current box
-        if current_cord[1] < 5:
-            if not(maze["horizontal_wall"][current_cord[1]][current_cord[0]]):
-                ans = solve_maze(start_cord, [current_cord[0], current_cord[1]+1],
-                                 end_cord, explored_cord, maze)
-                if ans and start_cord == current_cord:
-                    ans.append(current_cord)
-                    return ans
+        if current_coordinates[1] < 5:
+            if not (maze["horizontal_wall"][current_coordinates[1]][current_coordinates[0]]):
+                ans = solve_maze(start_coordinates, [current_coordinates[0], current_coordinates[1] + 1],
+                                 end_coordinates, explored_coordinates, maze)
+                if ans and start_coordinates == current_coordinates:
+                    ans.append(current_coordinates)
+                    return ans[::-1]
                 elif ans:
-                    ans.append(current_cord)
+                    ans.append(current_coordinates)
                     return ans
 
         # check if we can move to left of the current box
-        if current_cord[0] >= 1:
-            if not(maze["vertical_wall"][current_cord[1]][current_cord[0]-1]):
-                ans = solve_maze(start_cord, [current_cord[0]-1, current_cord[1]],
-                                 end_cord, explored_cord, maze)
-                if ans and start_cord == current_cord:
-                    ans.append(current_cord)
-                    return ans
+        if current_coordinates[0] >= 1:
+            if not (maze["vertical_wall"][current_coordinates[1]][current_coordinates[0] - 1]):
+                ans = solve_maze(start_coordinates, [current_coordinates[0] - 1, current_coordinates[1]],
+                                 end_coordinates, explored_coordinates, maze)
+                if ans and start_coordinates == current_coordinates:
+                    ans.append(current_coordinates)
+                    return ans[::-1]
                 elif ans:
-                    ans.append(current_cord)
+                    ans.append(current_coordinates)
                     return ans
 
         # check if we can move to right of the current box
-        if current_cord[0] < 5:
-            if not(maze["vertical_wall"][current_cord[1]][current_cord[0]]):
-                ans = solve_maze(start_cord, [current_cord[0]+1, current_cord[1]],
-                                 end_cord, explored_cord, maze)
-                if ans and start_cord == current_cord:
-                    ans.append(current_cord)
-                    return ans
+        if current_coordinates[0] < 5:
+            if not (maze["vertical_wall"][current_coordinates[1]][current_coordinates[0]]):
+                ans = solve_maze(start_coordinates, [current_coordinates[0] + 1, current_coordinates[1]],
+                                 end_coordinates, explored_coordinates, maze)
+                if ans and start_coordinates == current_coordinates:
+                    ans.append(current_coordinates)
+                    return ans[::-1]
                 elif ans:
-                    ans.append(current_cord)
+                    ans.append(current_coordinates)
                     return ans

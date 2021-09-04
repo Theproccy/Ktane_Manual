@@ -1,7 +1,3 @@
-# import multiprocessing
-import graphics
-
-
 def data_input():  # collects misc data abound the bomb for other defusing steps
     # var creation
     indicator_light_frk = False
@@ -539,12 +535,6 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
             wire_sequences()
         else:
             pass
-
-
-def main_window():
-    main_win = graphics.GraphWin("Keep Talking Nobody Explods Automated Manual", 800, 600)
-    main_win.setBackground("blue")
-    main_win.getMouse()
 
 
 def main():

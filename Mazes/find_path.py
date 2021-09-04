@@ -1,4 +1,5 @@
-def solve_maze(start_coordinates: list[list[int]], current_coordinates: list[list[int]], end_coordinates: list[list[int]],
+def solve_maze(start_coordinates: list[list[int]], current_coordinates: list[list[int]],
+               end_coordinates: list[list[int]],
                explored_coordinates: list, maze: dict) -> list:
     """this will find a path to solve the maze.
     Args:

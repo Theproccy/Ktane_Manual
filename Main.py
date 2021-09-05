@@ -1,3 +1,6 @@
+from maze_path_finding import solve_maze
+
+
 def data_input():  # collects misc data abound the bomb for other defusing steps
     # var creation
     indicator_light_frk = False
@@ -174,7 +177,24 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
 
 
 def maze():  # pathfinds moves to complet
-    pass
+    # data input
+    print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )")
+    green_1_input = input("Please enter the coordinate of the green circle : ")
+    green_2_input = input("Please enter the coordinate of the other green circle : ")
+    start_position_input = input("Please enter the coordinate of the white dot : ")
+    end_position_input = input("Please enter the coordinate of the red triangle : ")
+
+    # formating
+    for i in range(2):
+        green_1 = green_1_input.split(",")
+        green_2 = green_2_input.split(",")
+        start_position = start_position_input.split(",")
+        end_position = end_position_input.split(",")
+
+    # maze selection
+    maze_map =
+
+    route = solve_maze(start_position, start_position, end_position, [], maze_map)
 
 
 def simon_says(serial_number):

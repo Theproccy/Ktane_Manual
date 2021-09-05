@@ -1,5 +1,5 @@
-def solve_maze(start_coordinates: list[list[int]], current_coordinates: list[list[int]],
-               end_coordinates: list[list[int]],
+def solve_maze(start_coordinates: list[int], current_coordinates: list[int],
+               end_coordinates: list[int],
                explored_coordinates: list, maze: dict) -> list:
     """this will find a path to solve the maze.
     Args:
@@ -14,7 +14,7 @@ def solve_maze(start_coordinates: list[list[int]], current_coordinates: list[lis
     if current_coordinates == end_coordinates:  # check if we have reached the destination
         return [current_coordinates]
     elif current_coordinates in explored_coordinates:  # check if we have explored the cord
-        return
+        pass
     else:
         explored_coordinates.append(current_coordinates)
 

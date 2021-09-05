@@ -117,8 +117,19 @@ def wires(serial_num):  # Simple wires
 
 def button(battery_num, indicator_car, indicator_frk):  # The Button
     # var creation
-    button_color_list = ["BLUE", "RED", "WHITE", "YELLOW", "BLACK"]  # all color options for the button todo
-    button_label_list = ["Abort", "Detonate", "Hold", "Press"]  # all the label Options for the button
+    button_color_dictionary = {
+        1: "BLUE",
+        2: "RED",
+        3: "WHITE",
+        4: "YELLOW",
+        5: "BLACK"
+    }  # all color options for the button
+    button_label_dictionary = {
+        1: "Abort",
+        2: "Detonate",
+        3: "Hold",
+        4: "Press"
+    }  # all the label Options for the button
     # colors
     blue = False
     red = False
@@ -130,10 +141,10 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
     hold = False
 
     # data input
-    print(button_color_list)
+    print(button_color_dictionary)
     button_color_input = int(
         input("Please select the color of the button by entering the place in the list (e.g. Blue = 1) : "))
-    print(button_label_list)
+    print(button_label_dictionary)
     button_label_input = int(
         input("Please select the label of the button by entering the place in the list (e.g. Abort = 1) : "))
 
@@ -185,20 +196,17 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
 
 def maze(mazes):  # a pathfinder that calculates moves to complete
     # var creation
-    commands_condensed = []
     word_num = 1
     temp_list = []
     num = 0
     maze_map = {}
-    route = []
-    commands = []
     # data input
     print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )")
     green_1_input = input("Please enter the coordinate of the green circle : ")
     green_2_input = input("Please enter the coordinate of the other green circle : ")
     start_position_input = input("Please enter the coordinate of the white dot : ")
     end_position_input = input("Please enter the coordinate of the red triangle : ")
-
+    print("\n")  # quality of life new line
     # formatting
     green_1 = green_1_input.split(",")
     green_2 = green_2_input.split(",")
@@ -223,30 +231,23 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
             if green_2 == temp_green_1 or green_2 == temp_green_2:
                 maze_map = mazes[str(i + 1)]
 
-    route_found = False
-    try:
-        route = solve_maze(start_position, start_position, end_position, [], maze_map)
-        print(route)
-        route_found = True
-    except route is None:
-        print("invalid")
+    route = solve_maze(start_position, start_position, end_position, [], maze_map)
 
-    if route_found is True:  # stops error for the try except
-        commands = []
-        commands_condensed = []
-        for i in range(len(route) - 1):
-            temp_1 = route[i]
-            temp_2 = route[i + 1]
-            if temp_1[0] == temp_2[0]:  # if the x values are the same:
-                if temp_1[1] > temp_2[1]:  # up
-                    commands.append("UP : ")
-                if temp_1[1] < temp_2[1]:  # down
-                    commands.append("DOWN : ")
-            if temp_1[1] == temp_2[1]:  # if the y values are the same:
-                if temp_1[0] > temp_2[0]:  # left
-                    commands.append("LEFT : ")
-                if temp_1[0] < temp_2[0]:  # right
-                    commands.append("RIGHT : ")
+    commands = []
+    commands_condensed = []
+    for i in range(len(route) - 1):
+        temp_1 = route[i]
+        temp_2 = route[i + 1]
+        if temp_1[0] == temp_2[0]:  # if the x values are the same:
+            if temp_1[1] > temp_2[1]:  # up
+                commands.append("UP : ")
+            if temp_1[1] < temp_2[1]:  # down
+                commands.append("DOWN : ")
+        if temp_1[1] == temp_2[1]:  # if the y values are the same:
+            if temp_1[0] > temp_2[0]:  # left
+                commands.append("LEFT : ")
+            if temp_1[0] < temp_2[0]:  # right
+                commands.append("RIGHT : ")
 
     # output formatting
     while num <= (len(commands) - 2):
@@ -656,7 +657,10 @@ def main():
             module_select(serial_number, battery_numbers, parallel,
                           indicator_light_frk, indicator_light_car, ALL_MAZES)
         except:
-            print("There was an error in the input if u think there is no error in your input raise an issue in https://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new")
+            print(
+                "There was an error in the input."
+                "\nIf you think there is no error in your input raise an issue at:"
+                "\nhttps://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new")
 
         # is_bomb_defused = int(input("Is Bomb Defused (1 for yes)"))
         # if is_bomb_defused == 1:

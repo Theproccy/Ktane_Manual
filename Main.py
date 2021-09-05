@@ -178,13 +178,15 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
               "Else 1 in any position")
 
 
-def maze(ALL_MAZES):  # pathfinds moves to complet
+def maze(mazes):  # a pathfinder that calculates moves to complete
     # var creation
-    green_1 = []
-    green_2 = []
-    start_position = []
-    end_position = []
-    commands_dictionary = {}
+    commands_condensed = []
+    word_num = 1
+    temp_list = []
+    num = 0
+    maze_map = {}
+    route = []
+    commands = []
     # data input
     print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )")
     green_1_input = input("Please enter the coordinate of the green circle : ")
@@ -192,7 +194,7 @@ def maze(ALL_MAZES):  # pathfinds moves to complet
     start_position_input = input("Please enter the coordinate of the white dot : ")
     end_position_input = input("Please enter the coordinate of the red triangle : ")
 
-    # formating
+    # formatting
     green_1 = green_1_input.split(",")
     green_2 = green_2_input.split(",")
     start_position = start_position_input.split(",")
@@ -206,7 +208,7 @@ def maze(ALL_MAZES):  # pathfinds moves to complet
 
     # maze selection
     for i in range(9):
-        temp = ALL_MAZES[str(i + 1)]
+        temp = mazes[str(i + 1)]
         temp_green_1 = temp["Green_circle_1"]
         temp_green_2 = temp["Green_circle_2"]
         temp_green_1 = temp_green_1[0]
@@ -214,14 +216,14 @@ def maze(ALL_MAZES):  # pathfinds moves to complet
 
         if green_1 == temp_green_1 or green_1 == temp_green_2:
             if green_2 == temp_green_1 or green_2 == temp_green_2:
-                maze_map = ALL_MAZES[str(i + 1)]
-                continue
+                maze_map = mazes[str(i + 1)]
+
     route_found = False
     try:
         route = solve_maze(start_position, start_position, end_position, [], maze_map)
         print(route)
         route_found = True
-    except:
+    except route is None:
         print("invalid")
 
     if route_found is True:  # stops error for the try except
@@ -241,20 +243,22 @@ def maze(ALL_MAZES):  # pathfinds moves to complet
                 if temp_1[0] < temp_2[0]:  # right
                     commands.append("RIGHT : ")
 
-        for j in range(len(commands) - 1):
-            word_num = 0
-            temp_list = []
-
-            while commands[j] == commands[j + 1]:
-                if j < (len(commands) - 1):
-                    print(j)
-                    if word_num == 0:
-                        temp_list.append(commands[j])
-                    word_num += 1
-                    j += 1
+    # output formatting
+    while num <= (len(commands) - 2):
+        repeated_word = False
+        if commands[num] == commands[num + 1]:  # if there are multiple in order of instructions
+            word_num += 1
+            repeated_word = True
+        if repeated_word is False or num == (len(commands) - 2):  # when the multiples come to an end
+            temp_list.append(commands[num])
             temp_list.append(word_num)
-            commands_condensed.append(temp_list)
-        print(commands_condensed)
+            commands_condensed.append(str(commands[num]) + str(word_num))
+            temp_list = []
+            word_num = 1
+        num += 1
+    # output and formatting
+    for k in range(len(commands_condensed)):
+        print(commands_condensed[k])
 
 
 def simon_says(serial_number):
@@ -588,7 +592,7 @@ def wire_sequences():
 
 
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
-                  indicator_light_car, ALL_MAZES):  # function for all of the questions to be asked
+                  indicator_light_car, all_mazes):  # function for all of the questions to be asked
     print("\n"
           "modules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
           "Wire Sequences(8)")
@@ -602,7 +606,7 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
         elif selection == 2:
             button(battery_numbers, indicator_light_car, indicator_light_frk)
         elif selection == 3:
-            maze(ALL_MAZES)
+            maze(all_mazes)
         elif selection == 4:
             simon_says(serial_number)
         elif selection == 5:
@@ -618,8 +622,7 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
 
 
 def main():
-    MAPS = open("data.json")
-    ALL_MAZES = json.load(MAPS)
+    ALL_MAZES = json.load(open("data.json"))
     serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
     escape = False
     while escape is False:
@@ -630,8 +633,4 @@ def main():
         # escape = True
 
 
-# main()
-
-MAPS = open("data.json")
-ALL_MAZES = json.load(MAPS)
-maze(ALL_MAZES)
+main()

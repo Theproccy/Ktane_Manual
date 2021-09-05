@@ -6,10 +6,14 @@ def data_input():  # collects misc data abound the bomb for other defusing steps
 
     # data input
     serial_number = list(input("Please Enter the Serial Number : "))
-    battery_numbers = int(input("Please enter the number of batteries on the bomb : "))
-    parallel_input = int(input("Dose the bomb have a parallel port (if Yes Type 1) : "))
-    indicator_light_frk_input = int(input("Dose the bomb have a lit FRK Indicator (if Yes Type 1) : "))
-    indicator_light_car_input = int(input("Dose the bomb have a lit CAR Indicator (if Yes Type 1) : "))
+    battery_numbers = int(
+        input("Please enter the number of batteries on the bomb : "))
+    parallel_input = int(
+        input("Dose the bomb have a parallel port (if Yes Type 1) : "))
+    indicator_light_frk_input = int(
+        input("Dose the bomb have a lit FRK Indicator (if Yes Type 1) : "))
+    indicator_light_car_input = int(
+        input("Dose the bomb have a lit CAR Indicator (if Yes Type 1) : "))
 
     if indicator_light_frk_input == 1:  # converts the input into a bool
         indicator_light_frk = True
@@ -38,7 +42,8 @@ def wires(serial_num):  # Simple wires
     # data gathering from input
     wire_num = len(wire_input)  # the number of wires
     wire = wire_input.upper()  # converts wires to uppercase
-    wire_list = wire.strip()  # splits the wires to individual values and stores them as a list
+    # splits the wires to individual values and stores them as a list
+    wire_list = wire.strip()
 
     # converts input into the number of each color of wire
     for i in range(wire_num):
@@ -107,8 +112,10 @@ def wires(serial_num):  # Simple wires
 
 def button(battery_num, indicator_car, indicator_frk):  # The Button
     # var creation
-    button_color_list = ["BLUE", "RED", "WHITE", "YELLOW", "BLACK"]  # all color options for the button
-    button_label_list = ["Abort", "Detonate", "Hold", "Press"]  # all the label Options for the button
+    button_color_list = ["BLUE", "RED", "WHITE", "YELLOW",
+                         "BLACK"]  # all color options for the button
+    # all the label Options for the button
+    button_label_list = ["Abort", "Detonate", "Hold", "Press"]
     # colors
     blue = False
     red = False
@@ -217,64 +224,77 @@ def memory():
     if display_num == 3:
         print("Press the button in the Third position")
         position_list.append(3)
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
     elif display_num == 4:
         print("Press the button in the Fourth position")
         position_list.append(4)
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
     else:
         print("Press the button in the Second position")
         position_list.append(2)
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
 
     # Stage 2
     display_num = int(input("what is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button Labeled '4'")
         number_list.append(4)
-        position_list.append(input("What is the position of the button you pressed : "))
+        position_list.append(
+            input("What is the position of the button you pressed : "))
     elif display_num == 3:
         print("Press the button in the First position")
         position_list.append(1)
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
     else:
         print("Press the button in the ", position_list[0], " position")
         position_list.append(position_list[0])
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
 
     # Stage 3
     display_num = int(input("what is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button Labeled ", number_list[1])
         number_list.append(number_list[1])
-        position_list.append(input("What is the position of the button you pressed : "))
+        position_list.append(
+            input("What is the position of the button you pressed : "))
     elif display_num == 2:
         print("Press the button Labeled ", number_list[0])
         number_list.append(number_list[0])
-        position_list.append(input("What is the position of the button you pressed : "))
+        position_list.append(
+            input("What is the position of the button you pressed : "))
     elif display_num == 3:
         print("Press the button in the Third position")
         position_list.append(3)
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
     else:
         print("Press the button Labeled '4'")
         number_list.append(4)
-        position_list.append(input("What is the position of the button you pressed : "))
+        position_list.append(
+            input("What is the position of the button you pressed : "))
 
     # Stage 4
     display_num = int(input("what is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button in position ", position_list[0])
         position_list.append(position_list[0])
-        number_list.append(input("What is the label of the button you pressed : "))
+        number_list.append(
+            input("What is the label of the button you pressed : "))
     elif display_num == 2:
         print("Press the button in the First position")
         position_list.append(1)
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
     else:
         print("Press the button in the ", position_list[1], " position")
         position_list.append(position_list[1])
-        number_list.append(input("What is the number of the button you pressed : "))
+        number_list.append(
+            input("What is the number of the button you pressed : "))
 
     # Stage 5
     display_num = int(input("what is the number displayed on the module : "))
@@ -330,7 +350,8 @@ def complex_wires(serial_number, parallel_port, battery_num):
               "+------+-------+-------+-------+-------+\n"
               "| Both | Don't | Don't | Cut   | Don't |\n"
               "+------+-------+-------+-------+-------+")
-    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num >= 2:  # parallel and battery
+    # parallel and battery
+    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num >= 2:
         print("+------+-------+-------+-------+-------+\n"
               "|      | White | Red   | Blue  | Both  |\n"
               "+======+=======+=======+=======+=======+\n"
@@ -354,7 +375,8 @@ def complex_wires(serial_number, parallel_port, battery_num):
               "+------+-------+-------+-------+-------+\n"
               "| Both | Don't | Don't | Don't | Don't |\n"
               "+------+-------+-------+-------+-------+")
-    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num >= 2:  # even serial and battery
+    # even serial and battery
+    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num >= 2:
         print("+------+-------+-----+-------+-------+\n"
               "|      | White | Red | Blue  | Both  |\n"
               "+======+=======+=====+=======+=======+\n"
@@ -366,7 +388,8 @@ def complex_wires(serial_number, parallel_port, battery_num):
               "+------+-------+-----+-------+-------+\n"
               "| Both | Cut   | Cut | Don't | Don't |\n"
               "+------+-------+-----+-------+-------+")
-    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is True and battery_num < 2:  # even serial and parallel
+    # even serial and parallel
+    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is True and battery_num < 2:
         print("+------+-------+-------+-------+-------+\n"
               "|      | White | Red   | Blue  | Both  |\n"
               "+======+=======+=======+=======+=======+\n"
@@ -405,9 +428,12 @@ def passwords():
     answers_list_2 = []
     answers_list_3 = []
     # data input
-    first_letter_input = str(input("Enter all of the letters in the first column (E.G. aelzx) : "))
-    second_letter_input = str(input("Enter all of the letters in the Second column (E.G. aelzx) : "))
-    third_letter_input = str(input("Enter all of the letters in the third column (E.G. aelzx) : "))
+    first_letter_input = str(
+        input("Enter all of the letters in the first column (E.G. aelzx) : "))
+    second_letter_input = str(
+        input("Enter all of the letters in the Second column (E.G. aelzx) : "))
+    third_letter_input = str(
+        input("Enter all of the letters in the third column (E.G. aelzx) : "))
 
     # data formatting
     first_letter_list = first_letter_input.strip()
@@ -491,7 +517,8 @@ def wire_sequences():
     # solver
 
     while 1 == 1:
-        wire_color = input("\nPlease enter the color of the wire (Red=r,Blue=b,Black=k) : ")
+        wire_color = input(
+            "\nPlease enter the color of the wire (Red=r,Blue=b,Black=k) : ")
         wire_color.lower()
         if wire_color == "r":
             red += 1
@@ -512,7 +539,8 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
     print("\n"
           "modules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
           "Wire Sequences(8)")
-    selection_input = str(input("Please press the key for what you want to do (E.G. wires=1) : "))
+    selection_input = str(
+        input("Please press the key for what you want to do (E.G. wires=1) : "))
     print("\n")
 
     if selection_input != "":
@@ -541,11 +569,16 @@ def main():
     serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
     escape = False
     while escape is False:
-        module_select(serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car)
+        try:
+            module_select(serial_number, battery_numbers, parallel,
+                          indicator_light_frk, indicator_light_car)
+        except:
+            print("There was an error in the input if u think there is no error in your input raise an issue in https://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new")
 
         # is_bomb_defused = int(input("Is Bomb Defused (1 for yes)"))
         # if is_bomb_defused == 1:
         # escape = True
 
 
-main()
+if __name__ == "__main__":
+    main()

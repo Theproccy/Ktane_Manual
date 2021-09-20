@@ -213,26 +213,27 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
     start_position = start_position_input.split(",")
     end_position = end_position_input.split(",")
 
-    # str to int
+    # # str to int
     green_1 = list(map(int, green_1))
     green_2 = list(map(int, green_2))
     start_position = list(map(int, start_position))
     end_position = list(map(int, end_position))
 
     # maze selection
+    test = False
     for i in range(9):
-        temp = mazes[str(i + 1)]
-        temp_green_1 = temp["Green_circle_1"]
-        temp_green_2 = temp["Green_circle_2"]
-        temp_green_1 = temp_green_1[0]
-        temp_green_2 = temp_green_2[0]
+        if test is False:
+            temp = mazes[str(i + 1)]
 
-        if green_1 == temp_green_1 or green_1 == temp_green_2:
-            if green_2 == temp_green_1 or green_2 == temp_green_2:
-                maze_map = mazes[str(i + 1)]
+            temp_green_1 = temp["Green_circle_1"]
+            temp_green_2 = temp["Green_circle_2"]
 
+            if green_1 == temp_green_1[0] or green_1 == temp_green_2[0]:
+                if green_2 == temp_green_1[0] or green_2 == temp_green_2[0]:
+                    maze_map = temp
+    print(maze_map)
     route = solve_maze(start_position, start_position, end_position, [], maze_map)
-
+    print(route)
     commands = []
     commands_condensed = []
     for i in range(len(route) - 1):

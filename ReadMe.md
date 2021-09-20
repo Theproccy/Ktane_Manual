@@ -9,12 +9,21 @@
 * Wire Sequences
 
 ## Current Feature Being worked on:
-Look under Projects then Main
+* GUI
 
 
 ## Planed Features
-Look under Projects then Main
+
+* Modules
+    * Symbols
+    * Needy modules quick button
+    * Morse code
+    * On the subject of whose first
+* include links to pages in the manual
+* increase support to modded modules
 
 
 ## Known issues:
 
+* Maze (Program selects correct maze but does not return the correct answer. currently, troubleshooting to find the
+  exact source of the issue)

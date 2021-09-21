@@ -25,5 +25,3 @@
 
 ## Known issues:
 
-* Maze (Program selects correct maze but does not return the correct answer. currently, troubleshooting to find the
-  exact source of the issue)

@@ -200,6 +200,7 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
     temp_list = []
     num = 0
     maze_map = {}
+
     # data input
     print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )")
     green_1_input = input("Please enter the coordinate of the green circle : ")
@@ -207,17 +208,24 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
     start_position_input = input("Please enter the coordinate of the white dot : ")
     end_position_input = input("Please enter the coordinate of the red triangle : ")
     print("\n")  # quality of life new line
+
     # formatting
     green_1 = green_1_input.split(",")
     green_2 = green_2_input.split(",")
     start_position = start_position_input.split(",")
     end_position = end_position_input.split(",")
 
-    # # str to int
+    # str to int
     green_1 = list(map(int, green_1))
     green_2 = list(map(int, green_2))
     start_position = list(map(int, start_position))
     end_position = list(map(int, end_position))
+    # subtracts 1 so that the maze pathfinding works
+    for i in range(len(start_position)):
+        start_temp = start_position.pop(i)
+        end_temp = end_position.pop(i)
+        start_position.insert(i, start_temp - 1)
+        end_position.insert(i, end_temp - 1)
 
     # maze selection
     test = False
@@ -231,9 +239,10 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
             if green_1 == temp_green_1[0] or green_1 == temp_green_2[0]:
                 if green_2 == temp_green_1[0] or green_2 == temp_green_2[0]:
                     maze_map = temp
-    print(maze_map)
+    # pathfinding
     route = solve_maze(start_position, start_position, end_position, [], maze_map)
-    print(route)
+
+    # conversion from coordinate route to instructions
     commands = []
     commands_condensed = []
     for i in range(len(route) - 1):
@@ -652,6 +661,8 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
 def main():
     ALL_MAZES = json.load(open("data.json"))
     serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
+    module_select(serial_number, battery_numbers, parallel,
+                  indicator_light_frk, indicator_light_car, ALL_MAZES)
     escape = False
     while escape is False:
         try:
@@ -663,9 +674,9 @@ def main():
                 "\nIf you think there is no error in your input raise an issue at:"
                 "\nhttps://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new")
 
-        # is_bomb_defused = int(input("Is Bomb Defused (1 for yes)"))
-        # if is_bomb_defused == 1:
-        # escape = True
+    # is_bomb_defused = int(input("Is Bomb Defused (1 for yes)"))
+    # if is_bomb_defused == 1:
+    # escape = True
 
 
 if __name__ == "__main__":

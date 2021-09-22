@@ -1,3 +1,5 @@
+""" A Electronic Asisted manual for the game Keep talking nobody explodes"""
+
 import json
 
 from find_path import solve_maze
@@ -47,8 +49,7 @@ def wires(serial_num):  # Simple wires
     # data gathering from input
     wire_num = len(wire_input)  # the number of wires
     wire = wire_input.upper()  # converts wires to uppercase
-    # splits the wires to individual values and stores them as a list
-    wire_list = wire.strip()
+    wire_list = wire.strip()  # splits the wires to individual values and stores them as a list
 
     # converts input into the number of each color of wire
     for i in range(wire_num):
@@ -69,8 +70,6 @@ def wires(serial_num):  # Simple wires
             white += 1
 
     # solver
-    # print(yellow,red,blue,black,white)
-
     if wire_num == 3:
         if red == 0:
             print("Cut The Second Wire")
@@ -277,7 +276,7 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
         print(commands_condensed[k])
 
 
-def simon_says(serial_number):
+def simon_says(serial_number):  # simon says module
     Vowels = False
     for i in range(len(serial_number)):
         temp = str(serial_number[i])
@@ -309,7 +308,8 @@ def simon_says(serial_number):
             "+------------------+------------+--------+--------+--------+--------+")
 
 
-def memory():
+def memory():  # Memory module
+    # Var creation
     position_list = []
     number_list = []
     display_num = int(input("what is the number displayed on the module : "))

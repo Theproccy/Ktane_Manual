@@ -18,14 +18,17 @@ This program is an automated manual for the game Keep Talking Nobody Explodes
 ## Planed Features
 
 * Modules
-    * Symbols
-    * Needy modules quick button
-    * Morse code
-    * On the subject of whose first
+  * Symbols
+  * Needy modules quick button
+  * Morse code
+  * On the subject of whose first
 * include links to pages in the manual
 * increase support to modded modules
 
 ## Known issues:
 
-e
+## How to run
 
+1. Unzip the file
+2. run the .exe
+3. Tah Dah

@@ -1,4 +1,6 @@
-# This program is an automated manual for the game Keep Talking Nobody Explodes
+# Keep Typing And Nobody Explodes
+
+This program is an automated manual for the game Keep Talking Nobody Explodes
 
 ## Currently, the program is capable of:
 

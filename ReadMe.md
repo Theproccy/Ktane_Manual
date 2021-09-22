@@ -30,5 +30,5 @@ This program is an automated manual for the game Keep Talking Nobody Explodes
 ## How to run
 
 1. Unzip the file
-2. run the .exe
+2. Run the .exe
 3. Tah Dah

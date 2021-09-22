@@ -271,6 +271,7 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
             temp_list = []
             word_num = 1
         num += 1
+    commands_condensed.append(commands[-1])  # appends the last item as this cannot be added like the rest of them.
     # output and formatting
     for k in range(len(commands_condensed)):
         print(commands_condensed[k])

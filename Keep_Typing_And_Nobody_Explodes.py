@@ -102,7 +102,7 @@ def wires(serial_num):  # Simple wires
             print("Cut The First Wire")
 
     elif wire_num == 6:
-        if yellow == 0 and (int(serial_num[-1]) % 2 == 0):
+        if yellow == 0 and (int(serial_num[-1]) % 2 != 0):
             print("Cut The Third Wire")
         elif yellow == 1 and white > 1:
             print("Cut The Fourth Wire")

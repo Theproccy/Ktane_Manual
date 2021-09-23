@@ -12,11 +12,12 @@ This program is an automated manual for the game Keep Talking Nobody Explodes
 * Wire Sequences
 
 ## Current Feature Being worked on:
+* Auto Build Function
 
-* GUI
 
 ## Planed Features
 
+* GUI
 * Modules
   * Symbols
   * Needy modules quick button

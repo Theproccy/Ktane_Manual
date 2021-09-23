@@ -1,4 +1,4 @@
-""" A Electronic Asisted manual for the game Keep talking nobody explodes"""
+""" A Electronic Assisted manual for the game Keep talking nobody explodes"""
 
 import json
 
@@ -16,11 +16,11 @@ def data_input():  # collects misc data abound the bomb for other defusing steps
     battery_numbers = int(
         input("Please enter the number of batteries on the bomb : "))
     parallel_input = int(
-        input("Dose the bomb have a parallel port (if Yes Type 1) : "))
+        input("Does the bomb have a parallel port (if Yes Type 1) : "))
     indicator_light_frk_input = int(
-        input("Dose the bomb have a lit FRK Indicator (if Yes Type 1) : "))
+        input("Does the bomb have a lit FRK Indicator (if Yes Type 1) : "))
     indicator_light_car_input = int(
-        input("Dose the bomb have a lit CAR Indicator (if Yes Type 1) : "))
+        input("Does the bomb have a lit CAR Indicator (if Yes Type 1) : "))
 
     if indicator_light_frk_input == 1:  # converts the input into a bool
         indicator_light_frk = True
@@ -30,7 +30,6 @@ def data_input():  # collects misc data abound the bomb for other defusing steps
         parallel = True
 
     return serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car
-
 
 def wires(serial_num):  # Simple wires
     # var creation
@@ -201,7 +200,8 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
     maze_map = {}
 
     # data input
-    print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )")
+    print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )"
+          "\n Top Left (1,1)")
     green_1_input = input("Please enter the coordinate of the green circle : ")
     green_2_input = input("Please enter the coordinate of the other green circle : ")
     start_position_input = input("Please enter the coordinate of the white dot : ")
@@ -313,7 +313,7 @@ def memory():  # Memory module
     # Var creation
     position_list = []
     number_list = []
-    display_num = int(input("what is the number displayed on the module : "))
+    display_num = int(input("\nwhat is the number displayed on the module : "))
     # Stage 1
     if display_num == 3:
         print("Press the button in the Third position")
@@ -332,7 +332,7 @@ def memory():  # Memory module
             input("What is the number of the button you pressed : "))
 
     # Stage 2
-    display_num = int(input("what is the number displayed on the module : "))
+    display_num = int(input("\nwhat is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button Labeled '4'")
         number_list.append(4)
@@ -350,7 +350,7 @@ def memory():  # Memory module
             input("What is the number of the button you pressed : "))
 
     # Stage 3
-    display_num = int(input("what is the number displayed on the module : "))
+    display_num = int(input("\nwhat is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button Labeled ", number_list[1])
         number_list.append(number_list[1])
@@ -373,7 +373,7 @@ def memory():  # Memory module
             input("What is the position of the button you pressed : "))
 
     # Stage 4
-    display_num = int(input("what is the number displayed on the module : "))
+    display_num = int(input("\nwhat is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button in position ", position_list[0])
         position_list.append(position_list[0])
@@ -391,7 +391,7 @@ def memory():  # Memory module
             input("What is the number of the button you pressed : "))
 
     # Stage 5
-    display_num = int(input("what is the number displayed on the module : "))
+    display_num = int(input("\nwhat is the number displayed on the module : "))
     if display_num == 1:
         print("Press the button Labeled ", number_list[0])
         number_list.append(number_list[0])
@@ -617,7 +617,6 @@ def wire_sequences():
         if wire_color == "r":
             red += 1
             print("Cut the wire if it is connected to ", red_options[red])
-
         elif wire_color == "b":
             blue += 1
             print("Cut the wire if it is connected to ", blue_options[blue])
@@ -630,9 +629,11 @@ def wire_sequences():
 
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
                   indicator_light_car, all_mazes):  # function for all of the questions to be asked
-    print("\n"
-          "modules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
-          "Wire Sequences(8)")
+    print("\nFor New Bomb (0)"
+          "\nModules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
+          "Wire Sequences(8)"
+          )
+
     selection_input = str(
         input("Please press the key for what you want to do (E.G. wires=1) : "))
     print("\n")
@@ -655,6 +656,8 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
             passwords()
         elif selection == 8:
             wire_sequences()
+        elif selection == 0:
+            serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
         else:
             pass
 

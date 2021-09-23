@@ -657,7 +657,7 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
         elif selection == 8:
             wire_sequences()
         elif selection == 0:
-            serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
+            return True
         else:
             pass
 
@@ -670,8 +670,11 @@ def main():
     escape = False
     while escape is False:
         try:
-            module_select(serial_number, battery_numbers, parallel,
-                          indicator_light_frk, indicator_light_car, ALL_MAZES)
+            new_bomb = module_select(serial_number, battery_numbers, parallel,
+                                     indicator_light_frk, indicator_light_car, ALL_MAZES)
+            if new_bomb is True:
+                serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
+
         except:
             print(
                 "There was an error in the input."

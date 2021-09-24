@@ -31,6 +31,7 @@ def data_input():  # collects misc data abound the bomb for other defusing steps
 
     return serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car
 
+
 def wires(serial_num):  # Simple wires
     # var creation
     yellow = 0
@@ -271,7 +272,9 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
             temp_list = []
             word_num = 1
         num += 1
-    commands_condensed.append(commands[-1])  # appends the last item as this cannot be added like the rest of them.
+    commands_condensed.append(
+        str(commands[-1]) + str(1))  # appends the last item as this cannot be added like the rest of them.
+
     # output and formatting
     for k in range(len(commands_condensed)):
         print(commands_condensed[k])
@@ -627,11 +630,49 @@ def wire_sequences():
             break
 
 
+def morse():
+    print("+-----------------------+--------+-----------+\n"
+          "| Morse                 | Word   | Frequency |\n"
+          "+=======================+========+===========+\n"
+          "| .../...././.-../.-..  | shell  | 3.505     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| ..../.-/.-../.-../... | halls  | 3.515     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| .../.-../../.-.-/-.-  | slick  | 3.522     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -/.-./../-.-./-.-     | trick  | 3.532     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -.../---/-..-/./...   | boxes  | 3.535     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| .-.././.-/-.-/...     | leaks  | 3.542     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| .../-/.-./---/-.../.  | strobe | 3.545     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -.../../.../-/.-./--- | bistro | 3.552     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| ..-./.-../../-.-./-.- | flick  | 3.555     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -.../---/--/-.../...  | bombs  | 3.565     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -.../.-././.-/-.-     | break  | 3.572     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -.../.-./../-.-./-.-  | brick  | 3.575     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| .../-/./.-/-.-        | steak  | 3.582     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| .../-/../-./--.       | sting  | 3.592     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| ...-/./-.-./-/---/.-. | vector | 3.595     |\n"
+          "+-----------------------+--------+-----------+\n"
+          "| -..././.-/-/...       | beats  | 3.600     |\n"
+          "+-----------------------+--------+-----------+\n")
+
+
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
                   indicator_light_car, all_mazes):  # function for all of the questions to be asked
     print("\nFor New Bomb (0)"
           "\nModules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
-          "Wire Sequences(8)"
+          "Wire Sequences(8), Morse(9)"
           )
 
     selection_input = str(
@@ -656,6 +697,8 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
             passwords()
         elif selection == 8:
             wire_sequences()
+        elif selection == 9:
+            morse()
         elif selection == 0:
             return True
         else:

@@ -10,10 +10,10 @@ This program is an automated manual for the game Keep Talking Nobody Explodes
 * Memory
 * Complex Wires
 * Wire Sequences
+* Who's on First
 
 ## Current Feature Being worked on:
 * Auto Build Function
-
 
 ## Planed Features
 
@@ -21,9 +21,6 @@ This program is an automated manual for the game Keep Talking Nobody Explodes
 * Modules
   * Symbols
   * Needy modules quick button
-  * Morse code
-  * On the subject of whose first
-* include links to pages in the manual
 * increase support to modded modules
 
 ## Known issues:

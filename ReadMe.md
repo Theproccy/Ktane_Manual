@@ -13,7 +13,7 @@ This program is an automated manual for the game Keep Talking Nobody Explodes
 * Who's on First
 
 ## Current Feature Being worked on:
-* Auto Build Function
+* Auto Build Script
 
 ## Planed Features
 

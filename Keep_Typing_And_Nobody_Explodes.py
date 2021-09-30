@@ -764,9 +764,6 @@ def whose_on_first():
         print(corresponding_word)
 
 
-# TODO ADD OTHER LIST
-# TODO ADD METHOD TO FIND WORDS
-
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
                   indicator_light_car, all_mazes):  # function for all of the questions to be asked
     print("\nFor New Bomb (0)"

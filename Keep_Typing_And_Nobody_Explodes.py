@@ -13,20 +13,16 @@ def data_input():  # collects misc data abound the bomb for other defusing steps
 
     # data input
     serial_number = list(input("Please Enter the Serial Number : "))
-    battery_numbers = int(
-        input("Please enter the number of batteries on the bomb : "))
-    parallel_input = int(
-        input("Does the bomb have a parallel port (if Yes Type 1) : "))
-    indicator_light_frk_input = int(
-        input("Does the bomb have a lit FRK Indicator (if Yes Type 1) : "))
-    indicator_light_car_input = int(
-        input("Does the bomb have a lit CAR Indicator (if Yes Type 1) : "))
+    battery_numbers = input("Please enter the number of batteries on the bomb : ")
+    parallel_input = input("Does the bomb have a parallel port (if Yes Type 1) : ")
+    indicator_light_frk_input = input("Does the bomb have a lit FRK Indicator (if Yes Type 1) : ")
+    indicator_light_car_input = input("Does the bomb have a lit CAR Indicator (if Yes Type 1) : ")
 
-    if indicator_light_frk_input == 1:  # converts the input into a bool
+    if indicator_light_frk_input == "1":  # converts the input into a bool
         indicator_light_frk = True
-    if indicator_light_car_input == 1:
+    if indicator_light_car_input == "1":
         indicator_light_car = True
-    if parallel_input == 1:
+    if parallel_input == "1":
         parallel = True
 
     return serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car
@@ -698,6 +694,7 @@ def whose_on_first():
         "YOU'RE": "Middle Right",
         "YOUR": "Middle Right",
         "": "Bottom Left"}
+
     word_corresponding_list = {
         "READY": ["YES", "OKAY", "WHAT", "MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH",
                   "NOTHING", "WAIT"],
@@ -756,11 +753,11 @@ def whose_on_first():
         "LIKE": ["YOU'RE", "NEXT", "U", "UR", "HOLD", "DONE", "UH UH", "WHAT?", "UH HUH", "YOU", "LIKE", "SURE",
                  "YOU ARE", "YOUR"]
     }
+
     for i in range(3):
         displayed_word = display_word_dictionary[input("Please enter the word displayed : ").upper()]
-        print(displayed_word)
         corresponding_word = word_corresponding_list[
-            input("Please enter the word in the box that was indicated by the word above").upper()]
+            input("Please enter the word in the box that is located in the " + displayed_word + " : ").upper()]
         print(corresponding_word)
 
 

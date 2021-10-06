@@ -16,14 +16,14 @@ person needing to have an exceptional understanding of the game. May just help y
 * Who's on First
 
 ## Current Feature Being worked on:
-* Auto Build Script
+* Use Rich to make the text easier to read
 
 ## Planed Features
 
-* GUI
+* GUI (Replaced by Rich Usage)
 * Modules
   * Symbols
-  * Needy modules quick button
+  * Knobs
 * increase support to modded modules
 
 ## Known issues:

@@ -12,8 +12,9 @@ def data_input():  # collects misc data abound the bomb for other defusing steps
     parallel = False
 
     # data input
+
     serial_number = list(input("Please Enter the Serial Number : "))
-    battery_numbers = input("Please enter the number of batteries on the bomb : ")
+    battery_numbers = int(input("Please enter the number of batteries on the bomb : "))
     parallel_input = input("Does the bomb have a parallel port (if Yes Type 1) : ")
     indicator_light_frk_input = input("Does the bomb have a lit FRK Indicator (if Yes Type 1) : ")
     indicator_light_car_input = input("Does the bomb have a lit CAR Indicator (if Yes Type 1) : ")
@@ -168,7 +169,7 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
     releasing_held_button = False
     if blue is True and abort is True:
         releasing_held_button = True
-    elif battery_num > 1 and detonate:
+    elif battery_num > 1 and detonate is True:
         print("Press and Immediately Release")
     elif white is True and indicator_car is True:
         releasing_held_button = True
@@ -183,10 +184,11 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
 
         # releasing held button section
     if releasing_held_button is True:
-        print("Strip Color\n"
+        print("Hold the button\n"
+              "Strip Color:\n"
               "Blue = 4 any position\n"
               "Yellow = 5 any position\n"
-              "Else 1 in any position")
+              "Otherwise 1 in any position")
 
 
 def maze(mazes):  # a pathfinder that calculates moves to complete
@@ -268,8 +270,9 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
             temp_list = []
             word_num = 1
         num += 1
-    commands_condensed.append(
-        str(commands[-1]) + str(1))  # appends the last item as this cannot be added like the rest of them.
+    if commands[-1] != commands[-2]:
+        commands_condensed.append(
+            str(commands[-1]) + str(1))  # appends the last item as this cannot be added like the rest of them.
 
     # output and formatting
     for k in range(len(commands_condensed)):
@@ -762,7 +765,7 @@ def whose_on_first():
 
 
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
-                  indicator_light_car, all_mazes):  # function for all of the questions to be asked
+                  indicator_light_car, all_mazes, display_help):  # function for all of the questions to be asked
     print("\nFor New Bomb (0)"
           "\nModules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
           "Wire Sequences(8), Morse(9), On The Subject Of Whose First(10)"
@@ -771,7 +774,7 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
     selection_input = str(
         input("Please press the key for what you want to do (E.G. wires=1) : "))
     print("\n")
-
+    help_modules(display_help, selection_input)
     if selection_input != "":
         selection = int(selection_input)
         if selection == 1:
@@ -800,20 +803,92 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
             pass
 
 
+def help_required_function(first_time_asking, help_required):  # function to ask if person is in need of help
+    word_dict = {
+        True: "",
+        False: " still"
+    }
+    if help_required is True:  # help module
+        help_required = False
+        help_required_input = input("Do you" + word_dict[first_time_asking] + " require help(if Yes Type 1): ")
+        if help_required_input == "1":
+            help_required = True
+    return help_required
+
+
+def help_modules(help_required, module):
+    help_dictionary = {
+        1: "The Wires module (sometimes known as Simple Wires) contains 3-6 wires of different solid "
+           "colors.\n Wires may be colored in yellow, red, blue, black, or white.\n Only one of the wires of "
+           "the module must be cut in order to disarm the module.\n",
+
+        2: "The Button is a large button of one solid color, a one-word label on it, and a strip to the "
+           "right of it that lights up when the button is held.\n The button must be pressed and released at "
+           "the right time based on information on the button, as well as on batteries and some indicators "
+           "on the bomb.\n",
+
+        3: "The Maze module is a module that consists of a 6x6 grid of squares with two of the squares "
+           "containing green indicator circles,\n one square containing a white square, and one square "
+           "containing a red triangle as well as four directional buttons around the maze.\n In order to "
+           "disarm the module, the Defuser must guide the white light to the red triangle without running "
+           "into any of the walls shown in the manual.\n",
+
+        4: "One of the four colored buttons will flash.\n"
+           "Using the table below, press the button with the corresponding color.\n"
+           "The original button will flash, followed by another. Repeat this sequence in order using the "
+           "color mapping.\n "
+           "The sequence will lengthen by one each time you correctly enter a sequence until the module is "
+           "disarmed.\n",
+
+        5: "The Memory module features a display with a number from 1-4 and four buttons, with the labels "
+           "1-4,\n but not necessarily in that order. To disarm the module, the defuser must press the "
+           "correct buttons to fill the stage indicator five times in a row.\n",
+
+        6: "The Complicated Wires module contains up to six wires arranged vertically with an LED above each "
+           "wire and a space for a pencil-drawn ★ below it.\n To disarm the module, the defuser must cut the "
+           "correct wires, in any order, based on instructions laid out below.\n",
+
+        7: "The Password module consists of a five lettered display with arrows above and below them.\n The "
+           "expert must then find a word that has a letter in all five slots.\n Only one word is present in "
+           "the module.\n",
+
+        8: "The Wire Sequence module consists of four panels, each with 1 to 3 wires.\n Depending on the "
+           "occurrence number of the wire color and the letter it is connected to,\n the expert must determine "
+           "if each should be cut or not. Wire occurrences are indicated in their order from the left side.\n",
+
+        9: "The Morse Code module consists of a light flashing in Morse Code, a radio with a displayed "
+           "frequency and a TX button.\n The defuser must interpret the flashing Morse Light as dots and "
+           "dashes to form a word in Morse Code.\n This word corresponds to a radio frequency that the expert "
+           "must tell the defuser to transmit.\n The defuser must scroll to that frequency, and press the TX "
+           "button to solve the module.\n",
+
+        10: "The aim of the Who's on First module is to press the correct labelled button for three stages.\n "
+            "For each stage, the Defuser must read the label of a particular button based on the display.\n The "
+            "Expert then finds a list of words, and the first word on the list is the correct one to press.\n"
+    }
+    if help_required is True:
+        print(help_dictionary[module])
+
+
 def main():
     print("https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
           "\n Open the pages on symbols and the needy Knob module")
     ALL_MAZES = json.load(open("data.json"))
+
+    help_required = help_required_function(True, True)
+
     serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
     module_select(serial_number, battery_numbers, parallel,
-                  indicator_light_frk, indicator_light_car, ALL_MAZES)
+                  indicator_light_frk, indicator_light_car, ALL_MAZES, help_required)
     escape = False
     while escape is False:
         try:
             new_bomb = module_select(serial_number, battery_numbers, parallel,
-                                     indicator_light_frk, indicator_light_car, ALL_MAZES)
+                                     indicator_light_frk, indicator_light_car, ALL_MAZES, help_required)
             if new_bomb is True:
                 serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
+
+                help_required = help_required_function(False, help_required)
 
         except:
             print(
@@ -826,5 +901,7 @@ def main():
     # escape = True
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+# main()
+for i in range(9):
+    help_modules(True, i + 1)

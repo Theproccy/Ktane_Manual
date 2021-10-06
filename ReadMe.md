@@ -1,6 +1,9 @@
 # Keep Typing And Nobody Explodes
 
-This program is an automated manual for the game Keep Talking Nobody Explodes
+This program is an automated manual for the game Keep Talking Nobody Explodes.
+
+Unlike KTANE however this is meant for the solvers' computer allowing to keep the two-person fun without the other
+person needing to have an exceptional understanding of the game. May just help you on the bomb your stuck on.
 
 ## Currently, the program is capable of:
 

@@ -16,7 +16,7 @@ person needing to have an exceptional understanding of the game. May just help y
 * Who's on First
 
 ## Current Feature Being worked on:
-* Use Rich to make the text easier to read
+* Knobs Solver to run in parralel to the whole thing
 
 ## Planed Features
 
@@ -25,7 +25,7 @@ person needing to have an exceptional understanding of the game. May just help y
   * Symbols
   * Knobs
 * increase support to modded modules
-
+* Use Rich to make the text easier to read
 ## Known issues:
 
 ## How to run

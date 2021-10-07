@@ -14,18 +14,19 @@ person needing to have an exceptional understanding of the game. May just help y
 * Complex Wires
 * Wire Sequences
 * Who's on First
+* Knobs Solver to run in parallel to the whole thing
 
 ## Current Feature Being worked on:
-* Knobs Solver to run in parralel to the whole thing
+
+* Use Rich to make the text easier to read
 
 ## Planed Features
 
 * GUI (Replaced by Rich Usage)
 * Modules
   * Symbols
-  * Knobs
 * increase support to modded modules
-* Use Rich to make the text easier to read
+
 ## Known issues:
 
 ## How to run

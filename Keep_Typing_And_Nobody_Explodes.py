@@ -872,7 +872,8 @@ def help_modules(help_required, module):
 
 def main():
     print("https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
-          "\n Open the pages on symbols and the needy Knob module")
+          "\n Open the pages on symbols\n"
+          "Also Launce the program called *Knobs* from the same file this needs to run separately from the main code ")
     ALL_MAZES = json.load(open("data.json"))
 
     help_required = help_required_function(True, True)

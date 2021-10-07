@@ -139,3 +139,5 @@ cython_debug/
 
 #VS code workspace
 *.code-workspace
+/Assets/
+/Backups/

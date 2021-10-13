@@ -902,7 +902,5 @@ def main():
     # escape = True
 
 
-# if __name__ == "__main__":
-# main()
-for i in range(9):
-    help_modules(True, i + 1)
+if __name__ == "__main__":
+    main()

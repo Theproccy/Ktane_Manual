@@ -2,29 +2,19 @@
 
 import json
 
+import cutie
+
 from find_path import solve_maze
 
 
 def data_input():  # collects misc data abound the bomb for other defusing steps
-    # var creation
-    indicator_light_frk = False
-    indicator_light_car = False
-    parallel = False
-
     # data input
 
     serial_number = list(input("Please Enter the Serial Number : "))
     battery_numbers = int(input("Please enter the number of batteries on the bomb : "))
-    parallel_input = input("Does the bomb have a parallel port (if Yes Type 1) : ")
-    indicator_light_frk_input = input("Does the bomb have a lit FRK Indicator (if Yes Type 1) : ")
-    indicator_light_car_input = input("Does the bomb have a lit CAR Indicator (if Yes Type 1) : ")
-
-    if indicator_light_frk_input == "1":  # converts the input into a bool
-        indicator_light_frk = True
-    if indicator_light_car_input == "1":
-        indicator_light_car = True
-    if parallel_input == "1":
-        parallel = True
+    parallel = cutie.prompt_yes_or_no("Does the bomb have a parallel port: ")
+    indicator_light_frk = cutie.prompt_yes_or_no("Does the bomb have a lit FRK Indicator: ")
+    indicator_light_car = cutie.prompt_yes_or_no("Does the bomb have a lit CAR Indicator: ")
 
     return serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car
 
@@ -113,19 +103,9 @@ def wires(serial_num):  # Simple wires
 
 def button(battery_num, indicator_car, indicator_frk):  # The Button
     # var creation
-    button_color_dictionary = {
-        1: "BLUE",
-        2: "RED",
-        3: "WHITE",
-        4: "YELLOW",
-        5: "BLACK"
-    }  # all color options for the button
-    button_label_dictionary = {
-        1: "Abort",
-        2: "Detonate",
-        3: "Hold",
-        4: "Press"
-    }  # all the label Options for the button
+    button_color_list = ["BLUE", "RED", "WHITE", "YELLOW", "BLACK"]  # all color options for the button
+    button_label_list = ["Abort", "Detonate", "Hold", "Press"]  # all the label Options for the button
+
     # colors
     blue = False
     red = False
@@ -137,12 +117,11 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
     hold = False
 
     # data input
-    print(button_color_dictionary)
-    button_color_input = int(
-        input("Please select the color of the button by entering the place in the list (e.g. Blue = 1) : "))
-    print(button_label_dictionary)
-    button_label_input = int(
-        input("Please select the label of the button by entering the place in the list (e.g. Abort = 1) : "))
+    print("Please Select the color: ")
+    button_color_input = cutie.select(button_color_list)
+    print("Please select the label: ")
+    button_label_input = cutie.select(button_label_list)
+    print("\n")
 
     # data formatting
     # colors
@@ -161,8 +140,7 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
         detonate = True
     elif button_label_input == 3:
         hold = True
-    else:
-        pass
+
 
     # solving
     # main section
@@ -184,7 +162,7 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
 
         # releasing held button section
     if releasing_held_button is True:
-        print("Hold the button\n"
+        print("Hold the Button\n"
               "Strip Color:\n"
               "Blue = 4 any position\n"
               "Yellow = 5 any position\n"
@@ -608,24 +586,23 @@ def wire_sequences():
         9: "C"
     }
     # exit button
-    print("leave blank to exit this routine")
 
     # solver
-
+    print("Please select the color of the wire or exit to exit")
+    wire_color_list = ["Exit", "Red", "Blue", "Black"]
     while 1 == 1:
-        wire_color = input(
-            "\nPlease enter the color of the wire (Red=r,Blue=b,Black=k) : ")
-        wire_color.lower()
-        if wire_color == "r":
+        wire_color = cutie.select(wire_color_list, selected_index=1)
+        print("\n")
+        if wire_color == 1:
             red += 1
             print("Cut the wire if it is connected to ", red_options[red])
-        elif wire_color == "b":
+        elif wire_color == 2:
             blue += 1
             print("Cut the wire if it is connected to ", blue_options[blue])
-        elif wire_color == "k":
+        elif wire_color == 3:
             black += 1
             print("Cut the wire if it is connected to ", black_options[black])
-        else:
+        elif wire_color == 0:
             break
 
 
@@ -766,13 +743,12 @@ def whose_on_first():
 
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
                   indicator_light_car, all_mazes, display_help):  # function for all of the questions to be asked
-    print("\nFor New Bomb (0)"
-          "\nModules : Wires(1), Buttons(2), Maze(3), Simon says(4), Memory(5), Complex wires(6), Passwords(7), "
-          "Wire Sequences(8), Morse(9), On The Subject Of Whose First(10)"
-          )
+    options_list = ["New Bomb", "Wires", "Buttons", "Maze", "Simon says", "Memory", "Complex wires", "Passwords",
+                    "Wire Sequences",
+                    "Morse", "On The Subject Of Whose First"]
+    print("\n \nPlease Select the module you want to solve")
 
-    selection_input = str(
-        input("Please press the key for what you want to do (E.G. wires=1) : "))
+    selection_input = cutie.select(options_list, selected_index=1)
     print("\n")
     help_modules(display_help, selection_input)
     if selection_input != "":
@@ -810,7 +786,8 @@ def help_required_function(first_time_asking, help_required):  # function to ask
     }
     if help_required is True:  # help module
         help_required = False
-        help_required_input = input("Do you" + word_dict[first_time_asking] + " require help(if Yes Type 1): ")
+        help_required_input = cutie.prompt_yes_or_no(
+            "Do you" + word_dict[first_time_asking] + " require help(if Yes Type 1): ")
         if help_required_input == "1":
             help_required = True
     return help_required
@@ -873,7 +850,7 @@ def help_modules(help_required, module):
 def main():
     print("https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
           "\n Open the pages on symbols\n"
-          "Also Launce the program called *Knobs* from the same file this needs to run separately from the main code ")
+          "Also run the program called *Knobs* from the same file this needs to run separately from the main code")
     ALL_MAZES = json.load(open("data.json"))
 
     help_required = help_required_function(True, True)
@@ -893,13 +870,9 @@ def main():
 
         except:
             print(
-                "There was an error in the input."
+                "There was an error."
                 "\nIf you think there is no error in your input raise an issue at:"
                 "\nhttps://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new")
-
-    # is_bomb_defused = int(input("Is Bomb Defused (1 for yes)"))
-    # if is_bomb_defused == 1:
-    # escape = True
 
 
 if __name__ == "__main__":

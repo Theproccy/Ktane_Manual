@@ -17,12 +17,10 @@ person needing to have an exceptional understanding of the game. May just help y
 * Knobs Solver to run in parallel to the whole thing
 
 ## Current Feature Being worked on:
-
-* Use Rich to make the text easier to read
+* Rich Overhaul to make program even easier to read
+*
 
 ## Planed Features
-
-* GUI (Replaced by Rich Usage)
 * Modules
   * Symbols
 * increase support to modded modules

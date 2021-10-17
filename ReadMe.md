@@ -23,7 +23,7 @@ person needing to have an exceptional understanding of the game. May just help y
 
 ## Planed Features
 
-* increase support to modded modules
+* Increase support to modded modules
 * Overhaul the help text
 ## Known issues:
 

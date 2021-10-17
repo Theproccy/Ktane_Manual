@@ -13,7 +13,6 @@ console = rich.console.Console()
 
 def data_input():  # collects misc data abound the bomb for other defusing steps
     # data input
-
     serial_number = list(input("Please Enter the Serial Number : "))
     battery_numbers = int(input("Please enter the number of batteries on the bomb : "))
     parallel = cutie.prompt_yes_or_no("Does the bomb have a parallel port: ")
@@ -315,7 +314,7 @@ def memory():  # Memory module
         4: "Press the button labeled '4'"
     }
 
-    for i in range(5):  # todo finish refactor
+    for i in range(5):  # 5 levels of memory section
         display_num = int(input("\nWhat is the number displayed on the module: "))
         if i == 0:  # Stage 1
             if display_num == 1 or display_num == 2:

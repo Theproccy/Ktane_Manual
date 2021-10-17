@@ -6,9 +6,9 @@ import cutie
 import rich
 import rich.console
 
-console = rich.console.Console()
-
 from find_path import solve_maze
+
+console = rich.console.Console()
 
 
 def data_input():  # collects misc data abound the bomb for other defusing steps
@@ -33,7 +33,8 @@ def wires(serial_num):  # Simple wires
 
     # data input
     wire_input = console.input(
-        "Please enter the wires in order from top to bottom in order ([bold red]Yellow=Y,Red=R,Blue=B,Black=K,White=W[/bold red]) EG [RBy] "
+        "Please enter the wires in order from top to bottom in order ([bold red]Yellow=Y,Red=R,Blue=B,Black=K,"
+        "White=W[/bold red]) EG [RBy] "
         ": "
     )
 
@@ -293,101 +294,117 @@ def simon_says(serial_number):  # simon says module
     rich.print("[bold green]" + answer + "[/bold green]")
 
 
-def memory():  # Memory module Todo un fuck
+def memory():  # Memory module
     # Var creation
     position_list = []
-    number_list = []
-    display_num = int(input("\nwhat is the number displayed on the module : "))
-    # Stage 1
-    if display_num == 3:
-        print("Press the button in the Third position")
-        position_list.append(3)
-        number_list.append(
-            input("What is the number of the button you pressed : "))
-    elif display_num == 4:
-        print("Press the button in the Fourth position")
-        position_list.append(4)
-        number_list.append(
-            input("What is the number of the button you pressed : "))
-    else:
-        print("Press the button in the Second position")
-        position_list.append(2)
-        number_list.append(
-            input("What is the number of the button you pressed : "))
+    label_list = []
+    label_input_required = False
+    label = 0
+    position = 0
+    answer = ""
+    position_word_dictionary = {
+        1: "Press the button in the first position",
+        2: "Press the button in the second position",
+        3: "Press the button in the third position",
+        4: "Press the button in the fourth position"
+    }
+    label_word_dictionary = {
+        1: "Press the button labeled '1'",
+        2: "Press the button labeled '2'",
+        3: "Press the button labeled '3'",
+        4: "Press the button labeled '4'"
+    }
 
-    # Stage 2
-    display_num = int(input("\nwhat is the number displayed on the module : "))
-    if display_num == 1:
-        print("Press the button Labeled '4'")
-        number_list.append(4)
-        position_list.append(
-            input("What is the position of the button you pressed : "))
-    elif display_num == 3:
-        print("Press the button in the First position")
-        position_list.append(1)
-        number_list.append(
-            input("What is the number of the button you pressed : "))
-    else:
-        print("Press the button in the ", position_list[0], " position")
-        position_list.append(position_list[0])
-        number_list.append(
-            input("What is the number of the button you pressed : "))
+    for i in range(5):  # todo finish refactor
+        display_num = int(input("\nWhat is the number displayed on the module: "))
+        if i == 0:  # Stage 1
+            if display_num == 1 or display_num == 2:
+                label_input_required = True
+                position = 2  # Second position
+                answer = position_word_dictionary[position]
+            elif display_num == 3:
+                label_input_required = True
+                position = 3  # Third position
+                answer = position_word_dictionary[position]
+            elif display_num == 4:
+                label_input_required = True
+                position = 4  # Forth position
+                answer = position_word_dictionary[position]
 
-    # Stage 3
-    display_num = int(input("\nwhat is the number displayed on the module : "))
-    if display_num == 1:
-        print("Press the button Labeled ", number_list[1])
-        number_list.append(number_list[1])
-        position_list.append(
-            input("What is the position of the button you pressed : "))
-    elif display_num == 2:
-        print("Press the button Labeled ", number_list[0])
-        number_list.append(number_list[0])
-        position_list.append(
-            input("What is the position of the button you pressed : "))
-    elif display_num == 3:
-        print("Press the button in the Third position")
-        position_list.append(3)
-        number_list.append(
-            input("What is the number of the button you pressed : "))
-    else:
-        print("Press the button Labeled '4'")
-        number_list.append(4)
-        position_list.append(
-            input("What is the position of the button you pressed : "))
+        elif i == 1:  # Stage 2
+            if display_num == 1:
+                label_input_required = False
+                label = 4  # Labeled 4
+                answer = label_word_dictionary[label]
+            elif display_num == 2 or display_num == 4:
+                label_input_required = True
+                position = position_list[0]  # Same position as stage 1
+                answer = position_word_dictionary[position]
+            elif display_num == 3:
+                label_input_required = True
+                position = 1  # First position
+                answer = position_word_dictionary[position]
 
-    # Stage 4
-    display_num = int(input("\nwhat is the number displayed on the module : "))
-    if display_num == 1:
-        print("Press the button in position ", position_list[0])
-        position_list.append(position_list[0])
-        number_list.append(
-            input("What is the label of the button you pressed : "))
-    elif display_num == 2:
-        print("Press the button in the First position")
-        position_list.append(1)
-        number_list.append(
-            input("What is the number of the button you pressed : "))
-    else:
-        print("Press the button in the ", position_list[1], " position")
-        position_list.append(position_list[1])
-        number_list.append(
-            input("What is the number of the button you pressed : "))
+        elif i == 2:  # Stage 3
+            if display_num == 1:
+                label_input_required = False
+                label = label_list[1]  # Same label as stage 2
+                answer = label_word_dictionary[label]
+            elif display_num == 2:
+                label_input_required = False
+                label = label_list[0]  # Same label as stage 1
+                answer = label_word_dictionary[label]
+            elif display_num == 3:
+                label_input_required = True
+                position = 3  # Third position
+                answer = position_word_dictionary[position]
+            elif display_num == 4:
+                label_input_required = False
+                label = 4  # Labeled 4
+                answer = label_word_dictionary[4]
 
-    # Stage 5
-    display_num = int(input("\nwhat is the number displayed on the module : "))
-    if display_num == 1:
-        print("Press the button Labeled ", number_list[0])
-        number_list.append(number_list[0])
-    elif display_num == 2:
-        print("Press the button Labeled ", number_list[1])
-        number_list.append(number_list[1])
-    elif display_num == 3:
-        print("Press the button Labeled ", number_list[3])
-        number_list.append(number_list[3])
-    else:
-        print("Press the button labeled ", number_list[2])
-        number_list.append(number_list[2])
+        elif i == 3:  # Stage 4
+            if display_num == 1:
+                label_input_required = True
+                position = position_list[0]  # Same position as stage 1
+                answer = position_word_dictionary[position]
+            elif display_num == 2:
+                label_input_required = True
+                position = 1  # First position
+                answer = position_word_dictionary[position]
+            elif display_num == 3 or display_num == 4:
+                label_input_required = True
+                position = position_list[1]  # Same position as stage 2
+                answer = position_word_dictionary[position]
+
+        else:  # Stage 5
+            if display_num == 1:
+                label_input_required = False
+                label = label_list[0]  # Same label as stage 1
+                answer = label_word_dictionary[label]
+            elif display_num == 2:
+                label_input_required = False
+                label = label_list[1]  # Same label as stage 2
+                answer = label_word_dictionary[label]
+            elif display_num == 3:
+                label_input_required = False
+                label = label_list[3]  # Same label as stage 4
+                answer = label_word_dictionary[label]
+            elif display_num == 4:
+                label_input_required = False
+                label = label_list[2]  # Same label as stage 3
+                answer = label_word_dictionary[label]
+
+        rich.print("[bold green]" + answer + "[/bold green]")
+
+        if i < 4:  # Before stage 5
+            if label_input_required is True:
+                position_list.append(position)
+                label_list.append(int(input("What is the label of the button you pressed: ")))
+            else:
+                label_list.append(label)
+                position_list.append(int(input("What is the position of the button you pressed: ")))
+
     # Function end
 
 
@@ -626,19 +643,19 @@ def morse():  # morse table
                "+-----------------------+--------+-----------+\n"
                "| -/.-./../-.-./-.-     | trick  | 3.532     |\n"
                "+-----------------------+--------+-----------+\n"
-          "| -.../---/-..-/./...   | boxes  | 3.535     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| .-.././.-/-.-/...     | leaks  | 3.542     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| .../-/.-./---/-.../.  | strobe | 3.545     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| -.../../.../-/.-./--- | bistro | 3.552     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| ..-./.-../../-.-./-.- | flick  | 3.555     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| -.../---/--/-.../...  | bombs  | 3.565     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| -.../.-././.-/-.-     | break  | 3.572     |\n"
+               "| -.../---/-..-/./...   | boxes  | 3.535     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| .-.././.-/-.-/...     | leaks  | 3.542     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| .../-/.-./---/-.../.  | strobe | 3.545     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| -.../../.../-/.-./--- | bistro | 3.552     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| ..-./.-../../-.-./-.- | flick  | 3.555     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| -.../---/--/-.../...  | bombs  | 3.565     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| -.../.-././.-/-.-     | break  | 3.572     |\n"
                "+-----------------------+--------+-----------+\n"
                "| -.../.-./../-.-./-.-  | brick  | 3.575     |\n"
                "+-----------------------+--------+-----------+\n"

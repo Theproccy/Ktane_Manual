@@ -9,12 +9,15 @@ person needing to have an exceptional understanding of the game. May just help y
 
 * Wires
 * Buttons
+* Maze
 * Simon Says
 * Memory
 * Complex Wires
+* Passwords
 * Wire Sequences
 * Who's on First
-* Knobs Solver to run in parallel to the whole thing
+* Morse
+* Knobs Solver to run in parallel
 
 ## Current Feature Being worked on:
 * Modules

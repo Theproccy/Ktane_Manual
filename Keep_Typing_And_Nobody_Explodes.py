@@ -4,6 +4,9 @@ import json
 
 import cutie
 import rich
+import rich.console
+
+console = rich.console.Console()
 
 from find_path import solve_maze
 
@@ -29,10 +32,10 @@ def wires(serial_num):  # Simple wires
     white = 0
 
     # data input
-    wire_input = str(input(
-        "Please enter the wires in order from top to bottom in order (Yellow=Y,Red=R,Blue=B,Black=K,White=W) EG [RBy] "
+    wire_input = console.input(
+        "Please enter the wires in order from top to bottom in order ([bold red]Yellow=Y,Red=R,Blue=B,Black=K,White=W[/bold red]) EG [RBy] "
         ": "
-    ))
+    )
 
     # data gathering from input
     wire_num = len(wire_input)  # the number of wires

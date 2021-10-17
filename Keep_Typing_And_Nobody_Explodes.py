@@ -3,6 +3,7 @@
 import json
 
 import cutie
+import rich
 
 from find_path import solve_maze
 
@@ -57,47 +58,50 @@ def wires(serial_num):  # Simple wires
             white += 1
 
     # solver
+    answer = ""
     if wire_num == 3:
         if red == 0:
-            print("Cut The Second Wire")
+            answer = "Cut The Second Wire"
         elif wire_list[-1] == 'W':
-            print("Cut The Last Wire")
+            answer = "Cut The Last Wire"
         elif blue > 1:
-            print("Cut The Last Blue Wire")
+            answer = "Cut The Last Blue Wire"
         else:
-            print("Cut Last Wire")
+            answer = "Cut Last Wire"
 
     elif wire_num == 4:
         if red > 1 and (int(serial_num[-1]) % 2 == 0):
-            print("Cut The Last Red Wire")
+            answer = "Cut The Last Red Wire"
         elif wire_list[-1] == 'Y' and red == 0:
-            print("Cut The First Wire")
+            answer = "Cut The First Wire"
         elif blue == 1:
-            print("Cut The First Wire")
+            answer = "Cut The First Wire"
         elif yellow > 1:
-            print("Cut The Last Wire")
+            answer = "Cut The Last Wire"
         else:
-            print("Cut The Second Wire")
+            answer = "Cut The Second Wire"
 
     elif wire_num == 5:
         if wire_list[-1] and (int(serial_num[-1]) % 2 != 0) == "K":
-            print("Cut The Fourth Wire")
+            answer = "Cut The Fourth Wire"
         elif red == 1 and yellow > 1:
-            print("Cut The First Wire")
+            answer = "Cut The First Wire"
         elif black == 0:
-            print("Cut The Second Wire")
+            answer = "Cut The Second Wire"
         else:
-            print("Cut The First Wire")
+            answer = "Cut The First Wire"
 
     elif wire_num == 6:
         if yellow == 0 and (int(serial_num[-1]) % 2 != 0):
-            print("Cut The Third Wire")
+            answer = "Cut The Third Wire"
         elif yellow == 1 and white > 1:
-            print("Cut The Fourth Wire")
+            answer = "Cut The Fourth Wire"
         elif red == 0:
-            print("Cut The Last Wire")
+            answer = "Cut The Last Wire"
         else:
-            print("Cut The Forth Wire")
+            answer = "Cut The Forth Wire"
+
+    rich.print("[bold green]" + answer + "[/bold green]")
     # End function
 
 
@@ -141,32 +145,30 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
     elif button_label_input == 3:
         hold = True
 
-
     # solving
     # main section
+    answer = ""
     releasing_held_button = False
     if blue is True and abort is True:
         releasing_held_button = True
     elif battery_num > 1 and detonate is True:
-        print("Press and Immediately Release")
+        answer = "Press and Immediately Release"
     elif white is True and indicator_car is True:
         releasing_held_button = True
     elif indicator_frk is True and battery_num > 2:
-        print("Press and Immediately Release")
+        answer = "Press and Immediately Release"
     elif yellow is True:
         releasing_held_button = True
     elif red is True and hold is True:
-        print("Press and Immediately Release")
+        answer = "Press and Immediately Release"
     else:
         releasing_held_button = True
 
         # releasing held button section
     if releasing_held_button is True:
-        print("Hold the Button\n"
-              "Strip Color:\n"
-              "Blue = 4 any position\n"
-              "Yellow = 5 any position\n"
-              "Otherwise 1 in any position")
+        answer = "Hold the Button\nStrip Color:\nBlue = 4 any position\nYellow = 5 any position\nOtherwise 1 in any " \
+                 "position "
+    rich.print("[bold green]" + answer + "[/bold green]")
 
 
 def maze(mazes):  # a pathfinder that calculates moves to complete
@@ -254,7 +256,7 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
 
     # output and formatting
     for k in range(len(commands_condensed)):
-        print(commands_condensed[k])
+        rich.print("[bold green]" + commands_condensed[k] + "[/bold green]")
 
 
 def simon_says(serial_number):  # simon says module
@@ -265,31 +267,30 @@ def simon_says(serial_number):  # simon says module
         if temp == "A" or temp == "E" or temp == "I" or temp == "O" or temp == "U":
             Vowels = True
             continue
-    if Vowels:
-        print(  # vowel simon says
-            "+-------------------------------+--------+-------+--------+--------+\n"
-            "|                               | Red    | Blue  | Green  | Yellow |\n"
-            "+==================+============+========+=======+========+========+\n"
-            "|                  | No Strikes | Blue   | Red   | Yellow | Green  |\n"
-            "|                  +------------+--------+-------+--------+--------+\n"
-            "| Button to press: | 1 Strike   | Yellow | Green | Blue   | Red    |\n"
-            "|                  +------------+--------+-------+--------+--------+\n"
-            "|                  | 2 Strike   | Green  | Red   | Yellow | Blue   |\n"
-            "+------------------+------------+--------+-------+--------+--------+")
-    else:
-        print(  # no vowel simon says
-            "+-------------------------------+--------+--------+--------+--------+\n"
-            "|                               | Red    | Blue   | Green  | Yellow |\n"
-            "+==================+============+========+========+========+========+\n"
-            "|                  | No Strikes | Blue   | Yellow | Green  | Red    |\n"
-            "|                  +------------+--------+--------+--------+--------+\n"
-            "| Button to press: | 1 Strike   | Red    | Blue   | Yellow | Green  |\n"
-            "|                  +------------+--------+--------+--------+--------+\n"
-            "|                  | 2 Strike   | Yellow | Green  | Blue   | Red    |\n"
-            "+------------------+------------+--------+--------+--------+--------+")
+    if Vowels:  # vowel simon says
+        answer = "+-------------------------------+--------+-------+--------+--------+\n" \
+                 "|                               | Red    | Blue  | Green  | Yellow |\n" \
+                 "+==================+============+========+=======+========+========+\n" \
+                 "|                  | No Strikes | Blue   | Red   | Yellow | Green  |\n" \
+                 "|                  +------------+--------+-------+--------+--------+\n" \
+                 "| Button to press: | 1 Strike   | Yellow | Green | Blue   | Red    |\n" \
+                 "|                  +------------+--------+-------+--------+--------+\n" \
+                 "|                  | 2 Strike   | Green  | Red   | Yellow | Blue   |\n" \
+                 "+------------------+------------+--------+-------+--------+--------+"
+    else:  # no vowel simon says
+        answer = "+-------------------------------+--------+--------+--------+--------+\n" \
+                 "|                               | Red    | Blue   | Green  | Yellow |\n" \
+                 "+==================+============+========+========+========+========+\n" \
+                 "|                  | No Strikes | Blue   | Yellow | Green  | Red    |\n" \
+                 "|                  +------------+--------+--------+--------+--------+\n" \
+                 "| Button to press: | 1 Strike   | Red    | Blue   | Yellow | Green  |\n" \
+                 "|                  +------------+--------+--------+--------+--------+\n" \
+                 "|                  | 2 Strike   | Yellow | Green  | Blue   | Red    |\n" \
+                 "+------------------+------------+--------+--------+--------+--------+"
+    rich.print("[bold green]" + answer + "[/bold green]")
 
 
-def memory():  # Memory module
+def memory():  # Memory module Todo un fuck
     # Var creation
     position_list = []
     number_list = []
@@ -389,104 +390,105 @@ def memory():  # Memory module
 
 def complex_wires(serial_number, parallel_port, battery_num):
     if (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num < 2:  # all false
-        print("+------+-------+-------+-------+-------+\n"
-              "|      | White | Red   | Blue  | Both  |\n"
-              "+======+=======+=======+=======+=======+\n"
-              "| None | Cut   | Don't | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Star | Cut   | Cut   | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| LED  | Don't | Don't | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Both | Don't | Don't | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+")
+        answer = "+------+-------+-------+-------+-------+\n" \
+                 "|      | White | Red   | Blue  | Both  |\n" \
+                 "+======+=======+=======+=======+=======+\n" \
+                 "| None | Cut   | Don't | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Star | Cut   | Cut   | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| LED  | Don't | Don't | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Both | Don't | Don't | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+"
     elif (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num >= 2:  # battery
-        print("+------+-------+-------+-------+----------+\n"
-              "|      | White | Red   | Blue  | Both     |\n"
-              "+======+=======+=======+=======+==========+\n"
-              "| None | Cut   | Don't | Don't | Don't    |\n"
-              "+------+-------+-------+-------+----------+\n"
-              "| Star | Cut   | Cut   | Don't | Don't    |\n"
-              "+------+-------+-------+-------+----------+\n"
-              "| LED  | Don't | Cut   | Don't | Don't    |\n"
-              "+------+-------+-------+-------+----------+\n"
-              "| Both | Cut   | Cut   | Don't | Don't    |\n"
-              "+------+-------+-------+-------+----------+")
+        answer = "+------+-------+-------+-------+----------+\n" \
+                 "|      | White | Red   | Blue  | Both     |\n" \
+                 "+======+=======+=======+=======+==========+\n" \
+                 "| None | Cut   | Don't | Don't | Don't    |\n" \
+                 "+------+-------+-------+-------+----------+\n" \
+                 "| Star | Cut   | Cut   | Don't | Don't    |\n" \
+                 "+------+-------+-------+-------+----------+\n" \
+                 "| LED  | Don't | Cut   | Don't | Don't    |\n" \
+                 "+------+-------+-------+-------+----------+\n" \
+                 "| Both | Cut   | Cut   | Don't | Don't    |\n" \
+                 "+------+-------+-------+-------+----------+"
     elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num < 2:  # parallel
-        print("+------+-------+-------+-------+-------+\n"
-              "|      | White | Red   | Blue  | Both  |\n"
-              "+======+=======+=======+=======+=======+\n"
-              "| None | Cut   | Don't | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Star | Cut   | Cut   | Don't | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| LED  | Don't | Don't | Cut   | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Both | Don't | Don't | Cut   | Don't |\n"
-              "+------+-------+-------+-------+-------+")
+        answer = "+------+-------+-------+-------+-------+\n" \
+                 "|      | White | Red   | Blue  | Both  |\n" \
+                 "+======+=======+=======+=======+=======+\n" \
+                 "| None | Cut   | Don't | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Star | Cut   | Cut   | Don't | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| LED  | Don't | Don't | Cut   | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Both | Don't | Don't | Cut   | Don't |\n" \
+                 "+------+-------+-------+-------+-------+"
     # parallel and battery
     elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num >= 2:
-        print("+------+-------+-------+-------+-------+\n"
-              "|      | White | Red   | Blue  | Both  |\n"
-              "+======+=======+=======+=======+=======+\n"
-              "| None | Cut   | Don't | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Star | Cut   | Cut   | Don't | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| LED  | Don't | Cut   | Cut   | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Both | Cut   | Cut   | Cut   | Don't |\n"
-              "+------+-------+-------+-------+-------+")
+        answer = "+------+-------+-------+-------+-------+\n" \
+                 "|      | White | Red   | Blue  | Both  |\n" \
+                 "+======+=======+=======+=======+=======+\n" \
+                 "| None | Cut   | Don't | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Star | Cut   | Cut   | Don't | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| LED  | Don't | Cut   | Cut   | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Both | Cut   | Cut   | Cut   | Don't |\n" \
+                 "+------+-------+-------+-------+-------+"
     elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num < 2:  # even serial
-        print("+------+-------+-------+-------+-------+\n"
-              "|      | White | Red   | Blue  | Both  |\n"
-              "+======+=======+=======+=======+=======+\n"
-              "| None | Cut   | Cut   | Cut   | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Star | Cut   | Cut   | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| LED  | Don't | Don't | Don't | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Both | Don't | Don't | Don't | Don't |\n"
-              "+------+-------+-------+-------+-------+")
+        answer = "+------+-------+-------+-------+-------+\n" \
+                 "|      | White | Red   | Blue  | Both  |\n" \
+                 "+======+=======+=======+=======+=======+\n" \
+                 "| None | Cut   | Cut   | Cut   | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Star | Cut   | Cut   | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| LED  | Don't | Don't | Don't | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Both | Don't | Don't | Don't | Don't |\n" \
+                 "+------+-------+-------+-------+-------+"
     # even serial and battery
     elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num >= 2:
-        print("+------+-------+-----+-------+-------+\n"
-              "|      | White | Red | Blue  | Both  |\n"
-              "+======+=======+=====+=======+=======+\n"
-              "| None | Cut   | Cut | Cut   | Cut   |\n"
-              "+------+-------+-----+-------+-------+\n"
-              "| Star | Cut   | Cut | Don't | Don't |\n"
-              "+------+-------+-----+-------+-------+\n"
-              "| LED  | Don't | Cut | Don't | Cut   |\n"
-              "+------+-------+-----+-------+-------+\n"
-              "| Both | Cut   | Cut | Don't | Don't |\n"
-              "+------+-------+-----+-------+-------+")
+        answer = "+------+-------+-----+-------+-------+\n" \
+                 "|      | White | Red | Blue  | Both  |\n" \
+                 "+======+=======+=====+=======+=======+\n" \
+                 "| None | Cut   | Cut | Cut   | Cut   |\n" \
+                 "+------+-------+-----+-------+-------+\n" \
+                 "| Star | Cut   | Cut | Don't | Don't |\n" \
+                 "+------+-------+-----+-------+-------+\n" \
+                 "| LED  | Don't | Cut | Don't | Cut   |\n" \
+                 "+------+-------+-----+-------+-------+\n" \
+                 "| Both | Cut   | Cut | Don't | Don't |\n" \
+                 "+------+-------+-----+-------+-------+"
     # even serial and parallel
     elif (int(serial_number[-1]) % 2) == 0 and parallel_port is True and battery_num < 2:
-        print("+------+-------+-------+-------+-------+\n"
-              "|      | White | Red   | Blue  | Both  |\n"
-              "+======+=======+=======+=======+=======+\n"
-              "| None | Cut   | Cut   | Cut   | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Star | Cut   | Cut   | Don't | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| LED  | Don't | Don't | Cut   | Cut   |\n"
-              "+------+-------+-------+-------+-------+\n"
-              "| Both | Don't | Don't | Cut   | Don't |\n"
-              "+------+-------+-------+-------+-------+")
+        answer = "+------+-------+-------+-------+-------+\n" \
+                 "|      | White | Red   | Blue  | Both  |\n" \
+                 "+======+=======+=======+=======+=======+\n" \
+                 "| None | Cut   | Cut   | Cut   | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Star | Cut   | Cut   | Don't | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| LED  | Don't | Don't | Cut   | Cut   |\n" \
+                 "+------+-------+-------+-------+-------+\n" \
+                 "| Both | Don't | Don't | Cut   | Don't |\n" \
+                 "+------+-------+-------+-------+-------+"
     else:  # all
-        print("+------+-------+-----+-------+-------+\n"
-              "|      | White | Red | Blue  | Both  |\n"
-              "+======+=======+=====+=======+=======+\n"
-              "| None | Cut   | Cut | Cut   | Cut   |\n"
-              "+------+-------+-----+-------+-------+\n"
-              "| Star | Cut   | Cut | Don't | Cut   |\n"
-              "+------+-------+-----+-------+-------+\n"
-              "| LED  | Don't | Cut | Cut   | Cut   |\n"
-              "+------+-------+-----+-------+-------+\n"
-              "| Both | Cut   | Cut | Cut   | Don't |\n"
-              "------+-------+-----+-------+-------+")
+        answer = "+------+-------+-----+-------+-------+\n" \
+                 "|      | White | Red | Blue  | Both  |\n" \
+                 "+======+=======+=====+=======+=======+\n" \
+                 "| None | Cut   | Cut | Cut   | Cut   |\n" \
+                 "+------+-------+-----+-------+-------+\n" \
+                 "| Star | Cut   | Cut | Don't | Cut   |\n" \
+                 "+------+-------+-----+-------+-------+\n" \
+                 "| LED  | Don't | Cut | Cut   | Cut   |\n" \
+                 "+------+-------+-----+-------+-------+\n" \
+                 "| Both | Cut   | Cut | Cut   | Don't |\n" \
+                 "------+-------+-----+-------+-------+"
+    rich.print("[bold green]" + answer + "[/bold green]")
 
 
 def passwords():
@@ -541,7 +543,8 @@ def passwords():
             if temp_word[2] == temp_search:
                 answers_list_3.append(temp_word)
 
-    print(answers_list_3)  # return answer
+    # return answer
+    rich.print("[bold green]" + str(answers_list_3) + "[/bold green]")
 
 
 def wire_sequences():
@@ -590,34 +593,36 @@ def wire_sequences():
     # solver
     print("Please select the color of the wire or exit to exit")
     wire_color_list = ["Exit", "Red", "Blue", "Black"]
+    answer = ""
     while 1 == 1:
         wire_color = cutie.select(wire_color_list, selected_index=1)
         print("\n")
         if wire_color == 1:
             red += 1
-            print("Cut the wire if it is connected to ", red_options[red])
+            answer = "Cut the wire if it is connected to " + red_options[red]
         elif wire_color == 2:
             blue += 1
-            print("Cut the wire if it is connected to ", blue_options[blue])
+            answer = "Cut the wire if it is connected to " + blue_options[blue]
         elif wire_color == 3:
             black += 1
-            print("Cut the wire if it is connected to ", black_options[black])
+            answer = "Cut the wire if it is connected to " + black_options[black]
         elif wire_color == 0:
             break
+        rich.print("[bold green]" + answer + "[/bold green]")
 
 
 def morse():  # morse table
-    print("+-----------------------+--------+-----------+\n"
-          "| Morse                 | Word   | Frequency |\n"
-          "+=======================+========+===========+\n"
-          "| .../...././.-../.-..  | shell  | 3.505     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| ..../.-/.-../.-../... | halls  | 3.515     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| .../.-../../.-.-/-.-  | slick  | 3.522     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| -/.-./../-.-./-.-     | trick  | 3.532     |\n"
-          "+-----------------------+--------+-----------+\n"
+    rich.print("[bold green]+-----------------------+--------+-----------+\n"
+               "| Morse                 | Word   | Frequency |\n"
+               "+=======================+========+===========+\n"
+               "| .../...././.-../.-..  | shell  | 3.505     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| ..../.-/.-../.-../... | halls  | 3.515     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| .../.-../../.-.-/-.-  | slick  | 3.522     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| -/.-./../-.-./-.-     | trick  | 3.532     |\n"
+               "+-----------------------+--------+-----------+\n"
           "| -.../---/-..-/./...   | boxes  | 3.535     |\n"
           "+-----------------------+--------+-----------+\n"
           "| .-.././.-/-.-/...     | leaks  | 3.542     |\n"
@@ -631,17 +636,17 @@ def morse():  # morse table
           "| -.../---/--/-.../...  | bombs  | 3.565     |\n"
           "+-----------------------+--------+-----------+\n"
           "| -.../.-././.-/-.-     | break  | 3.572     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| -.../.-./../-.-./-.-  | brick  | 3.575     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| .../-/./.-/-.-        | steak  | 3.582     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| .../-/../-./--.       | sting  | 3.592     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| ...-/./-.-./-/---/.-. | vector | 3.595     |\n"
-          "+-----------------------+--------+-----------+\n"
-          "| -..././.-/-/...       | beats  | 3.600     |\n"
-          "+-----------------------+--------+-----------+\n")
+               "+-----------------------+--------+-----------+\n"
+               "| -.../.-./../-.-./-.-  | brick  | 3.575     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| .../-/./.-/-.-        | steak  | 3.582     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| .../-/../-./--.       | sting  | 3.592     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| ...-/./-.-./-/---/.-. | vector | 3.595     |\n"
+               "+-----------------------+--------+-----------+\n"
+               "| -..././.-/-/...       | beats  | 3.600     |\n"
+               "+-----------------------+--------+-----------+\n[/bold green]")
 
 
 def whose_on_first():
@@ -738,14 +743,13 @@ def whose_on_first():
         displayed_word = display_word_dictionary[input("Please enter the word displayed : ").upper()]
         corresponding_word = word_corresponding_list[
             input("Please enter the word in the box that is located in the " + displayed_word + " : ").upper()]
-        print(corresponding_word)
+        rich.print("[bold green]" + str(corresponding_word) + "[/bold green]")
 
 
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
                   indicator_light_car, all_mazes, display_help):  # function for all of the questions to be asked
     options_list = ["New Bomb", "Wires", "Buttons", "Maze", "Simon says", "Memory", "Complex wires", "Passwords",
-                    "Wire Sequences",
-                    "Morse", "On The Subject Of Whose First"]
+                    "Wire Sequences", "Morse", "On The Subject Of Whose First"]
     print("\n \nPlease Select the module you want to solve")
 
     selection_input = cutie.select(options_list, selected_index=1)
@@ -785,11 +789,9 @@ def help_required_function(first_time_asking, help_required):  # function to ask
         False: " still"
     }
     if help_required is True:  # help module
-        help_required = False
-        help_required_input = cutie.prompt_yes_or_no(
+        help_required = cutie.prompt_yes_or_no(
             "Do you" + word_dict[first_time_asking] + " require help(if Yes Type 1): ")
-        if help_required_input == "1":
-            help_required = True
+
     return help_required
 
 
@@ -844,13 +846,14 @@ def help_modules(help_required, module):
             "Expert then finds a list of words, and the first word on the list is the correct one to press.\n"
     }
     if help_required is True:
-        print(help_dictionary[module])
+        rich.print("[bold red]" + help_dictionary[module] + "[bold red]")
 
 
 def main():
-    print("https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
-          "\n Open the pages on symbols\n"
-          "Also run the program called *Knobs* from the same file this needs to run separately from the main code")
+    rich.print("[bold]https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
+               "\n Open the pages on symbols\n"
+               "Also run the program called [reverse]'Knobs.exe'[/reverse] from the same file this needs to run "
+               "separately from the main code[/bold]\n")
     ALL_MAZES = json.load(open("data.json"))
 
     help_required = help_required_function(True, True)
@@ -869,10 +872,10 @@ def main():
                 help_required = help_required_function(False, help_required)
 
         except:
-            print(
-                "There was an error."
+            rich.print(
+                "[reverse]There was an error."
                 "\nIf you think there is no error in your input raise an issue at:"
-                "\nhttps://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new")
+                "\nhttps://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/issues/new[/reverse]")
 
 
 if __name__ == "__main__":

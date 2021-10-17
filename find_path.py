@@ -3,6 +3,7 @@ def solve_maze(start_coordinates: list[int],
                end_coordinates: list[int],
                explored_coordinates: list,
                maze: dict) -> list:
+
     """This will find a path to solve the maze.
     Args:
         start_coordinates (list[list[int]]): the starting position of the player
@@ -25,8 +26,7 @@ def solve_maze(start_coordinates: list[int],
         if current_coordinates[1] >= 1:
             if not (maze["horizontal_wall"][current_coordinates[1] - 1][current_coordinates[0]]):
                 answer_list = solve_maze(start_coordinates,
-                                         [current_coordinates[0],
-                                          current_coordinates[1] - 1],
+                                         [current_coordinates[0], current_coordinates[1] - 1],
                                          end_coordinates,
                                          explored_coordinates,
                                          maze)
@@ -43,8 +43,7 @@ def solve_maze(start_coordinates: list[int],
         if current_coordinates[1] < 5:
             if not (maze["horizontal_wall"][current_coordinates[1]][current_coordinates[0]]):
                 answer_list = solve_maze(start_coordinates,
-                                         [current_coordinates[0],
-                                          current_coordinates[1] + 1],
+                                         [current_coordinates[0], current_coordinates[1] + 1],
                                          end_coordinates,
                                          explored_coordinates,
                                          maze)
@@ -61,8 +60,7 @@ def solve_maze(start_coordinates: list[int],
         if current_coordinates[0] >= 1:
             if not (maze["vertical_wall"][current_coordinates[1]][current_coordinates[0] - 1]):
                 answer_list = solve_maze(start_coordinates,
-                                         [current_coordinates[0] - 1,
-                                          current_coordinates[1]],
+                                         [current_coordinates[0] - 1, current_coordinates[1]],
                                          end_coordinates,
                                          explored_coordinates,
                                          maze)
@@ -79,8 +77,7 @@ def solve_maze(start_coordinates: list[int],
         if current_coordinates[0] < 5:
             if not (maze["vertical_wall"][current_coordinates[1]][current_coordinates[0]]):
                 answer_list = solve_maze(start_coordinates,
-                                         [current_coordinates[0] + 1,
-                                          current_coordinates[1]],
+                                         [current_coordinates[0] + 1, current_coordinates[1]],
                                          end_coordinates,
                                          explored_coordinates,
                                          maze)

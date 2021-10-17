@@ -17,10 +17,12 @@ person needing to have an exceptional understanding of the game. May just help y
 * Knobs Solver to run in parallel to the whole thing
 
 ## Current Feature Being worked on:
-* Rich Overhaul to make program even easier to read
-*
+
+* Overhaul the help text
 
 ## Planed Features
+
+* Refactor memory module
 * Modules
   * Symbols
 * increase support to modded modules

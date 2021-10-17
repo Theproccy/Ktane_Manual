@@ -818,51 +818,51 @@ def help_required_function(first_time_asking, help_required):  # function to ask
 def help_modules(help_required, module):
     help_dictionary = {
         1: "The Wires module (sometimes known as Simple Wires) contains 3-6 wires of different solid "
-           "colors.\n Wires may be colored in yellow, red, blue, black, or white.\n Only one of the wires of "
+           "colors.\nWires may be colored in yellow, red, blue, black, or white.\nOnly one of the wires of "
            "the module must be cut in order to disarm the module.\n",
 
         2: "The Button is a large button of one solid color, a one-word label on it, and a strip to the "
-           "right of it that lights up when the button is held.\n The button must be pressed and released at "
+           "right of it that lights up when the button is held.\nThe button must be pressed and released at "
            "the right time based on information on the button, as well as on batteries and some indicators "
            "on the bomb.\n",
 
         3: "The Maze module is a module that consists of a 6x6 grid of squares with two of the squares "
-           "containing green indicator circles,\n one square containing a white square, and one square "
-           "containing a red triangle as well as four directional buttons around the maze.\n In order to "
+           "containing green indicator circles,\none square containing a white square, and one square "
+           "containing a red triangle as well as four directional buttons around the maze.\nIn order to "
            "disarm the module, the Defuser must guide the white light to the red triangle without running "
            "into any of the walls shown in the manual.\n",
 
         4: "One of the four colored buttons will flash.\n"
            "Using the table below, press the button with the corresponding color.\n"
            "The original button will flash, followed by another. Repeat this sequence in order using the "
-           "color mapping.\n "
+           "color mapping.\n"
            "The sequence will lengthen by one each time you correctly enter a sequence until the module is "
            "disarmed.\n",
 
         5: "The Memory module features a display with a number from 1-4 and four buttons, with the labels "
-           "1-4,\n but not necessarily in that order. To disarm the module, the defuser must press the "
+           "1-4,\nbut not necessarily in that order. To disarm the module, the defuser must press the "
            "correct buttons to fill the stage indicator five times in a row.\n",
 
         6: "The Complicated Wires module contains up to six wires arranged vertically with an LED above each "
-           "wire and a space for a pencil-drawn ★ below it.\n To disarm the module, the defuser must cut the "
+           "wire and a space for a pencil-drawn ★ below it.\nTo disarm the module, the defuser must cut the "
            "correct wires, in any order, based on instructions laid out below.\n",
 
-        7: "The Password module consists of a five lettered display with arrows above and below them.\n The "
-           "expert must then find a word that has a letter in all five slots.\n Only one word is present in "
+        7: "The Password module consists of a five lettered display with arrows above and below them.\nThe "
+           "expert must then find a word that has a letter in all five slots.\nOnly one word is present in "
            "the module.\n",
 
-        8: "The Wire Sequence module consists of four panels, each with 1 to 3 wires.\n Depending on the "
-           "occurrence number of the wire color and the letter it is connected to,\n the expert must determine "
+        8: "The Wire Sequence module consists of four panels, each with 1 to 3 wires.\nDepending on the "
+           "occurrence number of the wire color and the letter it is connected to,\nthe expert must determine "
            "if each should be cut or not. Wire occurrences are indicated in their order from the left side.\n",
 
         9: "The Morse Code module consists of a light flashing in Morse Code, a radio with a displayed "
-           "frequency and a TX button.\n The defuser must interpret the flashing Morse Light as dots and "
-           "dashes to form a word in Morse Code.\n This word corresponds to a radio frequency that the expert "
-           "must tell the defuser to transmit.\n The defuser must scroll to that frequency, and press the TX "
+           "frequency and a TX button.\nThe defuser must interpret the flashing Morse Light as dots and "
+           "dashes to form a word in Morse Code.\nThis word corresponds to a radio frequency that the expert "
+           "must tell the defuser to transmit.\nThe defuser must scroll to that frequency, and press the TX "
            "button to solve the module.\n",
 
-        10: "The aim of the Who's on First module is to press the correct labelled button for three stages.\n "
-            "For each stage, the Defuser must read the label of a particular button based on the display.\n The "
+        10: "The aim of the Who's on First module is to press the correct labelled button for three stages.\n"
+            "For each stage, the Defuser must read the label of a particular button based on the display.\nThe "
             "Expert then finds a list of words, and the first word on the list is the correct one to press.\n"
     }
     if help_required is True:

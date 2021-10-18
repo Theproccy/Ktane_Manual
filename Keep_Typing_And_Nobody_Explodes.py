@@ -132,20 +132,20 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
 
     # data formatting
     # colors
-    if button_color_input == 1:
+    if button_color_input == 0:
         blue = True
-    elif button_color_input == 2:
+    elif button_color_input == 1:
         red = True
-    elif button_color_input == 3:
+    elif button_color_input == 2:
         white = True
-    elif button_color_input == 4:
+    elif button_color_input == 3:
         yellow = True
         # labels
-    if button_label_input == 1:
+    if button_label_input == 0:
         abort = True
-    elif button_label_input == 2:
+    elif button_label_input == 1:
         detonate = True
-    elif button_label_input == 3:
+    elif button_label_input == 2:
         hold = True
 
     # solving
@@ -872,7 +872,8 @@ def main():
     rich.print("[bold]https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
                "\n Open the pages on symbols\n"
                "Also run the program called [reverse]'Knobs.exe'[/reverse] from the same file this needs to run "
-               "separately from the main code[/bold]\n")
+               "separately from the main code.[/bold]\n"
+               "Use the arrow keys to navigate the menus.")
     ALL_MAZES = json.load(open("data.json"))
 
     help_required = help_required_function(True, True)

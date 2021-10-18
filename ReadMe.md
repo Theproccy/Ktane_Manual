@@ -25,13 +25,11 @@ person needing to have an exceptional understanding of the game. May just help y
 
 
 ## Planed Features
-
 * Increase support to modded modules
-* Overhaul the help text
+* Overhaul the help text(when I think of what actually will be helpful)
 ## Known issues:
 
 ## How to run
-
 1. Unzip the file
 2. Run the .exe
 3. Tah Dah

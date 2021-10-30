@@ -17,14 +17,18 @@ person needing to have an exceptional understanding of the game. May just help y
 * Wire Sequences
 * Who's on First
 * Morse
+* Symbols
 * Knobs Solver to run in parallel
 
 ## Current Feature Being worked on:
-* Modules
-  * Symbols
+
+* Looking into ways of improving the symbols module
+  * Upon compilation of research new build will be uploaded
 
 
 ## Planed Features
+
+* Refactor
 * Increase support to modded modules
 * Overhaul the help text(when I think of what actually will be helpful)
 ## Known issues:

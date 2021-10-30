@@ -1,6 +1,6 @@
 import json
 
-data = {
+data = {  # original data set
     "FILENAMES_LIST": ['Keypad01.png', 'Keypad02.png', 'Keypad03.png', 'Keypad04.png', 'Keypad05.png', 'Keypad06.png',
                        'Keypad07.png', 'Keypad08.png', 'Keypad09.png', 'Keypad10.png', 'Keypad11.png', 'Keypad12.png',
                        'Keypad13.png', 'Keypad14.png', 'Keypad15.png', 'Keypad16.png', 'Keypad17.png', 'Keypad18.png',

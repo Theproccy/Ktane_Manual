@@ -5,6 +5,7 @@ import json
 import cutie
 import rich
 import rich.console
+import texttable
 
 from find_path import solve_maze
 
@@ -765,10 +766,49 @@ def whose_on_first():
         rich.print("[bold green]" + str(corresponding_word) + "[/bold green]")
 
 
+def symbols():  # todo coment
+    file = open(r"Symbols/Symbols_Data.json", "r")
+    data = json.load(file)
+    NAMES_LIST = data["NAMES_LIST"]
+    file.close()
+    main_list = []
+    symbols_dictionary = {
+        1: [28, 13, 30, 12, 7, 9, 23],  # positions of the users selected words based off of the labels of the images
+        2: [16, 28, 23, 26, 3, 9, 20],
+        3: [1, 8, 26, 5, 15, 30, 3],
+        4: [11, 21, 31, 7, 5, 20, 4],
+        5: [24, 4, 31, 22, 21, 19, 2],
+        6: [11, 16, 27, 14, 24, 18, 6]
+    }
+
+    for j in range(6):
+        temp_list = []
+        dict_list = symbols_dictionary[j + 1]
+        for i in range(7):
+            num = dict_list[i] - 1
+            temp_list.append(NAMES_LIST[num])
+        main_list.append(temp_list)
+    print(main_list)
+    table_list = [["Sequence 1", "Sequence 2", "Sequence 3", "Sequence 4", "Sequence 5", "Sequence 6"]]
+    for j in range(7):
+        temp_row = []
+        for i in range(6):
+            temp = main_list[i]
+            temp_row.append(str(temp[j]))
+        table_list.append(temp_row)
+
+    table = texttable.Texttable()
+    table.set_cols_align(["c", "c", "c", "c", "c", "c"])
+    table.set_cols_width([15, 15, 15, 15, 15, 15])
+    table.add_rows(table_list)
+    table_ouput = table.draw()
+    rich.print("[bold green]" + table_ouput + "[/bold green]")
+
+
 def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
                   indicator_light_car, all_mazes, display_help):  # function for all of the questions to be asked
     options_list = ["New Bomb", "Wires", "Buttons", "Maze", "Simon says", "Memory", "Complex wires", "Passwords",
-                    "Wire Sequences", "Morse", "On The Subject Of Whose First"]
+                    "Wire Sequences", "Morse", "On The Subject Of Whose First", "Symbols"]
     print("\n \nPlease Select the module you want to solve")
 
     selection_input = cutie.select(options_list, selected_index=1)
@@ -796,6 +836,8 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
             morse()
         elif selection == 10:
             whose_on_first()
+        elif selection == 11:
+            symbols()
         elif selection == 0:
             return True
         else:

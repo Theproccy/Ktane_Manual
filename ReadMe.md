@@ -27,7 +27,7 @@ person needing to have an exceptional understanding of the game. May just help y
 
 
 ## Planed Features
-
+* Build Script
 * Refactor
 * Increase support to modded modules
 * Overhaul the help text(when I think of what actually will be helpful)

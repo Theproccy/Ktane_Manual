@@ -11,7 +11,10 @@ data = {  # original data set
                    "hookn", "teepee", "six", "squigglyn", "at", "ae", "metledthree", "euro", "circle", "nwithat",
                    "dragon",
                    "questionmark", "paragraph", "rightc", "leftc", "pitchfork", "tripod", "cursive", "track", "ballon",
-                   "weirdnose", "upsidedowny", "bt"]
+                   "weirdnose", "upsidedowny", "bt"],
+    "ACTIVE_LIST": [True, True, True, True, True, True, True, True, True, False, True, True, True, True, True, True,
+                    False, True, True, True, True, True, True, True, False, True, True, True, False, True, True]
+
 }
 file = open("Symbols_Data.json", "w")
 json_data = json.dumps(data, indent=4)

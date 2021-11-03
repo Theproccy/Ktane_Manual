@@ -788,7 +788,6 @@ def symbols():  # todo coment
             num = dict_list[i] - 1
             temp_list.append(NAMES_LIST[num])
         main_list.append(temp_list)
-    print(main_list)
     table_list = [["Sequence 1", "Sequence 2", "Sequence 3", "Sequence 4", "Sequence 5", "Sequence 6"]]
     for j in range(7):
         temp_row = []
@@ -799,7 +798,7 @@ def symbols():  # todo coment
 
     table = texttable.Texttable()
     table.set_cols_align(["c", "c", "c", "c", "c", "c"])
-    table.set_cols_width([15, 15, 15, 15, 15, 15])
+    table.set_cols_width([20, 20, 20, 20, 20, 20])
     table.add_rows(table_list)
     table_ouput = table.draw()
     rich.print("[bold green]" + table_ouput + "[/bold green]")
@@ -907,7 +906,7 @@ def help_modules(help_required, module):
             "Expert then finds a list of words, and the first word on the list is the correct one to press.\n"
     }
     if help_required is True:
-        rich.print("[bold red]" + help_dictionary[module] + "[bold red]")
+        rich.print("[bold red]" + help_dictionary[module] + "[/bold red]")
 
 
 def main():
@@ -919,7 +918,6 @@ def main():
     ALL_MAZES = json.load(open("data.json"))
 
     help_required = help_required_function(True, True)
-
     serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car = data_input()
     module_select(serial_number, battery_numbers, parallel,
                   indicator_light_frk, indicator_light_car, ALL_MAZES, help_required)

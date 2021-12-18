@@ -15,15 +15,19 @@ console = rich.console.Console()
 def data_input():  # collects misc data abound the bomb for other defusing steps
     # data input
     serial_number = list(input("Please Enter the Serial Number : "))
-    battery_numbers = int(input("Please enter the number of batteries on the bomb : "))
+    battery_numbers = input("Please enter the number of batteries on the bomb : ")
     parallel = cutie.prompt_yes_or_no("Does the bomb have a parallel port: ")
     indicator_light_frk = cutie.prompt_yes_or_no("Does the bomb have a lit FRK Indicator: ")
     indicator_light_car = cutie.prompt_yes_or_no("Does the bomb have a lit CAR Indicator: ")
 
+    if battery_numbers != "":
+        battery_numbers = int(battery_numbers)
+    else:
+        battery_numbers = 0
     return serial_number, battery_numbers, parallel, indicator_light_frk, indicator_light_car
 
 
-def wires(serial_num):  # Simple wires
+def wires(serial_num: list):  # Simple wires
     # var creation
     yellow = 0
     red = 0
@@ -109,7 +113,7 @@ def wires(serial_num):  # Simple wires
     # End function
 
 
-def button(battery_num, indicator_car, indicator_frk):  # The Button
+def button(battery_num: int, indicator_car: bool, indicator_frk: bool):  # The Button
     # var creation
     button_color_list = ["BLUE", "RED", "WHITE", "YELLOW", "BLACK"]  # all color options for the button
     button_label_list = ["Abort", "Detonate", "Hold", "Press"]  # all the label Options for the button
@@ -175,7 +179,7 @@ def button(battery_num, indicator_car, indicator_frk):  # The Button
     rich.print("[bold green]" + answer + "[/bold green]")
 
 
-def maze(mazes):  # a pathfinder that calculates moves to complete
+def maze(mazes: dict):  # a pathfinder that calculates moves to complete
     # var creation
     word_num = 1
     temp_list = []
@@ -263,7 +267,7 @@ def maze(mazes):  # a pathfinder that calculates moves to complete
         rich.print("[bold green]" + commands_condensed[k] + "[/bold green]")
 
 
-def simon_says(serial_number):  # simon says module
+def simon_says(serial_number: list):  # simon says module
     Vowels = False
     for i in range(len(serial_number)):
         temp = str(serial_number[i])
@@ -408,7 +412,7 @@ def memory():  # Memory module
     # Function end
 
 
-def complex_wires(serial_number, parallel_port, battery_num):
+def complex_wires(serial_number: list, parallel_port: bool, battery_num: int):
     if (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num < 2:  # all false
         answer = "+------+-------+-------+-------+-------+\n" \
                  "|      | White | Red   | Blue  | Both  |\n" \
@@ -766,7 +770,7 @@ def whose_on_first():
         rich.print("[bold green]" + str(corresponding_word) + "[/bold green]")
 
 
-def symbols():  # todo coment
+def symbols():  # todo comment
     file = open(r"Symbols/Symbols_Data.json", "r")
     data = json.load(file)
     NAMES_LIST = data["NAMES_LIST"]
@@ -800,12 +804,13 @@ def symbols():  # todo coment
     table.set_cols_align(["c", "c", "c", "c", "c", "c"])
     table.set_cols_width([20, 20, 20, 20, 20, 20])
     table.add_rows(table_list)
-    table_ouput = table.draw()
-    rich.print("[bold green]" + table_ouput + "[/bold green]")
+    table_output = table.draw()
+    rich.print("[bold green]" + table_output + "[/bold green]")
 
 
-def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
-                  indicator_light_car, all_mazes, display_help):  # function for all of the questions to be asked
+def module_select(serial_number: list, battery_numbers: int, parallel: bool, indicator_light_frk: bool,
+                  indicator_light_car: bool, all_mazes: dict,
+                  display_help: bool):  # function for all of the questions to be asked
     options_list = ["New Bomb", "Wires", "Buttons", "Maze", "Simon says", "Memory", "Complex wires", "Passwords",
                     "Wire Sequences", "Morse", "On The Subject Of Whose First", "Symbols"]
     print("\n \nPlease Select the module you want to solve")
@@ -843,7 +848,8 @@ def module_select(serial_number, battery_numbers, parallel, indicator_light_frk,
             pass
 
 
-def help_required_function(first_time_asking, help_required):  # function to ask if person is in need of help
+def help_required_function(first_time_asking: bool,
+                           help_required: bool):  # function to ask if person is in need of help
     word_dict = {
         True: "",
         False: " still"
@@ -855,8 +861,9 @@ def help_required_function(first_time_asking, help_required):  # function to ask
     return help_required
 
 
-def help_modules(help_required, module):
+def help_modules(help_required: bool, module: int):
     help_dictionary = {
+        0: "",
         1: "The Wires module (sometimes known as Simple Wires) contains 3-6 wires of different solid "
            "colors.\nWires may be colored in yellow, red, blue, black, or white.\nOnly one of the wires of "
            "the module must be cut in order to disarm the module.\n",

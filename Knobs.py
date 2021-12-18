@@ -8,7 +8,7 @@ def knobs():
     right = ["101111111010", "101100111010"]
     answer = ""
     sequence_input = input("Please enter the sequence of LEDs(E.G. 001011111101)(1 meaning light is on): ")
-    exit_knobs = True
+    exit_knobs = False
     if sequence_input == up[0] or sequence_input == up[1]:
         answer = "Up"
     elif sequence_input == down[0] or sequence_input == down[1]:
@@ -34,6 +34,5 @@ print("Data entry for the led sequences is done like so:\n"
       "Will be entered as : 001011111101\n"
       "Leave blank to exit\n")
 
-exit_ = False
-while exit_ is False:
-    exit_ = knobs()
+while True is True:
+    knobs()

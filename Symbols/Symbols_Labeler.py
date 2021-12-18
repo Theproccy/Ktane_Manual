@@ -32,19 +32,19 @@ layout = [[Gui.Text(text="Image " + str(i + 1), key="-IMAGE LABEL TEXT-")],
 win = Gui.Window("Icon Labeler", layout)  # window creation
 
 while True:  # main loop
-    event, values = win.read()  # if somthing happens in the window
-    # repaces label in list
+    event, values = win.read()  # if something happens in the window
+    # replaces label in list
     names_list.pop(i)
     names_list.insert(i, values['-INPUT-'])
     if event == "Next":  # if button pressed
-        if 30 >= i >= 0:
+        if 30 > i:
             i += 1
     if event == "Back":  # if button pressed
-        if 31 >= i >= 1:
+        if i >= 1:
             i -= 1
     if event == Gui.WIN_CLOSED:  # if exit pressed
         break
-    if event == "Save":  # overates json file
+    if event == "Save":  # overwrites json file
         file = open("Symbols_Data.json", "w")
         data.update({"FILENAMES_LIST": FILENAMES_LIST,
                      "NAMES_LIST": names_list})

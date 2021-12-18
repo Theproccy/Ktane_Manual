@@ -22,18 +22,25 @@ person needing to have an exceptional understanding of the game. May just help y
 
 ## Current Feature Being worked on:
 
-* Looking into ways of improving the symbols module
-  * Upon compilation of research new build will be uploaded
-
+* Overhaul the help text(when I think of what actually will be helpful)
 
 ## Planed Features
-* Build Script
-* Refactor
-* Increase support to modded modules
-* Overhaul the help text(when I think of what actually will be helpful)
+
+* Modded Modules
+
 ## Known issues:
 
+* ### None
+
 ## How to run
+
 1. Unzip the file
-2. Run the .exe
-3. Tah Dah
+2. Run Keep_Typing_And_Nobody_Explodes.exe
+3. Run Knobs.exe (only necessary if the bomb contains knobs)
+4. Tah Dah
+
+## How to change symbol names
+
+1. Navigate into /Symbols directory
+2. Run Symbols_Labeler.exe
+3. Press save when done

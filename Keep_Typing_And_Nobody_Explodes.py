@@ -222,7 +222,8 @@ def maze(mazes: dict):  # a pathfinder that calculates moves to complete
             temp_green_1 = temp["Green_circle_1"]
             temp_green_2 = temp["Green_circle_2"]
 
-            if green_1 == temp_green_1[0] or green_1 == temp_green_2[0]:
+            if green_1 == temp_green_1[0] or green_1 == temp_green_2[
+                0]:  # both temp_greens are position 0 due to it being a list.
                 if green_2 == temp_green_1[0] or green_2 == temp_green_2[0]:
                     maze_map = temp
     # pathfinding

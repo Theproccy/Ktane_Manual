@@ -37,7 +37,8 @@ def test_wires():
         four_wire_tests_passed.append(True)
     else:
         four_wire_tests_passed.append(False)
-    if Modules.wires(['A', 'L', '5', '0', 'F', '2'], ["white", "white", "white""yellow"]) == 0:
+
+    if Modules.wires(['A', 'L', '5', '0', 'F', '2'], ["white", "white", "white", "yellow"]) == 0:
         # Otherwise, if the last wire is yellow and
         # there are no red wires, cut the first wire.
         four_wire_tests_passed.append(True)
@@ -107,4 +108,55 @@ def test_wires():
     return three_wire_tests_passed, four_wire_tests_passed, five_wire_tests_passed, six_wire_tests_passed
 
 
+def test_button():
+    button_tests_passed = []
+    if not Modules.button(number_of_batteries=0, car_indicator_light_is_lit=False, frk_indicator_light_is_lit=False,
+                          button_color="blue", button_label="abort"):
+        # If the button is blue and the button says "Abort", hold the button and refer to "Releasing a Held Button".
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    if Modules.button(number_of_batteries=2, car_indicator_light_is_lit=False, frk_indicator_light_is_lit=False,
+                      button_color="red", button_label="detonate"):
+        # If there is more than 1 battery on the bomb and the button says "Detonate", press and immediately release
+        # the button.
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    if not Modules.button(number_of_batteries=0, car_indicator_light_is_lit=True, frk_indicator_light_is_lit=False,
+                          button_color="white", button_label="detonate"):
+        # If the button is white and there is a lit indicator with label CAR, hold the button and refer to "Releasing
+        # a Held Button".
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    if Modules.button(number_of_batteries=3, car_indicator_light_is_lit=False, frk_indicator_light_is_lit=True,
+                      button_color="white", button_label="detonate"):
+        # If there are more than 2 batteries on the bomb and there is a lit indicator with label FRK, press and
+        # immediately release the button.
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    if not Modules.button(number_of_batteries=0, car_indicator_light_is_lit=False, frk_indicator_light_is_lit=False,
+                          button_color="yellow", button_label="detonate"):
+        # If the button is yellow, hold the button and refer to "Releasing a Held Button".
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    if Modules.button(number_of_batteries=0, car_indicator_light_is_lit=False, frk_indicator_light_is_lit=False,
+                      button_color="red", button_label="hold"):
+        # If the button is red and the button says "Hold", press and immediately release the button.
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    if not Modules.button(number_of_batteries=0, car_indicator_light_is_lit=False, frk_indicator_light_is_lit=False,
+                          button_color="white", button_label="detonate"):
+        # If none of the above apply, hold the button and refer to "Releasing a Held Button".
+        button_tests_passed.append(True)
+    else:
+        button_tests_passed.append(False)
+    return button_tests_passed
+
+
 print(test_wires())
+print(test_button())

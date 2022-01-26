@@ -105,12 +105,10 @@ def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indic
     :param frk_indicator_light_is_lit: If the FRK indicator light is lit
     :param button_color: The color of the button
     :param button_label: The label on the button
-    :return:
+    :return: bool that if True means that the button is a push and immoderately release
     """
 
     # var creation
-    button_color_list = ["BLUE", "RED", "WHITE", "YELLOW", "BLACK"]  # all color options for the button
-    button_label_list = ["Abort", "Detonate", "Hold", "Press"]  # all the label Options for the button
 
     # colors
     blue = False
@@ -143,25 +141,32 @@ def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indic
 
     # solving
     # main section
-    answer = ""
-    releasing_held_button = False
-
+    # If the button is blue and the button says "Abort", hold the button and refer to "Releasing a Held Button".
     if blue is True and abort is True:
-        releasing_held_button = True
+        press_and_immediately_release = False
+    # If there is more than 1 battery on the bomb and the button says "Detonate", press and immediately release the
+    # button.
     elif number_of_batteries > 1 and detonate is True:
-        answer = "Press and Immediately Release"
+        press_and_immediately_release = True
+    # If the button is white and there is a lit indicator with label CAR, hold the button and refer to "Releasing a
+    # Held Button".
     elif white is True and car_indicator_light_is_lit is True:
-        releasing_held_button = True
+        press_and_immediately_release = False
+    # If there are more than 2 batteries on the bomb and there is a lit indicator with label FRK, press and
+    # immediately release the button.
     elif frk_indicator_light_is_lit is True and number_of_batteries > 2:
-        answer = "Press and Immediately Release"
+        press_and_immediately_release = True
+    # If the button is yellow, hold the button and refer to "Releasing a Held Button".
     elif yellow is True:
-        releasing_held_button = True
+        press_and_immediately_release = False
+    # If the button is red and the button says "Hold", press and immediately release the button.
     elif red is True and hold is True:
-        answer = "Press and Immediately Release"
+        press_and_immediately_release = True
+    # If none of the above apply, hold the button and refer to "Releasing a Held Button".
     else:
-        releasing_held_button = True
+        press_and_immediately_release = False
 
-        # releasing held button section
-    if releasing_held_button is True:
-        answer = "Hold the Button\nStrip Color:\nBlue = 4 any position\nYellow = 5 any position\nOtherwise 1 in any " \
-                 "position "
+    # # releasing held button section if releasing_held_button is True: press_and_immediately_release = "Hold the
+    # Button\nStrip Color:\nBlue = 4 any position\nYellow = 5 any position\nOtherwise 1 in any " \ "position "
+
+    return press_and_immediately_release

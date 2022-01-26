@@ -1,5 +1,7 @@
 """ A Library of solvers for the included modules in the game Keep talking nobody explodes"""
 
+import find_path as pathfinder
+
 
 def wires(serial_num: list, wire_list: list):  # Module for Simple wires
 
@@ -166,7 +168,38 @@ def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indic
     else:
         press_and_immediately_release = False
 
-    # # releasing held button section if releasing_held_button is True: press_and_immediately_release = "Hold the
-    # Button\nStrip Color:\nBlue = 4 any position\nYellow = 5 any position\nOtherwise 1 in any " \ "position "
-
     return press_and_immediately_release
+
+
+def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
+         end_position: list):  # a pathfinder that calculates moves to complete
+
+    """
+    N.B. top left of maze is [0,0] Bottom right is [5,5]
+    :param mazes: dictionary of all the mazes ("mazes.json")
+    :param green_1: list coordinate of the first green circle e.g. [0,1]
+    :param green_2: list coordinate of the second green circle e.g. [5,2]
+    :param start_position: list coordinate of the white square e.g. [0,0]
+    :param end_position: list coordinate of the red triangle e.g. [5,2]
+    :return: list of list coordinate of the coordinates from the start position to the end position
+    e.g. [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5]]
+    """
+    # var creation
+    maze_map = {}
+
+    # maze selection
+    test = False
+    for i in range(9):
+        if test is False:
+            temp = mazes[str(i + 1)]
+
+            temp_green_1 = temp["Green_circle_1"]
+            temp_green_2 = temp["Green_circle_2"]
+
+            if green_1 == temp_green_1 or green_1 == temp_green_2:
+                if green_2 == temp_green_1 or green_2 == temp_green_2:
+                    maze_map = temp
+    # pathfinding
+    route = pathfinder.solve_maze(start_position, start_position, end_position, [], maze_map)
+
+    return route

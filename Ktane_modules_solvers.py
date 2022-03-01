@@ -203,3 +203,67 @@ def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
     route = pathfinder.solve_maze(start_position, start_position, end_position, [], maze_map)
 
     return route
+
+
+# def simon_says_solver():
+
+def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon says module
+
+    vowels = False
+    for i in range(len(serial_number)):
+        temp = str(serial_number[i])
+        temp = temp.upper()
+        if temp == "A" or temp == "E" or temp == "I" or temp == "O" or temp == "U":
+            vowels = True
+            continue
+
+    if vowels:  # vowel simon says
+        if strikes == 0:
+            switch_dict = {
+                "red": "blue",
+                "blue": "red",
+                "green": "yellow",
+                "yellow": "green"
+            }
+        elif strikes == 1:
+            switch_dict = {
+                "red": "yellow",
+                "blue": "green",
+                "green": "blue",
+                "yellow": "red"
+            }
+        else:
+            switch_dict = {
+                "red": "green",
+                "blue": "red",
+                "green": "yellow",
+                "yellow": "blue"
+            }
+    else:  # no vowel simon says
+        if strikes == 0:
+            switch_dict = {
+                "red": "blue",
+                "blue": "yellow",
+                "green": "green",
+                "yellow": "red"
+            }
+        elif strikes == 1:
+            switch_dict = {
+                "red": "red",
+                "blue": "blue",
+                "green": "yellow",
+                "yellow": "green"
+            }
+        else:
+            switch_dict = {
+                "red": "yellow",
+                "blue": "green",
+                "green": "blue",
+                "yellow": "red"
+            }
+    answer = []
+    for i in range(len(colors_list)):
+        temp_color = switch_dict[colors_list[i]]
+        answer.append(temp_color)
+
+    return answer

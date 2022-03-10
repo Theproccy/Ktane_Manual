@@ -209,6 +209,13 @@ def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
 
 def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon says module
 
+    """
+    :param serial_number: List form of the serial number ['A','L','5','0','F','2']
+    :param strikes: Integer of the number of strikes
+    :param colors_list: List of colors ["red","blue","green","yellow"]
+    :return: List of colors to press in order
+    """
+
     vowels = False
     for i in range(len(serial_number)):
         temp = str(serial_number[i])
@@ -267,3 +274,320 @@ def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon s
         answer.append(temp_color)
 
     return answer
+
+
+def memory(display_number: int, position_list: list, label_list: list, stage: int, button_number_order: list):
+    """
+    :param display_number: Integer of the number displayed on the module
+    :param position_list: List of previous positions of buttons
+    :param label_list: List of previous labels
+    :param stage: the current stage
+    :param button_number_order: the combination of 4 buttons at the bottom of the module [4,2,3,1]
+    :return: both the position and the label int
+    """
+
+    position = 0
+    label = 0
+    if stage == 1:  # Stage 1
+        if display_number == 1 or display_number == 2:
+            position = 2  # Second position
+            label = button_number_order[position - 1]
+        elif display_number == 3:
+            position = 3  # Third position
+            label = button_number_order[position - 1]
+        elif display_number == 4:
+            position = 4  # Forth position
+            label = button_number_order[position - 1]
+
+    elif stage == 2:  # Stage 2
+        if display_number == 1:
+            label = 4  # Labeled 4
+            position = button_number_order.index(label) + 1
+        elif display_number == 2 or display_number == 4:
+            position = position_list[0]  # Same position as stage 1
+            label = button_number_order[position - 1]
+        elif display_number == 3:
+            position = 1  # First position
+            label = button_number_order[position - 1]
+
+    elif stage == 3:  # Stage 3
+        if display_number == 1:
+            label = label_list[1]  # Same label as stage 2
+            position = button_number_order.index(label) + 1
+        elif display_number == 2:
+            label = label_list[0]  # Same label as stage 1
+            position = button_number_order.index(label) + 1
+        elif display_number == 3:
+            position = 3  # Third position
+            label = button_number_order[position - 1]
+        elif display_number == 4:
+            label = 4  # Labeled 4
+            position = button_number_order.index(label) + 1
+
+    elif stage == 4:  # Stage 4
+        if display_number == 1:
+            position = position_list[0]  # Same position as stage 1
+            label = button_number_order[position - 1]
+        elif display_number == 2:
+            position = 1  # First position
+            label = button_number_order[position - 1]
+        elif display_number == 3 or display_number == 4:
+            position = position_list[1]  # Same position as stage 2
+            label = button_number_order[position - 1]
+
+    elif stage == 5:  # Stage 5
+        if display_number == 1:
+            label = label_list[0]  # Same label as stage 1
+            position = button_number_order.index(label) + 1
+        elif display_number == 2:
+            label = label_list[1]  # Same label as stage 2
+            position = button_number_order.index(label) + 1
+        elif display_number == 3:
+            label = label_list[3]  # Same label as stage 4
+            position = button_number_order.index(label) + 1
+        elif display_number == 4:
+            label = label_list[2]  # Same label as stage 3
+            position = button_number_order.index(label) + 1
+
+    else:
+        position = 0
+        label = 0
+
+    return position, label
+
+
+def complex_wires():  # todo
+    pass
+
+
+def passwords(first_letter_list: list, second_letter_list: list, third_letter_list: list):
+    """
+
+    :param first_letter_list: List of all the letters in the first column ["a","e","l","z","x"]
+    :param second_letter_list: List of all the letters in the second column ["a","e","l","z","x"]
+    :param third_letter_list: List of all the letters in the third column ["a","e","l","z","x"]
+    :return: list of possible words ["about","after"] only one will be compatible
+    """
+
+    # var creation
+    password_list = ["about", "after", "again", "below", "could",
+                     "every", "first", "found", "great", "house",
+                     "large", "learn", "never", "other", "place",
+                     "plant", "point", "right", "small", "sound",
+                     "spell", "still", "study", "their", "there",
+                     "these", "thing", "think", "three", "water",
+                     "where", "which", "world", "would", "write"]
+    answers_list_1 = []
+    answers_list_2 = []
+    answers_list_3 = []
+
+    # first char search
+    for i in range(len(password_list)):
+        temp_word = password_list[i]
+        for j in range(len(first_letter_list)):
+            temp_search = first_letter_list[j]
+            temp_search = temp_search.lower()
+            if temp_word[0] == temp_search:
+                answers_list_1.append(temp_word)
+
+    # second char search
+    for i in range(len(answers_list_1)):
+        temp_word = answers_list_1[i]
+        for j in range(len(second_letter_list)):
+            temp_search = second_letter_list[j]
+            temp_search = temp_search.lower()
+            if temp_word[1] == temp_search:
+                answers_list_2.append(temp_word)
+
+    # third char search
+    for i in range(len(answers_list_2)):
+        temp_word = answers_list_2[i]
+        for j in range(len(third_letter_list)):
+            temp_search = third_letter_list[j]
+            temp_search = temp_search.lower()
+            if temp_word[2] == temp_search:
+                answers_list_3.append(temp_word)
+
+    return answers_list_3
+
+
+def wire_sequences(color: str, color_history_dict: dict):  # todo test
+    """
+
+    :param color: The color of the wire currently be examined. "red" "blue" "black"
+    :param color_history_dict: the number of the wires of that color previously seen. Given in the form
+        color_history_dict={
+        "red": 0,
+        "blue": 3,
+        "black": 2
+    }
+    :return: the terminals that if connect to the wire should be cut. An amended color history dict  todo improve
+    """
+
+    red = color_history_dict["red"]
+    blue = color_history_dict["blue"]
+    black = color_history_dict["black"]
+
+    red_options = {
+        1: ["C"],
+        2: ["B"],
+        3: ["A"],
+        4: ["A", "C"],
+        5: ["B"],
+        6: ["A", "C"],
+        7: ["A", "B", "C"],
+        8: ["A", "B"],
+        9: ["B"]
+    }
+
+    blue_options = {
+        1: ["B"],
+        2: ["A", "C"],
+        3: ["B"],
+        4: ["A"],
+        5: ["B"],
+        6: ["B", "C"],
+        7: ["C"],
+        8: ["A", "C"],
+        9: ["A"]
+    }
+
+    black_options = {
+        1: ["A", "B", "C"],
+        2: ["A", "C"],
+        3: ["B"],
+        4: ["A", "C"],
+        5: ["B"],
+        6: ["B", "C"],
+        7: ["A", "B"],
+        8: ["C"],
+        9: ["C"]
+    }
+
+    # solver
+    answer = "Error"
+
+    if color == "red":
+        red += 1
+        answer = red_options[red]
+        color_history_dict["red"] = red
+    elif color == "blue":
+        blue += 1
+        answer = blue_options[blue]
+        color_history_dict["blue"] = blue
+    elif color == "black":
+        black += 1
+        answer = black_options[black]
+        color_history_dict["black"] = black
+
+    return answer
+
+
+def morse():  # todo
+    pass
+
+
+def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo test
+    """
+    :param step_two: True if entering the word on the button rather than the display
+    :param displayed_word: The word on the display
+    :param button_word:  The word on the button in the position indicated
+    :return: the location to read from and a list of words to be tried in order
+    """
+
+    display_word_dictionary = {
+        "blank": "middle right",
+        "c": "top right",
+        "cee": "bottom right",
+        "display": "bottom right",
+        "first": "top right",
+        "hold on": "bottom right",
+        "lead": "bottom right",
+        "led": "middle left",
+        "leed": "bottom left",
+        "no": "bottom right",
+        "nothing": "middle left",
+        "okay": "top right",
+        "read": "middle right",
+        "red": "middle right",
+        "reed": "bottom left",
+        "says": "bottom right",
+        "see": "bottom right",
+        "their": "middle right",
+        "there": "bottom right",
+        "they are": "middle left",
+        "they're": "bottom left",
+        "ur": "top left",
+        "yes": "middle left",
+        "you": "middle right",
+        "you are": "bottom right",
+        "you're": "middle right",
+        "your": "middle right",
+        "": "bottom left"}
+
+    word_corresponding_list = {
+        "ready": ["yes", "okay", "what", "middle", "left", "press", "right", "blank", "ready", "no", "first", "uhhh",
+                  "nothing", "wait"],
+        "first": ["left", "okay", "yes", "middle", "no", "right", "nothing", "uhhh", "wait", "ready", "blank", "what",
+                  "press", "first"],
+        "no": ["blank", "uhhh", "wait", "first", "what", "ready", "right", "yes", "nothing", "left", "press", "okay",
+               "no", "middle"],
+        "blank": ["wait", "right", "okay", "middle", "blank", "press", "ready", "nothing", "no", "what", "left", "uhhh",
+                  "yes", "first"],
+        "nothing": ["uhhh", "right", "okay", "middle", "yes", "blank", "no", "press", "left", "what", "wait", "first",
+                    "nothing", "ready"],
+        "yes": ["okay", "right", "uhhh", "middle", "first", "what", "press", "ready", "nothing", "yes", "left", "blank",
+                "no", "wait"],
+        "what": ["uhhh", "what", "left", "nothing", "ready", "blank", "middle", "no", "okay", "first", "wait", "yes",
+                 "press", "right"],
+        "uhhh": ["ready", "nothing", "left", "what", "okay", "yes", "right", "no", "press", "blank", "uhhh", "middle",
+                 "wait", "first"],
+        "left": ["right", "left", "first", "no", "middle", "yes", "blank", "what", "uhhh", "wait", "press", "ready",
+                 "okay", "nothing"],
+        "right": ["yes", "nothing", "ready", "press", "no", "wait", "what", "right", "middle", "left", "uhhh", "blank",
+                  "okay", "first"],
+        "middle": ["blank", "ready", "okay", "what", "nothing", "press", "no", "wait", "left", "middle", "right",
+                   "first", "uhhh", "yes"],
+        "okay": ["middle", "no", "first", "yes", "uhhh", "nothing", "wait", "okay", "left", "ready", "blank", "press",
+                 "what", "right"],
+        "wait": ["uhhh", "no", "blank", "okay", "yes", "left", "first", "press", "what", "wait", "nothing", "ready",
+                 "right", "middle"],
+        "press": ["right", "middle", "yes", "ready", "press", "okay", "nothing", "uhhh", "blank", "left", "first",
+                  "what", "no", "wait"],
+        "you": ["sure", "you are", "your", "you're", "next", "uh huh", "ur", "hold", "what?", "you", "uh uh", "like",
+                "done", "u"],
+        "you are": ["your", "next", "like", "uh huh", "what?", "done", "uh uh", "hold", "you", "u", "you're", "sure",
+                    "ur", "you are"],
+        "your": ["uh uh", "you are", "uh huh", "your", "next", "ur", "sure", "u", "you're", "you", "what?", "hold",
+                 "like", "done"],
+        "you're": ["you", "you're", "ur", "next", "uh uh", "you are", "u", "your", "what?", "uh huh", "sure", "done",
+                   "like", "hold"],
+        "ur": ["done", "u", "ur", "uh huh", "what?", "sure", "your", "hold", "you're", "like", "next", "uh uh",
+               "you are", "you"],
+        "u": ["uh huh", "sure", "next", "what?", "you're", "ur", "uh uh", "done", "u", "you", "like", "hold", "you are",
+              "your"],
+        "uh huh": ["uh huh", "your", "you are", "you", "done", "hold", "uh uh", "next", "sure", "like", "you're", "ur",
+                   "u", "what?"],
+        "uh uh": ["ur", "u", "you are", "you're", "next", "uh uh", "done", "you", "uh huh", "like", "your", "sure",
+                  "hold", "what?"],
+        "what?": ["you", "hold", "you're", "your", "u", "done", "uh uh", "like", "you are", "uh huh", "ur", "next",
+                  "what?", "sure"],
+        "done": ["sure", "uh huh", "next", "what?", "your", "ur", "you're", "hold", "like", "you", "u", "you are",
+                 "uh uh", "done"],
+        "next": ["what?", "uh huh", "uh uh", "your", "hold", "sure", "next", "like", "done", "you are", "ur", "you're",
+                 "u", "you"],
+        "hold": ["you are", "u", "done", "uh uh", "you", "ur", "sure", "what?", "you're", "next", "hold", "uh huh",
+                 "your", "like"],
+        "sure": ["you are", "done", "like", "you're", "you", "hold", "uh huh", "ur", "sure", "u", "what?", "next",
+                 "your", "uh uh"],
+        "like": ["you're", "next", "u", "ur", "hold", "done", "uh uh", "what?", "uh huh", "you", "like", "sure",
+                 "you are", "your"]
+    }
+    button_read_location = ""
+    corresponding_word = ""
+    if step_two is False:
+        button_read_location = display_word_dictionary[displayed_word]
+    else:
+        corresponding_word = word_corresponding_list[button_word]
+
+    return button_read_location, corresponding_word

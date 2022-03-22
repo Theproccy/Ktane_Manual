@@ -356,8 +356,196 @@ def memory(display_number: int, position_list: list, label_list: list, stage: in
     return position, label
 
 
-def complex_wires():  # todo
-    pass
+def complex_wires(serial_number: list, parallel_port: bool, battery_num: int, red: bool, blue: bool, star: bool,
+                  led: bool):
+    """
+    :param serial_number: List form of the serial number ['A','L','5','0','F','2']
+    :param parallel_port: Boolean of whether the bomb has a parallel port
+    :param battery_num: Number of battery modules the bomb has
+    :param red: if the wire has the red trait
+    :param blue: if the wire has the blue trait
+    :param star: if the wire has the star trait
+    :param led:  if the wire has the led trait
+    :return: whether or not the wire should be cut
+    """
+
+    both_colors = False
+    white = False
+    red_only = False
+    blue_only = False
+
+    both_led_star = False
+    neither_led_star = False
+    star_only = False
+    led_only = False
+
+    if red is True and blue is True:
+        both_colors = True
+    elif red is False and blue is False:
+        white = True
+    elif red is True and blue is False:
+        red_only = True
+    elif red is False and blue is True:
+        blue_only = True
+
+    if star is True and led is True:
+        both_led_star = True
+    elif star is False and led is False:
+        neither_led_star = True
+    elif star is True and led is False:
+        star_only = True
+    elif star is False and led is True:
+        led_only = True
+
+    cut = False
+    if (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num < 2:  # all false
+        if (white is True and led is False) or \
+                (red_only is True and star_only is True):
+            cut = True
+
+    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num >= 2:  # battery
+        if (white is True and led_only is False) or \
+                (red_only is True and neither_led_star is False):
+            cut = True
+
+    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num < 2:  # parallel
+        if (white is True and led is False) or \
+                (red_only is True and star_only is True) or \
+                (blue_only is True and led is True) or \
+                (both_colors is True and star_only is True):
+            cut = True
+
+    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num >= 2:  # parallel and battery
+        if (white is True and led_only is False) or \
+                (red_only is True and neither_led_star is False) or \
+                (blue_only is True and led is True) or \
+                (both_colors is True and star_only is True):
+            cut = True
+
+    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num < 2:  # even serial
+        if (star_only is True and blue is False) or \
+                (neither_led_star is True) or \
+                (both_colors is True and star is False):
+            cut = True
+
+    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num >= 2:  # even serial and battery
+        if (white is True and led_only is False or both_led_star is True) or \
+                (red_only is True) or \
+                (blue_only is True and neither_led_star is True) or \
+                (both_colors is True and star is False):
+            cut = True
+
+    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is True and battery_num < 2:
+        if (neither_led_star is True) or \
+                (star_only is True and blue_only is False) or \
+                (led_only is True and blue is True) or \
+                (both_led_star is True and blue_only is True):
+            cut = True
+
+    else:  # all
+        if (white is True and led_only is False) or \
+                (red_only is True) or \
+                (blue_only is True and star_only is False) or \
+                (both_colors is True and both_led_star is False):
+            cut = True
+
+        # all false
+        # answer=  "+------+-------+-------+-------+-------+\n" \
+        #          "|      | White | Red   | Blue  | Both  |\n" \
+        #          "+======+=======+=======+=======+=======+\n" \
+        #          "| None | Cut   | Don't | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Star | Cut   | Cut   | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| LED  | Don't | Don't | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Both | Don't | Don't | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+"
+        # battery
+        # answer = "+------+-------+-------+-------+----------+\n" \
+        #          "|      | White | Red   | Blue  | Both     |\n" \
+        #          "+======+=======+=======+=======+==========+\n" \
+        #          "| None | Cut   | Don't | Don't | Don't    |\n" \
+        #          "+------+-------+-------+-------+----------+\n" \
+        #          "| Star | Cut   | Cut   | Don't | Don't    |\n" \
+        #          "+------+-------+-------+-------+----------+\n" \
+        #          "| LED  | Don't | Cut   | Don't | Don't    |\n" \
+        #          "+------+-------+-------+-------+----------+\n" \
+        #          "| Both | Cut   | Cut   | Don't | Don't    |\n" \
+        #          "+------+-------+-------+-------+----------+"
+        # parallel
+        # answer = "+------+-------+-------+-------+-------+\n" \
+        #          "|      | White | Red   | Blue  | Both  |\n" \
+        #          "+======+=======+=======+=======+=======+\n" \
+        #          "| None | Cut   | Don't | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Star | Cut   | Cut   | Don't | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| LED  | Don't | Don't | Cut   | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Both | Don't | Don't | Cut   | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+"
+        # parallel and battery
+        # answer = "+------+-------+-------+-------+-------+\n" \
+        #          "|      | White | Red   | Blue  | Both  |\n" \
+        #          "+======+=======+=======+=======+=======+\n" \
+        #          "| None | Cut   | Don't | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Star | Cut   | Cut   | Don't | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| LED  | Don't | Cut   | Cut   | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Both | Cut   | Cut   | Cut   | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+"
+        # even serial
+        # answer = "+------+-------+-------+-------+-------+\n" \
+        #          "|      | White | Red   | Blue  | Both  |\n" \
+        #          "+======+=======+=======+=======+=======+\n" \
+        #          "| None | Cut   | Cut   | Cut   | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Star | Cut   | Cut   | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| LED  | Don't | Don't | Don't | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Both | Don't | Don't | Don't | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+"
+        # even serial and battery
+        # answer = "+------+-------+-----+-------+-------+\n" \
+        #          "|      | White | Red | Blue  | Both  |\n" \
+        #          "+======+=======+=====+=======+=======+\n" \
+        #          "| None | Cut   | Cut | Cut   | Cut   |\n" \
+        #          "+------+-------+-----+-------+-------+\n" \
+        #          "| Star | Cut   | Cut | Don't | Don't |\n" \
+        #          "+------+-------+-----+-------+-------+\n" \
+        #          "| LED  | Don't | Cut | Don't | Cut   |\n" \
+        #          "+------+-------+-----+-------+-------+\n" \
+        #          "| Both | Cut   | Cut | Don't | Don't |\n" \
+        #          "+------+-------+-----+-------+-------+"
+        # even serial and parallel
+        # answer = "+------+-------+-------+-------+-------+\n" \
+        #          "|      | White | Red   | Blue  | Both  |\n" \
+        #          "+======+=======+=======+=======+=======+\n" \
+        #          "| None | Cut   | Cut   | Cut   | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Star | Cut   | Cut   | Don't | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| LED  | Don't | Don't | Cut   | Cut   |\n" \
+        #          "+------+-------+-------+-------+-------+\n" \
+        #          "| Both | Don't | Don't | Cut   | Don't |\n" \
+        #          "+------+-------+-------+-------+-------+"
+        # all
+        # answer = "+------+-------+-----+-------+-------+\n" \
+        #          "|      | White | Red | Blue  | Both  |\n" \
+        #          "+======+=======+=====+=======+=======+\n" \
+        #          "| None | Cut   | Cut | Cut   | Cut   |\n" \
+        #          "+------+-------+-----+-------+-------+\n" \
+        #          "| Star | Cut   | Cut | Don't | Cut   |\n" \
+        #          "+------+-------+-----+-------+-------+\n" \
+        #          "| LED  | Don't | Cut | Cut   | Cut   |\n" \
+        #          "+------+-------+-----+-------+-------+\n" \
+        #          "| Both | Cut   | Cut | Cut   | Don't |\n" \
+        #          "------+-------+-----+-------+-------+"
+    return cut
 
 
 def passwords(first_letter_list: list, second_letter_list: list, third_letter_list: list):
@@ -483,8 +671,48 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
     return answer
 
 
-def morse():  # todo
-    pass
+def morse_sequence_to_word(sequence: str):
+    sequence_to_word_dict = {
+        ".../...././.-../.-..": "shell",
+        "..../.-/.-../.-../...": "halls",
+        ".../.-../../.-.-/-.-": "slick",
+        "-/.-./../-.-./-.-": "trick",
+        "-.../---/-..-/./...": "boxes",
+        ".-.././.-/-.-/...": "leaks",
+        ".../-/.-./---/-.../.": "strobe",
+        "-.../../.../-/.-./---": "bistro",
+        "..-./.-../../-.-./-.-": "flick",
+        "-.../---/--/-.../...": "bombs",
+        "-.../.-././.-/-.-": "break",
+        "-.../.-./../-.-./-.-": "brick",
+        ".../-/./.-/-.-": "steak",
+        ".../-/../-./--.": "string",
+        "...-/./-.-./-/---/.-.": "vector",
+        "-..././.-/-/...": "beats"
+    }
+    return sequence_to_word_dict[sequence]
+
+
+def morse_word_to_frequency(word: str):  # todo
+    word_frequency_dict = {
+        "shell": 3.505,
+        "halls": 3.515,
+        "slick": 3.522,
+        "trick": 3.532,
+        "boxes": 3.535,
+        "leaks": 3.542,
+        "strobe": 3.545,
+        "bistro": 3.552,
+        "flick": 3.555,
+        "bombs": 3.565,
+        "break": 3.572,
+        "brick": 3.575,
+        "steak": 3.582,
+        "string": 3.592,
+        "vector": 3.595,
+        "beats": 3.600
+    }
+    return word_frequency_dict[word]
 
 
 def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo test

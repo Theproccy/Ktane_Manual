@@ -22,9 +22,9 @@ person needing to have an exceptional understanding of the game. May just help y
 
 ## Current Feature Being worked on:
 
-* Refactor of solver code into library
-* Tests
 * Refactor the main program to work with the library
+* Tests
+* Help Section
 
 ## Planed Features
 

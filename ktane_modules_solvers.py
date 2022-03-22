@@ -107,11 +107,12 @@ def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indic
     :param frk_indicator_light_is_lit: If the FRK indicator light is lit
     :param button_color: The color of the button
     :param button_label: The label on the button
-    :return: bool that if True means that the button is a push and immoderately release
+    :return: bool that if True means that the button is a push and Immediately release
     """
 
     # var creation
-
+    button_color = button_color.lower()
+    button_label = button_label.lower()
     # colors
     blue = False
     red = False
@@ -169,6 +170,15 @@ def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indic
         press_and_immediately_release = False
 
     return press_and_immediately_release
+
+
+def button_indicator_color(color: str):
+    held_button_dict = {
+        "blue": 4,
+        "yellow": 5,
+        "other": 1
+    }
+    return held_button_dict[color]
 
 
 def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
@@ -819,3 +829,4 @@ def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo t
         corresponding_word = word_corresponding_list[button_word]
 
     return button_read_location, corresponding_word
+

@@ -224,6 +224,13 @@ def test_maze():
     return maze_test_passed
 
 
-print(test_wires())
-print(test_button())
-print(test_maze())
+def test_simon_says():  # todo fill out
+    temp = Modules.simon_says(serial_number=['A', '0', '0', '0', '0', '0'], strikes=0,
+                              colors_list=["red", "blue", "green", "yellow"])
+    return temp
+
+
+# print(test_wires())
+# print(test_button())
+# print(test_maze())
+print(test_simon_says())

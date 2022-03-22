@@ -1,6 +1,6 @@
 import json
 
-import Ktane_modules_solvers as Modules
+import ktane_modules_solvers as Modules
 
 
 # todo clean up

@@ -3,7 +3,7 @@
 This program is an automated manual for the game Keep Talking Nobody Explodes.
 
 Unlike KTANE_Voice however this is meant for the solvers' computer allowing to keep the two-person fun without the other
-person needing to have an exceptional understanding of the game. May just help you on the bomb your stuck on.
+person needing to have an exceptional understanding of the game. It may just help you on the bomb your stuck on.
 
 ## Currently, the program is capable of:
 
@@ -23,6 +23,7 @@ person needing to have an exceptional understanding of the game. May just help y
 ## Current Feature Being worked on:
 
 * Refactor the main program to work with the library
+* Clean up of code to improve readability
 * Tests
 * Help Section
 

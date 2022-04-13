@@ -22,8 +22,9 @@ person needing to have an exceptional understanding of the game. May just help y
 
 ## Current Feature Being worked on:
 
-* Overhaul the help text(when I think of what actually will be helpful)
-
+* Complete overhaul of program happening on
+  the [Ktane_Solver_Libary](https://github.com/Theproccy/Keep_Typing_And_Nobody_Explodes__/tree/Ktane_Solver_Libary)
+  branch
 ## Planed Features
 
 * Modded Modules

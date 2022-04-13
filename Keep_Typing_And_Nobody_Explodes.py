@@ -258,10 +258,14 @@ def data_load():
     ALL_MAZES = json.load(open("mazes.json"))
 
 
-def main():
-    data_load()
+def new_bomb():
     global info_dict
     info_dict = get_bomb_details()
+
+
+def main():
+    data_load()
+    new_bomb()
 
     rich.print("[bold]https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
                "\n Open the pages on symbols\n"
@@ -309,10 +313,7 @@ def main():
             pass  # symbols()
 
         elif selection == 0:
-            break
-
-        else:
-            pass
+            new_bomb()
 
 
 if __name__ == '__main__':

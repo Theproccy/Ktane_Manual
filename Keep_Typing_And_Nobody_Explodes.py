@@ -235,6 +235,23 @@ def complex_wires():
         rich.print("[bold green]" + answer + "[/bold green]\n")
 
 
+def passwords():
+    first_letter_input = str(
+        input("Enter all of the letters in the first column (E.G. aelzx) : "))
+    second_letter_input = str(
+        input("Enter all of the letters in the Second column (E.G. aelzx) : "))
+    third_letter_input = str(
+        input("Enter all of the letters in the third column (E.G. aelzx) : "))
+
+    # data formatting
+    first_letter_list = list(first_letter_input.strip())
+    second_letter_list = list(second_letter_input.strip())
+    third_letter_list = list(third_letter_input.strip())
+    answers = solvers.passwords(first_letter_list, second_letter_list, third_letter_list)
+
+    rich.print("[bold green] The word is: " + str(answers) + "[/bold green]\n")  # todo fix formatting on answer output
+
+
 def data_load():
     # Data Load
     global ALL_MAZES
@@ -277,7 +294,7 @@ def main():
             complex_wires()
 
         elif selection == 7:
-            pass  # passwords()
+            passwords()
 
         elif selection == 8:
             pass  # wire_sequences()

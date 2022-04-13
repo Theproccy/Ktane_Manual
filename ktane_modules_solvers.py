@@ -829,3 +829,6 @@ def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo t
         corresponding_word = word_corresponding_list[button_word]
 
     return button_read_location, corresponding_word
+
+def symbols():  # todo create symbols module
+    pass

@@ -201,14 +201,14 @@ def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
     test = False
     for i in range(9):
         if test is False:
-            temp = mazes[str(i + 1)]
+            current_maze = mazes[str(i + 1)]
 
-            temp_green_1 = temp["Green_circle_1"]
-            temp_green_2 = temp["Green_circle_2"]
+            temp_green_1 = current_maze["Green_circle_1"]
+            temp_green_2 = current_maze["Green_circle_2"]
 
             if green_1 == temp_green_1 or green_1 == temp_green_2:
                 if green_2 == temp_green_1 or green_2 == temp_green_2:
-                    maze_map = temp
+                    maze_map = current_maze
     # pathfinding
     route = pathfinder.solve_maze(start_position, start_position, end_position, [], maze_map)
 
@@ -829,4 +829,3 @@ def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo t
         corresponding_word = word_corresponding_list[button_word]
 
     return button_read_location, corresponding_word
-

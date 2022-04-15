@@ -615,16 +615,16 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
     :param color: The color of the wire currently be examined. "red" "blue" "black"
     :param color_history_dict: the number of the wires of that color previously seen. Given in the form
         color_history_dict={
-        "red": 0,
-        "blue": 3,
-        "black": 2
+        "Red": 0,
+        "Blue": 3,
+        "Black": 2
     }
-    :return: the terminals that if connect to the wire should be cut. An amended color history dict  todo improve
+    :return: the terminals that if connect to the wire should be cut.  todo improve
     """
 
-    red = color_history_dict["red"]
-    blue = color_history_dict["blue"]
-    black = color_history_dict["black"]
+    red = color_history_dict["Red"]
+    blue = color_history_dict["Blue"]
+    black = color_history_dict["Black"]
 
     red_options = {
         1: ["C"],
@@ -665,18 +665,15 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
     # solver
     answer = "Error"
 
-    if color == "red":
+    if color == "Red":
         red += 1
         answer = red_options[red]
-        color_history_dict["red"] = red
-    elif color == "blue":
+    elif color == "Blue":
         blue += 1
         answer = blue_options[blue]
-        color_history_dict["blue"] = blue
-    elif color == "black":
+    elif color == "Black":
         black += 1
         answer = black_options[black]
-        color_history_dict["black"] = black
 
     return answer
 

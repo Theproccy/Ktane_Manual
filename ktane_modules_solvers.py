@@ -722,12 +722,10 @@ def morse_word_to_frequency(word: str):  # todo
     return word_frequency_dict[word]
 
 
-def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo test
+def whose_on_first_step_one(displayed_word=""):  # todo test
     """
-    :param step_two: True if entering the word on the button rather than the display
     :param displayed_word: The word on the display
-    :param button_word:  The word on the button in the position indicated
-    :return: the location to read from and a list of words to be tried in order
+    :return: the location to read from
     """
 
     display_word_dictionary = {
@@ -758,8 +756,17 @@ def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo t
         "you are": "bottom right",
         "you're": "middle right",
         "your": "middle right",
-        "": "bottom left"}
+        "": "bottom left"
+    }
 
+    return display_word_dictionary[displayed_word]
+
+
+def whose_on_first_step_two(button_word=""):
+    """
+    :param button_word:  The word on the button in the position indicated
+    :return:list of words to be tried in order
+    """
     word_corresponding_list = {
         "ready": ["yes", "okay", "what", "middle", "left", "press", "right", "blank", "ready", "no", "first", "uhhh",
                   "nothing", "wait"],
@@ -846,15 +853,7 @@ def whose_on_first(step_two=False, displayed_word="", button_word=""):  # todo t
                  "you are", "your"]
     }
 
-    button_read_location = ""
-    corresponding_word = ""
-    if step_two is False:
-        button_read_location = display_word_dictionary[displayed_word]
-    else:
-        corresponding_word = word_corresponding_list[button_word]
-
-    return button_read_location, corresponding_word
-
+    return word_corresponding_list[button_word]
 
 def symbols():  # todo create symbols module
     pass

@@ -279,6 +279,19 @@ def wire_sequence():
         rich.print("[bold green] The word is: " + str(answer) + "[/bold green]\n")
 
 
+def whos_on_first():  # todo add error handling
+    for i in range(3):
+        button_position = solvers.whose_on_first_step_one(
+            input("Please enter the word displayed : ").lower())  # position of button to read
+
+        corresponding_word = solvers.whose_on_first_step_two(
+            input(
+                "Please enter the word in the box that is located in the " + button_position + " : ").lower())
+        # word on button to press
+
+        rich.print("[bold green]" + str(corresponding_word) + "[/bold green]")  # output
+
+
 def data_load():
     # Data Load
     global ALL_MAZES
@@ -334,7 +347,7 @@ def main():
             pass  # morse()
 
         elif selection == 10:
-            pass  # whose_on_first()
+            whos_on_first()
 
         elif selection == 11:
             pass  # symbols()

@@ -210,11 +210,12 @@ def complex_wires():
     while module_completed is False:
         print("\n")  # todo add words (complex wires)
         color_choice = cutie.select(color_options, selected_index=2)
-        print("\n")
-        led_star_choice = cutie.select(led_star_options, selected_index=2)
 
         if color_choice == 4:  # if exit is selected terminate the module
             break
+
+        print("\n")
+        led_star_choice = cutie.select(led_star_options, selected_index=2)
 
         colors = result_dict[color_choice]
         led_star = result_dict[led_star_choice]
@@ -250,6 +251,32 @@ def passwords():
     answers = solvers.passwords(first_letter_list, second_letter_list, third_letter_list)
 
     rich.print("[bold green] The word is: " + str(answers) + "[/bold green]\n")  # todo fix formatting on answer output
+
+
+def wire_sequence():
+    print("Please select the color of the wire or exit to exit")
+    wire_color_list = ["Exit", "Red", "Blue", "Black"]
+    color_history_dict = {
+        "Red": 0,
+        "Blue": 0,
+        "Black": 0
+    }
+
+    while 1 == 1:
+        wire_color = cutie.select(wire_color_list, selected_index=1)
+        print("\n")
+
+        if wire_color == 0:  # if exit selected
+            break
+
+        answer = solvers.wire_sequences(wire_color_list[wire_color], color_history_dict)
+
+        if answer != "Error":
+            color_history_dict[wire_color_list[wire_color]] += 1
+        else:
+            print("error")  # todo error msg
+
+        rich.print("[bold green] The word is: " + str(answer) + "[/bold green]\n")
 
 
 def data_load():
@@ -301,7 +328,7 @@ def main():
             passwords()
 
         elif selection == 8:
-            pass  # wire_sequences()
+            wire_sequence()
 
         elif selection == 9:
             pass  # morse()

@@ -17,12 +17,10 @@ person needing to have an exceptional understanding of the game. It may just hel
 * Wire Sequences
 * Who's on First
 * Morse
-* Symbols
+* Symbols (Module needs polishing. I currently recommend using the page from the original manual)
 * Knobs Solver to run in parallel
 
 ## Current Feature Being worked on:
-
-* Refactor the main program to work with the library
 * Clean up of code to improve readability
 * Tests
 * Help Section

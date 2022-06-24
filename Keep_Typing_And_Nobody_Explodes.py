@@ -279,17 +279,43 @@ def wire_sequence():
         rich.print("[bold green] The word is: " + str(answer) + "[/bold green]\n")
 
 
-def whos_on_first():  # todo add error handling
-    for i in range(3):
-        button_position = solvers.whose_on_first_step_one(
-            input("Please enter the word displayed : ").lower())  # position of button to read
+def whose_on_first():  # todo add error handling
+    i = 0
+    while i < 3:
+        i += 1
+        try:
+            button_position = solvers.whose_on_first_step_one(
+                input("Please enter the word displayed : ").lower())  # position of button to read
+        except LookupError:
+            rich.print("[blink]DISPLAYED WORD NOT FOUND!")
+            i -= 1
+            continue
+        try:
+            corresponding_word = solvers.whose_on_first_step_two(
+                input(
+                    "Please enter the word in the box that is located in the " + button_position + " : ").lower())
+        except LookupError:
+            rich.print("[blink]BUTTON WORD NOT FOUND!")
+            i -= 1
+            continue
 
-        corresponding_word = solvers.whose_on_first_step_two(
-            input(
-                "Please enter the word in the box that is located in the " + button_position + " : ").lower())
-        # word on button to press
+            # word on button to press
 
         rich.print("[bold green]" + str(corresponding_word) + "[/bold green]")  # output
+
+
+def morse():
+    solved = False
+    words = solvers.morse_word_list()
+    while solved is False:
+        text = input("Please enter as many letters as you have decoded: ")  # input
+        text_list = list(text.lower())
+        for i in range(len(text_list)):
+            words = solvers.morse_smart_sort(text_list[i], words)
+            print("Options Remaining :{}".format(words))
+        if len(words) == 1:
+            solved = True
+    rich.print("[bold green] {} [/bold green]".format(solvers.morse_word_to_frequency(words[0].lower())))
 
 
 def data_load():
@@ -314,7 +340,7 @@ def main():
                "Use the arrow keys to navigate the menus.")
 
     options_list = ["New Bomb", "Wires", "Buttons", "Maze", "Simon says", "Memory", "Complex wires", "Passwords",
-                    "Wire Sequences", "Morse", "On The Subject Of Whose First", "Symbols"]
+                    "Wire Sequences", "Morse", "On The Subject Of Whose First"]  # ,"Symbols"
     while True:
         print("\n \nPlease Select the module you want to solve")
         selection = cutie.select(options_list, selected_index=1)
@@ -344,13 +370,13 @@ def main():
             wire_sequence()
 
         elif selection == 9:
-            pass  # morse()
+            morse()
 
         elif selection == 10:
-            whos_on_first()
+            whose_on_first()
 
         elif selection == 11:
-            pass  # symbols()
+            pass  # symbols() TODO
 
         elif selection == 0:
             new_bomb()

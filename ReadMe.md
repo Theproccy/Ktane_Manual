@@ -17,12 +17,10 @@ person needing to have an exceptional understanding of the game. It may just hel
 * Wire Sequences
 * Who's on First
 * Morse
-* Symbols (Module needs polishing. I currently recommend using the page from the original manual)
 * Knobs Solver to run in parallel
 
+For Symbols, I recommend using the manual page as that is the most effective way we have discovered through testing.
 ## Current Feature Being worked on:
-* Clean up of code to improve readability
-* Tests
 * Help Section
 
 ## Planed Features

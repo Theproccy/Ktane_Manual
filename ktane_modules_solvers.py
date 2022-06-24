@@ -722,6 +722,19 @@ def morse_word_to_frequency(word: str):  # todo
     return word_frequency_dict[word]
 
 
+def morse_word_list():
+    return ['shell', 'halls', 'slick', 'trick', 'boxes', 'leaks', 'strobe', 'bistro', 'flick',
+            'bombs', 'break', 'brick', 'steak', 'string', 'vector', 'beats']
+
+
+def morse_smart_sort(letter, word_list):
+    new_word_list = []
+    for i in range(len(word_list)):
+        if letter in word_list[i]:
+            new_word_list.append(word_list[i])
+    return new_word_list
+
+
 def whose_on_first_step_one(displayed_word=""):  # todo test
     """
     :param displayed_word: The word on the display
@@ -854,6 +867,7 @@ def whose_on_first_step_two(button_word=""):
     }
 
     return word_corresponding_list[button_word]
+
 
 def symbols():  # todo create symbols module
     pass

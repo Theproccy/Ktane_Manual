@@ -20,26 +20,15 @@ person needing to have an exceptional understanding of the game. It may just hel
 * Knobs Solver to run in parallel
 
 For Symbols, I recommend using the manual page as that is the most effective way we have discovered through testing.
-## Current Feature Being worked on:
-* Help Section
 
-## Planed Features
-
-* Modded Modules
 
 ## Known issues:
 
 * ### None
 
 ## How to run
-
 1. Unzip the file
 2. Run Keep_Typing_And_Nobody_Explodes.exe
 3. Run Knobs.exe (only necessary if the bomb contains knobs)
-4. Tah Dah
-
-## How to change symbol names
-
-1. Navigate into /Symbols directory
-2. Run Symbols_Labeler.exe
-3. Press save when done
+4. Open the Bomb manual to the symbols page
+5. Tah Dah

@@ -23,8 +23,9 @@ For Symbols, I recommend using the manual page as that is the most effective way
 
 
 ## Known issues:
+Whole Program Is Borked
+testing is being conducted and fixes are being done for the time being use version 2 
 
-* ### None
 
 ## How to run
 1. Unzip the file

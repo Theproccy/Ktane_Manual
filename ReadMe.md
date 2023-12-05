@@ -24,7 +24,16 @@ For Symbols, I recommend using the manual page as that is the most effective way
 
 ## Known issues:
 Whole Program Is Borked
-testing is being conducted and fixes are being done for the time being use version 2 
+Use Version 2
+during the rewrite the program was split into multiple files. one to solve the modules and one to deal with the overall bomb (crap explination but i cant think of a better way)
+the issues seam to arrive from:
+a complete lack of automated testing 
+the implimentation in the overall script
+
+Soloutin is to build a test sweet for both scripts.
+i have time this month so it is aiming to be compleeted at the end of december early january.
+
+
 
 
 ## How to run

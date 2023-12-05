@@ -4,7 +4,6 @@ import find_path as pathfinder
 
 
 def wires(serial_num: list, wire_list: list):  # Module for Simple wires
-
     """
     args:
     :param serial_num:  List form of the serial number ['A','L','5','0','F','2']
@@ -24,19 +23,19 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
     # Splits the list in to the number of each wire color
     for i in range(number_of_wires):
         temp = wire_list[i]
-        if temp == 'yellow':
+        if temp == "yellow":
             number_of_yellow_wires += 1
 
-        elif temp == 'red':
+        elif temp == "red":
             number_of_red_wires += 1
 
-        elif temp == 'blue':
+        elif temp == "blue":
             number_of_blue_wires += 1
 
-        elif temp == 'black':
+        elif temp == "black":
             number_of_black_wires += 1
 
-        elif temp == 'white':
+        elif temp == "white":
             number_of_white_wires += 1
 
     # Solver N.B. the if/elif/else statements are not combined when the results have the same outputs due to the fact
@@ -46,7 +45,7 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
     if number_of_wires == 3:
         if number_of_red_wires == 0:
             answer = 1  # "Cut The Second Wire"
-        elif wire_list[-1] == 'white':
+        elif wire_list[-1] == "white":
             answer = 2  # "Cut The Last Wire"
         elif number_of_blue_wires > 1:
             for i in range(number_of_wires):
@@ -66,7 +65,7 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
                 if temp_wire_color == "red":
                     answer = number_of_wires - i  # "Cut The Last red Wire"
                     break
-        elif wire_list[-1] == 'yellow' and number_of_red_wires == 0:
+        elif wire_list[-1] == "yellow" and number_of_red_wires == 0:
             answer = 0  # "Cut The First Wire"
         elif number_of_blue_wires == 1:
             answer = 0  # "Cut The First Wire"
@@ -99,8 +98,13 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
     # End function
 
 
-def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indicator_light_is_lit: bool,
-           button_color: str, button_label: str):  # The Button
+def button(
+    number_of_batteries: int,
+    car_indicator_light_is_lit: bool,
+    frk_indicator_light_is_lit: bool,
+    button_color: str,
+    button_label: str,
+):  # The Button
     """
     :param number_of_batteries: The number of batteries on the bomb
     :param car_indicator_light_is_lit: If the CAR indicator light is lit
@@ -173,17 +177,13 @@ def button(number_of_batteries: int, car_indicator_light_is_lit: bool, frk_indic
 
 
 def button_indicator_color(color: str):
-    held_button_dict = {
-        "blue": 4,
-        "yellow": 5,
-        "other": 1
-    }
+    held_button_dict = {"blue": 4, "yellow": 5, "other": 1}
     return held_button_dict[color]
 
 
-def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
-         end_position: list):  # a pathfinder that calculates moves to complete
-
+def maze(
+    mazes: dict, green_1: list, green_2: list, start_position: list, end_position: list
+):  # a pathfinder that calculates moves to complete
     """
     N.B. top left of maze is [0,0] Bottom right is [5,5]
     :param mazes: dictionary of all the mazes ("mazes.json")
@@ -210,15 +210,19 @@ def maze(mazes: dict, green_1: list, green_2: list, start_position: list,
                 if green_2 == temp_green_1 or green_2 == temp_green_2:
                     maze_map = current_maze
     # pathfinding
-    route = pathfinder.solve_maze(start_position, start_position, end_position, [], maze_map)
+    route = pathfinder.solve_maze(
+        start_position, start_position, end_position, [], maze_map
+    )
 
     return route
 
 
 # def simon_says_solver():
 
-def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon says module
 
+def simon_says(
+    serial_number: list, strikes: int, colors_list: list
+):  # simon says module
     """
     :param serial_number: List form of the serial number ['A','L','5','0','F','2']
     :param strikes: Integer of the number of strikes
@@ -240,21 +244,21 @@ def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon s
                 "red": "blue",
                 "blue": "red",
                 "green": "yellow",
-                "yellow": "green"
+                "yellow": "green",
             }
         elif strikes == 1:
             switch_dict = {
                 "red": "yellow",
                 "blue": "green",
                 "green": "blue",
-                "yellow": "red"
+                "yellow": "red",
             }
         else:
             switch_dict = {
                 "red": "green",
                 "blue": "red",
                 "green": "yellow",
-                "yellow": "blue"
+                "yellow": "blue",
             }
     else:  # no vowel simon says
         if strikes == 0:
@@ -262,21 +266,21 @@ def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon s
                 "red": "blue",
                 "blue": "yellow",
                 "green": "green",
-                "yellow": "red"
+                "yellow": "red",
             }
         elif strikes == 1:
             switch_dict = {
                 "red": "red",
                 "blue": "blue",
                 "green": "yellow",
-                "yellow": "green"
+                "yellow": "green",
             }
         else:
             switch_dict = {
                 "red": "yellow",
                 "blue": "green",
                 "green": "blue",
-                "yellow": "red"
+                "yellow": "red",
             }
     answer = []
     for i in range(len(colors_list)):
@@ -286,7 +290,13 @@ def simon_says(serial_number: list, strikes: int, colors_list: list):  # simon s
     return answer
 
 
-def memory(display_number: int, position_list: list, label_list: list, stage: int, button_number_order: list):
+def memory(
+    display_number: int,
+    position_list: list,
+    label_list: list,
+    stage: int,
+    button_number_order: list,
+):
     """
     :param display_number: Integer of the number displayed on the module
     :param position_list: List of previous positions of buttons
@@ -366,8 +376,15 @@ def memory(display_number: int, position_list: list, label_list: list, stage: in
     return position, label
 
 
-def complex_wires(serial_number: list, parallel_port: bool, battery_num: int, red: bool, blue: bool, star: bool,
-                  led: bool):
+def complex_wires(
+    serial_number: list,
+    parallel_port: bool,
+    battery_num: int,
+    red: bool,
+    blue: bool,
+    star: bool,
+    led: bool,
+):
     """
     :param serial_number: List form of the serial number ['A','L','5','0','F','2']
     :param parallel_port: Boolean of whether the bomb has a parallel port
@@ -408,55 +425,85 @@ def complex_wires(serial_number: list, parallel_port: bool, battery_num: int, re
         led_only = True
 
     cut = False
-    if (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num < 2:  # all false
-        if (white is True and led is False) or \
-                (red_only is True and star_only is True):
+    if (
+        (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num < 2
+    ):  # all false
+        if (white is True and led is False) or (red_only is True and star_only is True):
             cut = True
 
-    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is False and battery_num >= 2:  # battery
-        if (white is True and led_only is False) or \
-                (red_only is True and neither_led_star is False):
+    elif (
+        (int(serial_number[-1]) % 2) != 0
+        and parallel_port is False
+        and battery_num >= 2
+    ):  # battery
+        if (white is True and led_only is False) or (
+            red_only is True and neither_led_star is False
+        ):
             cut = True
 
-    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num < 2:  # parallel
-        if (white is True and led is False) or \
-                (red_only is True and star_only is True) or \
-                (blue_only is True and led is True) or \
-                (both_colors is True and star_only is True):
+    elif (
+        (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num < 2
+    ):  # parallel
+        if (
+            (white is True and led is False)
+            or (red_only is True and star_only is True)
+            or (blue_only is True and led is True)
+            or (both_colors is True and star_only is True)
+        ):
             cut = True
 
-    elif (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num >= 2:  # parallel and battery
-        if (white is True and led_only is False) or \
-                (red_only is True and neither_led_star is False) or \
-                (blue_only is True and led is True) or \
-                (both_colors is True and star_only is True):
+    elif (
+        (int(serial_number[-1]) % 2) != 0 and parallel_port is True and battery_num >= 2
+    ):  # parallel and battery
+        if (
+            (white is True and led_only is False)
+            or (red_only is True and neither_led_star is False)
+            or (blue_only is True and led is True)
+            or (both_colors is True and star_only is True)
+        ):
             cut = True
 
-    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num < 2:  # even serial
-        if (star_only is True and blue is False) or \
-                (neither_led_star is True) or \
-                (both_colors is True and star is False):
+    elif (
+        (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num < 2
+    ):  # even serial
+        if (
+            (star_only is True and blue is False)
+            or (neither_led_star is True)
+            or (both_colors is True and star is False)
+        ):
             cut = True
 
-    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is False and battery_num >= 2:  # even serial and battery
-        if (white is True and led_only is False or both_led_star is True) or \
-                (red_only is True) or \
-                (blue_only is True and neither_led_star is True) or \
-                (both_colors is True and star is False):
+    elif (
+        (int(serial_number[-1]) % 2) == 0
+        and parallel_port is False
+        and battery_num >= 2
+    ):  # even serial and battery
+        if (
+            (white is True and led_only is False or both_led_star is True)
+            or (red_only is True)
+            or (blue_only is True and neither_led_star is True)
+            or (both_colors is True and star is False)
+        ):
             cut = True
 
-    elif (int(serial_number[-1]) % 2) == 0 and parallel_port is True and battery_num < 2:
-        if (neither_led_star is True) or \
-                (star_only is True and blue_only is False) or \
-                (led_only is True and blue is True) or \
-                (both_led_star is True and blue_only is True):
+    elif (
+        (int(serial_number[-1]) % 2) == 0 and parallel_port is True and battery_num < 2
+    ):
+        if (
+            (neither_led_star is True)
+            or (star_only is True and blue_only is False)
+            or (led_only is True and blue is True)
+            or (both_led_star is True and blue_only is True)
+        ):
             cut = True
 
     else:  # all
-        if (white is True and led_only is False) or \
-                (red_only is True) or \
-                (blue_only is True and star_only is False) or \
-                (both_colors is True and both_led_star is False):
+        if (
+            (white is True and led_only is False)
+            or (red_only is True)
+            or (blue_only is True and star_only is False)
+            or (both_colors is True and both_led_star is False)
+        ):
             cut = True
 
         # all false
@@ -558,7 +605,9 @@ def complex_wires(serial_number: list, parallel_port: bool, battery_num: int, re
     return cut
 
 
-def passwords(first_letter_list: list, second_letter_list: list, third_letter_list: list):
+def passwords(
+    first_letter_list: list, second_letter_list: list, third_letter_list: list
+):
     """
 
     :param first_letter_list: List of all the letters in the first column ["a","e","l","z","x"]
@@ -568,13 +617,43 @@ def passwords(first_letter_list: list, second_letter_list: list, third_letter_li
     """
 
     # var creation
-    password_list = ["about", "after", "again", "below", "could",
-                     "every", "first", "found", "great", "house",
-                     "large", "learn", "never", "other", "place",
-                     "plant", "point", "right", "small", "sound",
-                     "spell", "still", "study", "their", "there",
-                     "these", "thing", "think", "three", "water",
-                     "where", "which", "world", "would", "write"]
+    password_list = [
+        "about",
+        "after",
+        "again",
+        "below",
+        "could",
+        "every",
+        "first",
+        "found",
+        "great",
+        "house",
+        "large",
+        "learn",
+        "never",
+        "other",
+        "place",
+        "plant",
+        "point",
+        "right",
+        "small",
+        "sound",
+        "spell",
+        "still",
+        "study",
+        "their",
+        "there",
+        "these",
+        "thing",
+        "think",
+        "three",
+        "water",
+        "where",
+        "which",
+        "world",
+        "would",
+        "write",
+    ]
     answers_list_1 = []
     answers_list_2 = []
     answers_list_3 = []
@@ -635,7 +714,7 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
         6: ["A", "C"],
         7: ["A", "B", "C"],
         8: ["A", "B"],
-        9: ["B"]
+        9: ["B"],
     }
 
     blue_options = {
@@ -647,7 +726,7 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
         6: ["B", "C"],
         7: ["C"],
         8: ["A", "C"],
-        9: ["A"]
+        9: ["A"],
     }
 
     black_options = {
@@ -659,7 +738,7 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
         6: ["B", "C"],
         7: ["A", "B"],
         8: ["C"],
-        9: ["C"]
+        9: ["C"],
     }
 
     # solver
@@ -695,7 +774,7 @@ def morse_sequence_to_word(sequence: str):
         ".../-/./.-/-.-": "steak",
         ".../-/../-./--.": "string",
         "...-/./-.-./-/---/.-.": "vector",
-        "-..././.-/-/...": "beats"
+        "-..././.-/-/...": "beats",
     }
     return sequence_to_word_dict[sequence]
 
@@ -717,14 +796,30 @@ def morse_word_to_frequency(word: str):  # todo
         "steak": 3.582,
         "string": 3.592,
         "vector": 3.595,
-        "beats": 3.600
+        "beats": 3.600,
     }
     return word_frequency_dict[word]
 
 
 def morse_word_list():
-    return ['shell', 'halls', 'slick', 'trick', 'boxes', 'leaks', 'strobe', 'bistro', 'flick',
-            'bombs', 'break', 'brick', 'steak', 'string', 'vector', 'beats']
+    return [
+        "shell",
+        "halls",
+        "slick",
+        "trick",
+        "boxes",
+        "leaks",
+        "strobe",
+        "bistro",
+        "flick",
+        "bombs",
+        "break",
+        "brick",
+        "steak",
+        "string",
+        "vector",
+        "beats",
+    ]
 
 
 def morse_smart_sort(letter, word_list):
@@ -769,7 +864,7 @@ def whose_on_first_step_one(displayed_word=""):  # todo test
         "you are": "bottom right",
         "you're": "middle right",
         "your": "middle right",
-        "": "bottom left"
+        "": "bottom left",
     }
 
     return display_word_dictionary[displayed_word]
@@ -781,89 +876,454 @@ def whose_on_first_step_two(button_word=""):
     :return:list of words to be tried in order
     """
     word_corresponding_list = {
-        "ready": ["yes", "okay", "what", "middle", "left", "press", "right", "blank", "ready", "no", "first", "uhhh",
-                  "nothing", "wait"],
-
-        "first": ["left", "okay", "yes", "middle", "no", "right", "nothing", "uhhh", "wait", "ready", "blank", "what",
-                  "press", "first"],
-
-        "no": ["blank", "uhhh", "wait", "first", "what", "ready", "right", "yes", "nothing", "left", "press", "okay",
-               "no", "middle"],
-
-        "blank": ["wait", "right", "okay", "middle", "blank", "press", "ready", "nothing", "no", "what", "left", "uhhh",
-                  "yes", "first"],
-
-        "nothing": ["uhhh", "right", "okay", "middle", "yes", "blank", "no", "press", "left", "what", "wait", "first",
-                    "nothing", "ready"],
-
-        "yes": ["okay", "right", "uhhh", "middle", "first", "what", "press", "ready", "nothing", "yes", "left", "blank",
-                "no", "wait"],
-
-        "what": ["uhhh", "what", "left", "nothing", "ready", "blank", "middle", "no", "okay", "first", "wait", "yes",
-                 "press", "right"],
-
-        "uhhh": ["ready", "nothing", "left", "what", "okay", "yes", "right", "no", "press", "blank", "uhhh", "middle",
-                 "wait", "first"],
-
-        "left": ["right", "left", "first", "no", "middle", "yes", "blank", "what", "uhhh", "wait", "press", "ready",
-                 "okay", "nothing"],
-
-        "right": ["yes", "nothing", "ready", "press", "no", "wait", "what", "right", "middle", "left", "uhhh", "blank",
-                  "okay", "first"],
-
-        "middle": ["blank", "ready", "okay", "what", "nothing", "press", "no", "wait", "left", "middle", "right",
-                   "first", "uhhh", "yes"],
-
-        "okay": ["middle", "no", "first", "yes", "uhhh", "nothing", "wait", "okay", "left", "ready", "blank", "press",
-                 "what", "right"],
-
-        "wait": ["uhhh", "no", "blank", "okay", "yes", "left", "first", "press", "what", "wait", "nothing", "ready",
-                 "right", "middle"],
-
-        "press": ["right", "middle", "yes", "ready", "press", "okay", "nothing", "uhhh", "blank", "left", "first",
-                  "what", "no", "wait"],
-
-        "you": ["sure", "you are", "your", "you're", "next", "uh huh", "ur", "hold", "what?", "you", "uh uh", "like",
-                "done", "u"],
-
-        "you are": ["your", "next", "like", "uh huh", "what?", "done", "uh uh", "hold", "you", "u", "you're", "sure",
-                    "ur", "you are"],
-
-        "your": ["uh uh", "you are", "uh huh", "your", "next", "ur", "sure", "u", "you're", "you", "what?", "hold",
-                 "like", "done"],
-
-        "you're": ["you", "you're", "ur", "next", "uh uh", "you are", "u", "your", "what?", "uh huh", "sure", "done",
-                   "like", "hold"],
-
-        "ur": ["done", "u", "ur", "uh huh", "what?", "sure", "your", "hold", "you're", "like", "next", "uh uh",
-               "you are", "you"],
-
-        "u": ["uh huh", "sure", "next", "what?", "you're", "ur", "uh uh", "done", "u", "you", "like", "hold", "you are",
-              "your"],
-
-        "uh huh": ["uh huh", "your", "you are", "you", "done", "hold", "uh uh", "next", "sure", "like", "you're", "ur",
-                   "u", "what?"],
-
-        "uh uh": ["ur", "u", "you are", "you're", "next", "uh uh", "done", "you", "uh huh", "like", "your", "sure",
-                  "hold", "what?"],
-
-        "what?": ["you", "hold", "you're", "your", "u", "done", "uh uh", "like", "you are", "uh huh", "ur", "next",
-                  "what?", "sure"],
-
-        "done": ["sure", "uh huh", "next", "what?", "your", "ur", "you're", "hold", "like", "you", "u", "you are",
-                 "uh uh", "done"],
-
-        "next": ["what?", "uh huh", "uh uh", "your", "hold", "sure", "next", "like", "done", "you are", "ur", "you're",
-                 "u", "you"],
-
-        "hold": ["you are", "u", "done", "uh uh", "you", "ur", "sure", "what?", "you're", "next", "hold", "uh huh",
-                 "your", "like"],
-
-        "sure": ["you are", "done", "like", "you're", "you", "hold", "uh huh", "ur", "sure", "u", "what?", "next",
-                 "your", "uh uh"],
-
-        "like": ["you're", "next", "u", "ur", "hold", "done", "uh uh", "what?", "uh huh", "you", "like", "sure",
-                 "you are", "your"]
+        "ready": [
+            "yes",
+            "okay",
+            "what",
+            "middle",
+            "left",
+            "press",
+            "right",
+            "blank",
+            "ready",
+            "no",
+            "first",
+            "uhhh",
+            "nothing",
+            "wait",
+        ],
+        "first": [
+            "left",
+            "okay",
+            "yes",
+            "middle",
+            "no",
+            "right",
+            "nothing",
+            "uhhh",
+            "wait",
+            "ready",
+            "blank",
+            "what",
+            "press",
+            "first",
+        ],
+        "no": [
+            "blank",
+            "uhhh",
+            "wait",
+            "first",
+            "what",
+            "ready",
+            "right",
+            "yes",
+            "nothing",
+            "left",
+            "press",
+            "okay",
+            "no",
+            "middle",
+        ],
+        "blank": [
+            "wait",
+            "right",
+            "okay",
+            "middle",
+            "blank",
+            "press",
+            "ready",
+            "nothing",
+            "no",
+            "what",
+            "left",
+            "uhhh",
+            "yes",
+            "first",
+        ],
+        "nothing": [
+            "uhhh",
+            "right",
+            "okay",
+            "middle",
+            "yes",
+            "blank",
+            "no",
+            "press",
+            "left",
+            "what",
+            "wait",
+            "first",
+            "nothing",
+            "ready",
+        ],
+        "yes": [
+            "okay",
+            "right",
+            "uhhh",
+            "middle",
+            "first",
+            "what",
+            "press",
+            "ready",
+            "nothing",
+            "yes",
+            "left",
+            "blank",
+            "no",
+            "wait",
+        ],
+        "what": [
+            "uhhh",
+            "what",
+            "left",
+            "nothing",
+            "ready",
+            "blank",
+            "middle",
+            "no",
+            "okay",
+            "first",
+            "wait",
+            "yes",
+            "press",
+            "right",
+        ],
+        "uhhh": [
+            "ready",
+            "nothing",
+            "left",
+            "what",
+            "okay",
+            "yes",
+            "right",
+            "no",
+            "press",
+            "blank",
+            "uhhh",
+            "middle",
+            "wait",
+            "first",
+        ],
+        "left": [
+            "right",
+            "left",
+            "first",
+            "no",
+            "middle",
+            "yes",
+            "blank",
+            "what",
+            "uhhh",
+            "wait",
+            "press",
+            "ready",
+            "okay",
+            "nothing",
+        ],
+        "right": [
+            "yes",
+            "nothing",
+            "ready",
+            "press",
+            "no",
+            "wait",
+            "what",
+            "right",
+            "middle",
+            "left",
+            "uhhh",
+            "blank",
+            "okay",
+            "first",
+        ],
+        "middle": [
+            "blank",
+            "ready",
+            "okay",
+            "what",
+            "nothing",
+            "press",
+            "no",
+            "wait",
+            "left",
+            "middle",
+            "right",
+            "first",
+            "uhhh",
+            "yes",
+        ],
+        "okay": [
+            "middle",
+            "no",
+            "first",
+            "yes",
+            "uhhh",
+            "nothing",
+            "wait",
+            "okay",
+            "left",
+            "ready",
+            "blank",
+            "press",
+            "what",
+            "right",
+        ],
+        "wait": [
+            "uhhh",
+            "no",
+            "blank",
+            "okay",
+            "yes",
+            "left",
+            "first",
+            "press",
+            "what",
+            "wait",
+            "nothing",
+            "ready",
+            "right",
+            "middle",
+        ],
+        "press": [
+            "right",
+            "middle",
+            "yes",
+            "ready",
+            "press",
+            "okay",
+            "nothing",
+            "uhhh",
+            "blank",
+            "left",
+            "first",
+            "what",
+            "no",
+            "wait",
+        ],
+        "you": [
+            "sure",
+            "you are",
+            "your",
+            "you're",
+            "next",
+            "uh huh",
+            "ur",
+            "hold",
+            "what?",
+            "you",
+            "uh uh",
+            "like",
+            "done",
+            "u",
+        ],
+        "you are": [
+            "your",
+            "next",
+            "like",
+            "uh huh",
+            "what?",
+            "done",
+            "uh uh",
+            "hold",
+            "you",
+            "u",
+            "you're",
+            "sure",
+            "ur",
+            "you are",
+        ],
+        "your": [
+            "uh uh",
+            "you are",
+            "uh huh",
+            "your",
+            "next",
+            "ur",
+            "sure",
+            "u",
+            "you're",
+            "you",
+            "what?",
+            "hold",
+            "like",
+            "done",
+        ],
+        "you're": [
+            "you",
+            "you're",
+            "ur",
+            "next",
+            "uh uh",
+            "you are",
+            "u",
+            "your",
+            "what?",
+            "uh huh",
+            "sure",
+            "done",
+            "like",
+            "hold",
+        ],
+        "ur": [
+            "done",
+            "u",
+            "ur",
+            "uh huh",
+            "what?",
+            "sure",
+            "your",
+            "hold",
+            "you're",
+            "like",
+            "next",
+            "uh uh",
+            "you are",
+            "you",
+        ],
+        "u": [
+            "uh huh",
+            "sure",
+            "next",
+            "what?",
+            "you're",
+            "ur",
+            "uh uh",
+            "done",
+            "u",
+            "you",
+            "like",
+            "hold",
+            "you are",
+            "your",
+        ],
+        "uh huh": [
+            "uh huh",
+            "your",
+            "you are",
+            "you",
+            "done",
+            "hold",
+            "uh uh",
+            "next",
+            "sure",
+            "like",
+            "you're",
+            "ur",
+            "u",
+            "what?",
+        ],
+        "uh uh": [
+            "ur",
+            "u",
+            "you are",
+            "you're",
+            "next",
+            "uh uh",
+            "done",
+            "you",
+            "uh huh",
+            "like",
+            "your",
+            "sure",
+            "hold",
+            "what?",
+        ],
+        "what?": [
+            "you",
+            "hold",
+            "you're",
+            "your",
+            "u",
+            "done",
+            "uh uh",
+            "like",
+            "you are",
+            "uh huh",
+            "ur",
+            "next",
+            "what?",
+            "sure",
+        ],
+        "done": [
+            "sure",
+            "uh huh",
+            "next",
+            "what?",
+            "your",
+            "ur",
+            "you're",
+            "hold",
+            "like",
+            "you",
+            "u",
+            "you are",
+            "uh uh",
+            "done",
+        ],
+        "next": [
+            "what?",
+            "uh huh",
+            "uh uh",
+            "your",
+            "hold",
+            "sure",
+            "next",
+            "like",
+            "done",
+            "you are",
+            "ur",
+            "you're",
+            "u",
+            "you",
+        ],
+        "hold": [
+            "you are",
+            "u",
+            "done",
+            "uh uh",
+            "you",
+            "ur",
+            "sure",
+            "what?",
+            "you're",
+            "next",
+            "hold",
+            "uh huh",
+            "your",
+            "like",
+        ],
+        "sure": [
+            "you are",
+            "done",
+            "like",
+            "you're",
+            "you",
+            "hold",
+            "uh huh",
+            "ur",
+            "sure",
+            "u",
+            "what?",
+            "next",
+            "your",
+            "uh uh",
+        ],
+        "like": [
+            "you're",
+            "next",
+            "u",
+            "ur",
+            "hold",
+            "done",
+            "uh uh",
+            "what?",
+            "uh huh",
+            "you",
+            "like",
+            "sure",
+            "you are",
+            "your",
+        ],
     }
 
     return word_corresponding_list[button_word]

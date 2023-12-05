@@ -14,9 +14,15 @@ def get_bomb_details():
     prompt_text_start = "Is there a "
     prompt_text_end = " on the bomb: "
 
-    parallel = cutie.prompt_yes_or_no(prompt_text_start + "parallel port" + prompt_text_end)
-    frk_light = cutie.prompt_yes_or_no(prompt_text_start + "lit FRK indicator" + prompt_text_end)
-    car_light = cutie.prompt_yes_or_no(prompt_text_start + "lit CAR indicator" + prompt_text_end)
+    parallel = cutie.prompt_yes_or_no(
+        prompt_text_start + "parallel port" + prompt_text_end
+    )
+    frk_light = cutie.prompt_yes_or_no(
+        prompt_text_start + "lit FRK indicator" + prompt_text_end
+    )
+    car_light = cutie.prompt_yes_or_no(
+        prompt_text_start + "lit CAR indicator" + prompt_text_end
+    )
     serial_number_input_str = input("Please enter the Serial Number: ")
     batteries = input("Please enter the number of batteries on the bomb: ")
 
@@ -38,7 +44,13 @@ def get_bomb_details():
 
 
 def wires_input():
-    color_options = ['No more wires', 'red', 'blue', 'black', 'white', ]
+    color_options = [
+        "No more wires",
+        "red",
+        "blue",
+        "black",
+        "white",
+    ]
     selection = 3
     wires_list = []
     while selection != 0:
@@ -54,15 +66,26 @@ def wires():
         3: "Third",
         4: "Fourth",
         5: "Fifth",
-        6: "Sixth"
+        6: "Sixth",
     }
     wire_to_cut = solvers.wires(info_dict["serial_number_list"], wires_input())
     print("Cut the " + label_dict[wire_to_cut] + " wire.")
 
 
 def buttons():
-    button_color_list = ["BLUE", "RED", "WHITE", "YELLOW", "BLACK"]  # all color options for the button
-    button_label_list = ["Abort", "Detonate", "Hold", "Press"]  # all the label Options for the button
+    button_color_list = [
+        "BLUE",
+        "RED",
+        "WHITE",
+        "YELLOW",
+        "BLACK",
+    ]  # all color options for the button
+    button_label_list = [
+        "Abort",
+        "Detonate",
+        "Hold",
+        "Press",
+    ]  # all the label Options for the button
     # Data entry
     color_select = cutie.select(button_color_list)
     label_select = cutie.select(button_label_list)
@@ -70,16 +93,20 @@ def buttons():
     color = button_color_list[color_select]
     label = button_label_list[label_select]
     # Solving
-    push_and_release = solvers.button(info_dict["batteries"],
-                                      info_dict["car_light"],
-                                      info_dict["frk_light"],
-                                      color,
-                                      label)
+    push_and_release = solvers.button(
+        info_dict["batteries"],
+        info_dict["car_light"],
+        info_dict["frk_light"],
+        color,
+        label,
+    )
 
     if push_and_release is False:
         button_indicator_list = ["blue", "yellow", "other"]
         indicator_color_selection = cutie.select(button_indicator_list)
-        held_button_number = solvers.button_indicator_color(button_color_list[indicator_color_selection])
+        held_button_number = solvers.button_indicator_color(
+            button_color_list[indicator_color_selection]
+        )
         print("Release the button with a " + held_button_number + " in any position")
     else:
         print("Push then immediately release the button")
@@ -87,8 +114,10 @@ def buttons():
 
 def maze():
     # data input
-    print("All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )"
-          "\n Top Left (1,1)")
+    print(
+        "All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )"
+        "\n Top Left (1,1)"
+    )
     green_1_input = input("Please enter the coordinate of the green circle : ")
     green_2_input = input("Please enter the coordinate of the other green circle : ")
     start_position_input = input("Please enter the coordinate of the white dot : ")
@@ -119,7 +148,9 @@ def maze():
         green_1.insert(i, green_1_temp - 1)
         green_2.insert(i, green_2_temp - 1)
 
-    route = solvers.maze(ALL_MAZES, green_1, green_2, start_position, end_position)  # Generates route
+    route = solvers.maze(
+        ALL_MAZES, green_1, green_2, start_position, end_position
+    )  # Generates route
 
     # converts route to instructions
     commands = []
@@ -144,10 +175,14 @@ def maze():
     temp_list = []
     while num <= (len(commands) - 2):
         repeated_word = False
-        if commands[num] == commands[num + 1]:  # if there are multiple in order of instructions
+        if (
+            commands[num] == commands[num + 1]
+        ):  # if there are multiple in order of instructions
             word_num += 1
             repeated_word = True
-        if repeated_word is False or num == (len(commands) - 2):  # when the multiples come to an end
+        if repeated_word is False or num == (
+            len(commands) - 2
+        ):  # when the multiples come to an end
             temp_list.append(commands[num])
             temp_list.append(word_num)
             commands_condensed.append(str(commands[num]) + str(word_num))
@@ -156,7 +191,8 @@ def maze():
         num += 1
     if commands[-1] != commands[-2]:
         commands_condensed.append(
-            str(commands[-1]) + str(1))  # appends the last item as this cannot be added like the rest of them.
+            str(commands[-1]) + str(1)
+        )  # appends the last item as this cannot be added like the rest of them.
 
     # output and formatting
     for k in range(len(commands_condensed)):
@@ -176,7 +212,9 @@ def simon_says():
         else:
             color_string = color_options[selected_color]
             color_input_list.append(color_string)
-            color_output_list = solvers.simon_says(info_dict["serial_number_list"], strikes, color_input_list)
+            color_output_list = solvers.simon_says(
+                info_dict["serial_number_list"], strikes, color_input_list
+            )
             rich.print("[bold green]" + color_output_list + "[/bold green]")
 
 
@@ -185,14 +223,21 @@ def memory():
     label_list = []
 
     for stage in range(5):
-        displayed_number = int(input("Please enter the number displayed on the screen of the module: "))
+        displayed_number = int(
+            input("Please enter the number displayed on the screen of the module: ")
+        )
         button_numbers = input(
-            "Please enter the numbers on the keys from left to right with a comma separating each value. i.e. '4,2,1,3")
+            "Please enter the numbers on the keys from left to right with a comma separating each value. i.e. '4,2,1,3"
+        )
         number_list = list(map(int, button_numbers.split(",")))
-        position, label = solvers.memory(displayed_number, position_list, label_list, stage, number_list)
+        position, label = solvers.memory(
+            displayed_number, position_list, label_list, stage, number_list
+        )
         position_list.append(position)
         label_list.append(label)
-        rich.print("[bold green]" + "Press the key labeled '" + str(label) + "'[/bold green]\n")
+        rich.print(
+            "[bold green]" + "Press the key labeled '" + str(label) + "'[/bold green]\n"
+        )
 
 
 def complex_wires():
@@ -204,7 +249,7 @@ def complex_wires():
         0: [False, False],  # White / None
         1: [True, False],  # Red   / Led
         2: [False, True],  # Blue  / Star
-        3: [True, True]  # Both  / Both
+        3: [True, True],  # Both  / Both
     }
 
     while module_completed is False:
@@ -225,8 +270,15 @@ def complex_wires():
         led = led_star[0]
         star = led_star[1]
 
-        cut_wire = solvers.complex_wires(info_dict["serial_number_list"], info_dict["parallel"], info_dict["batteries"],
-                                         red, blue, star, led)
+        cut_wire = solvers.complex_wires(
+            info_dict["serial_number_list"],
+            info_dict["parallel"],
+            info_dict["batteries"],
+            red,
+            blue,
+            star,
+            led,
+        )
 
         if cut_wire is True:
             answer = "Cut the wire."
@@ -238,29 +290,32 @@ def complex_wires():
 
 def passwords():
     first_letter_input = str(
-        input("Enter all of the letters in the first column (E.G. aelzx) : "))
+        input("Enter all of the letters in the first column (E.G. aelzx) : ")
+    )
     second_letter_input = str(
-        input("Enter all of the letters in the Second column (E.G. aelzx) : "))
+        input("Enter all of the letters in the Second column (E.G. aelzx) : ")
+    )
     third_letter_input = str(
-        input("Enter all of the letters in the third column (E.G. aelzx) : "))
+        input("Enter all of the letters in the third column (E.G. aelzx) : ")
+    )
 
     # data formatting
     first_letter_list = list(first_letter_input.strip())
     second_letter_list = list(second_letter_input.strip())
     third_letter_list = list(third_letter_input.strip())
-    answers = solvers.passwords(first_letter_list, second_letter_list, third_letter_list)
+    answers = solvers.passwords(
+        first_letter_list, second_letter_list, third_letter_list
+    )
 
-    rich.print("[bold green] The word is: " + str(answers) + "[/bold green]\n")  # todo fix formatting on answer output
+    rich.print(
+        "[bold green] The word is: " + str(answers) + "[/bold green]\n"
+    )  # todo fix formatting on answer output
 
 
 def wire_sequence():
     print("Please select the color of the wire or exit to exit")
     wire_color_list = ["Exit", "Red", "Blue", "Black"]
-    color_history_dict = {
-        "Red": 0,
-        "Blue": 0,
-        "Black": 0
-    }
+    color_history_dict = {"Red": 0, "Blue": 0, "Black": 0}
 
     while 1 == 1:
         wire_color = cutie.select(wire_color_list, selected_index=1)
@@ -285,7 +340,8 @@ def whose_on_first():  # todo add error handling
         i += 1
         try:
             button_position = solvers.whose_on_first_step_one(
-                input("Please enter the word displayed : ").lower())  # position of button to read
+                input("Please enter the word displayed : ").lower()
+            )  # position of button to read
         except LookupError:
             rich.print("[blink]DISPLAYED WORD NOT FOUND!")
             i -= 1
@@ -293,7 +349,11 @@ def whose_on_first():  # todo add error handling
         try:
             corresponding_word = solvers.whose_on_first_step_two(
                 input(
-                    "Please enter the word in the box that is located in the " + button_position + " : ").lower())
+                    "Please enter the word in the box that is located in the "
+                    + button_position
+                    + " : "
+                ).lower()
+            )
         except LookupError:
             rich.print("[blink]BUTTON WORD NOT FOUND!")
             i -= 1
@@ -315,7 +375,11 @@ def morse():
             print("Options Remaining :{}".format(words))
         if len(words) == 1:
             solved = True
-    rich.print("[bold green] {} [/bold green]".format(solvers.morse_word_to_frequency(words[0].lower())))
+    rich.print(
+        "[bold green] {} [/bold green]".format(
+            solvers.morse_word_to_frequency(words[0].lower())
+        )
+    )
 
 
 def data_load():
@@ -333,14 +397,27 @@ def main():
     data_load()
     new_bomb()
 
-    rich.print("[bold]https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
-               "\n Open the pages on symbols\n"
-               "Also run the program called [reverse]'Knobs.exe'[/reverse] from the same file this needs to run "
-               "separately from the main code.[/bold]\n"
-               "Use the arrow keys to navigate the menus.")
+    rich.print(
+        "[bold]https://www.bombmanual.com/print/KeepTalkingAndNobodyExplodes-BombDefusalManual-v1.pdf"
+        "\n Open the pages on symbols\n"
+        "Also run the program called [reverse]'Knobs.exe'[/reverse] from the same file this needs to run "
+        "separately from the main code.[/bold]\n"
+        "Use the arrow keys to navigate the menus."
+    )
 
-    options_list = ["New Bomb", "Wires", "Buttons", "Maze", "Simon says", "Memory", "Complex wires", "Passwords",
-                    "Wire Sequences", "Morse", "On The Subject Of Whose First"]  # ,"Symbols"
+    options_list = [
+        "New Bomb",
+        "Wires",
+        "Buttons",
+        "Maze",
+        "Simon says",
+        "Memory",
+        "Complex wires",
+        "Passwords",
+        "Wire Sequences",
+        "Morse",
+        "On The Subject Of Whose First",
+    ]  # ,"Symbols"
     while True:
         print("\n \nPlease Select the module you want to solve")
         selection = cutie.select(options_list, selected_index=1)
@@ -382,5 +459,5 @@ def main():
             new_bomb()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

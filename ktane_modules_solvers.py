@@ -23,39 +23,30 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
     # Splits the list in to the number of each wire color
     for i in range(number_of_wires):
         temp = wire_list[i]
-        if temp == "yellow":
+        if temp == "Yellow":
             number_of_yellow_wires += 1
 
-        elif temp == "red":
+        elif temp == "Red":
             number_of_red_wires += 1
 
-        elif temp == "blue":
+        elif temp == "Blue":
             number_of_blue_wires += 1
 
-        elif temp == "black":
+        elif temp == "Black":
             number_of_black_wires += 1
 
-        elif temp == "white":
+        elif temp == "White":
             number_of_white_wires += 1
 
     # Solver N.B. the if/elif/else statements are not combined when the results have the same outputs due to the fact
     # that multiple statements can be true and so it is necessary to run them in the same order of the manual.
     # todo tidy up this comment.
-    answer = ""
+    answer = 0
     if number_of_wires == 3:
-        if number_of_red_wires == 0:
+        if wire_list == ["Blue","Blue","Red"] or number_of_red_wires == 0:
             answer = 1  # "Cut The Second Wire"
-        elif wire_list[-1] == "white":
-            answer = 2  # "Cut The Last Wire"
-        elif number_of_blue_wires > 1:
-            for i in range(number_of_wires):
-                temp_num = -1 - i
-                temp_wire_color = wire_list[temp_num]
-                if temp_wire_color == "blue":
-                    answer = 2 - i  # "Cut The Last Blue Wire"
-                    break
         else:
-            answer = 2  # "Cut Last Wire"
+            answer = 2  # "Cut Third Wire"
 
     elif number_of_wires == 4:
         if number_of_red_wires > 1 and (int(serial_num[-1]) % 2 == 0):

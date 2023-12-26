@@ -43,30 +43,43 @@ def get_bomb_details():
     return bomb_details_dict
 
 
-def wires_input():
+def wires_input(): #Wire colour entry
     color_options = [
         "No more wires",
-        "red",
-        "blue",
-        "black",
-        "white",
+        "Red",
+        "Blue",
+        "Black",
+        "White",
+        "Yellow",
     ]
+    label_dict = {
+        0: "First",
+        1: "Second",
+        2: "Third",
+        3: "Fourth",
+        4: "Fifth",
+        5: "Sixth",
+    }
+    prompt = "Select the {wire} wire:"
     selection = 3
     wires_list = []
-    while selection != 0:
+    print("Select the colour of the wires from top to bottom.")
+    while selection != 0 and len(wires_list) != 6:
+        print(prompt.format(wire = label_dict[len(wires_list)]))
         selection = cutie.select(color_options, selected_index=3)
-        wires_list.append(color_options[selection])
+        if selection !=0:
+            wires_list.append(color_options[selection])
     return wires_list
 
 
 def wires():
     label_dict = {
-        1: "First",
-        2: "Second",
-        3: "Third",
-        4: "Fourth",
-        5: "Fifth",
-        6: "Sixth",
+        0: "First",
+        1: "Second",
+        2: "Third",
+        3: "Fourth",
+        4: "Fifth",
+        5: "Sixth",
     }
     wire_to_cut = solvers.wires(info_dict["serial_number_list"], wires_input())
     print("Cut the " + label_dict[wire_to_cut] + " wire.")

@@ -87,7 +87,9 @@ def buttons():
         "Press",
     ]  # all the label Options for the button
     # Data entry
+    print("Choose the colour of the button;")
     color_select = cutie.select(button_color_list)
+    print("Select the lable on the button")
     label_select = cutie.select(button_label_list)
     # int str conversion
     color = button_color_list[color_select]
@@ -102,7 +104,10 @@ def buttons():
     )
 
     if push_and_release is False:
-        button_indicator_list = ["blue", "yellow", "other"]
+        rich.print("[b u]Hold the button.")
+        print("Select the colour of the indicator light")
+
+        button_indicator_list = ["Blue", "Yellow", "Other"]
         indicator_color_selection = cutie.select(button_indicator_list)
         held_button_number = solvers.button_indicator_color(
             button_indicator_list[indicator_color_selection]

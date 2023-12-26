@@ -105,9 +105,9 @@ def buttons():
         button_indicator_list = ["blue", "yellow", "other"]
         indicator_color_selection = cutie.select(button_indicator_list)
         held_button_number = solvers.button_indicator_color(
-            button_color_list[indicator_color_selection]
+            button_indicator_list[indicator_color_selection]
         )
-        print("Release the button with a " + held_button_number + " in any position")
+        print("Release the button with a " + str(held_button_number) + " in any position")
     else:
         print("Push then immediately release the button")
 

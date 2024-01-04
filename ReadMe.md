@@ -23,15 +23,10 @@ For Symbols, I recommend using the manual page as that is the most effective way
 
 
 ## Known issues:
-Whole Program Is Borked
-Use Version 2
-during the rewrite the program was split into multiple files. one to solve the modules and one to deal with the overall bomb (crap explination but i cant think of a better way)
-the issues seam to arrive from:
-a complete lack of automated testing 
-the implimentation in the overall script
+As far as i am aware the program functions as intended now.  there will be more testing. 
 
-Soloutin is to build a test sweet for both scripts.
-i have time this month so it is aiming to be compleeted at the end of december early january.
+morce module has been rewritten.
+
 
 
 

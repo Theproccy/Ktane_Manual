@@ -43,7 +43,7 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
     # todo tidy up this comment.
     answer = 0
     if number_of_wires == 3:
-        if wire_list == ["Blue","Blue","Red"] or number_of_red_wires == 0:
+        if wire_list == ["Blue", "Blue", "Red"] or number_of_red_wires == 0:
             answer = 1  # "Cut The Second Wire"
         else:
             answer = 2  # "Cut Third Wire"
@@ -169,7 +169,7 @@ def button(
 
 def button_indicator_color(color: str):
     held_button_dict = {"blue": 4, "yellow": 5, "other": 1}
-    return held_button_dict[color]
+    return held_button_dict[color.lower()]
 
 
 def maze(
@@ -299,7 +299,7 @@ def memory(
 
     position = 0
     label = 0
-    if stage == 1:  # Stage 1
+    if stage == 0:  # Stage 1
         if display_number == 1 or display_number == 2:
             position = 2  # Second position
             label = button_number_order[position - 1]
@@ -310,7 +310,7 @@ def memory(
             position = 4  # Forth position
             label = button_number_order[position - 1]
 
-    elif stage == 2:  # Stage 2
+    elif stage == 1:  # Stage 2
         if display_number == 1:
             label = 4  # Labeled 4
             position = button_number_order.index(label) + 1
@@ -321,7 +321,7 @@ def memory(
             position = 1  # First position
             label = button_number_order[position - 1]
 
-    elif stage == 3:  # Stage 3
+    elif stage == 2:  # Stage 3
         if display_number == 1:
             label = label_list[1]  # Same label as stage 2
             position = button_number_order.index(label) + 1
@@ -335,7 +335,7 @@ def memory(
             label = 4  # Labeled 4
             position = button_number_order.index(label) + 1
 
-    elif stage == 4:  # Stage 4
+    elif stage == 3:  # Stage 4
         if display_number == 1:
             position = position_list[0]  # Same position as stage 1
             label = button_number_order[position - 1]
@@ -346,7 +346,7 @@ def memory(
             position = position_list[1]  # Same position as stage 2
             label = button_number_order[position - 1]
 
-    elif stage == 5:  # Stage 5
+    elif stage == 4:  # Stage 5
         if display_number == 1:
             label = label_list[0]  # Same label as stage 1
             position = button_number_order.index(label) + 1
@@ -596,7 +596,7 @@ def complex_wires(
     return cut
 
 
-def passwords(
+def password_list(
     first_letter_list: list, second_letter_list: list, third_letter_list: list
 ):
     """
@@ -604,7 +604,7 @@ def passwords(
     :param first_letter_list: List of all the letters in the first column ["a","e","l","z","x"]
     :param second_letter_list: List of all the letters in the second column ["a","e","l","z","x"]
     :param third_letter_list: List of all the letters in the third column ["a","e","l","z","x"]
-    :return: list of possible words ["about","after"] only one will be compatible
+    :return: list of possible word_list ["about","after"] only one will be compatible
     """
 
     # var creation
@@ -813,12 +813,27 @@ def morse_word_list():
     ]
 
 
-def morse_smart_sort(letter, word_list):
-    new_word_list = []
+def morse_smart_sort(
+    letters, word_list
+):  # Removes words from the word_list which don't contain all the letters in letters]
+    new_words_list = []
     for i in range(len(word_list)):
-        if letter in word_list[i]:
-            new_word_list.append(word_list[i])
-    return new_word_list
+        word = list(word_list[i])
+        contains_letters = False
+        for j in range(len(letters)):
+            if letters[j] in word:
+                word.remove(letters[j])
+                contains_letters = True
+            else:
+                contains_letters = False
+                break
+        if contains_letters is True:
+            new_words_list.append(word_list[i])
+
+    if len(new_words_list) == 0:
+        return word_list
+    else:
+        return new_words_list
 
 
 def whose_on_first_step_one(displayed_word=""):  # todo test
@@ -864,7 +879,7 @@ def whose_on_first_step_one(displayed_word=""):  # todo test
 def whose_on_first_step_two(button_word=""):
     """
     :param button_word:  The word on the button in the position indicated
-    :return:list of words to be tried in order
+    :return:list of word_list to be tried in order
     """
     word_corresponding_list = {
         "ready": [

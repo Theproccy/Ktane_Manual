@@ -43,7 +43,7 @@ def get_bomb_details():
     return bomb_details_dict
 
 
-def wires_input(): #Wire colour entry
+def wires_input():  # Wire colour entry
     color_options = [
         "No more wires",
         "Red",
@@ -65,9 +65,9 @@ def wires_input(): #Wire colour entry
     wires_list = []
     print("Select the colour of the wires from top to bottom.")
     while selection != 0 and len(wires_list) != 6:
-        print(prompt.format(wire = label_dict[len(wires_list)]))
+        print(prompt.format(wire=label_dict[len(wires_list)]))
         selection = cutie.select(color_options, selected_index=3)
-        if selection !=0:
+        if selection != 0:
             wires_list.append(color_options[selection])
     return wires_list
 
@@ -125,7 +125,9 @@ def buttons():
         held_button_number = solvers.button_indicator_color(
             button_indicator_list[indicator_color_selection]
         )
-        print("Release the button with a " + str(held_button_number) + " in any position")
+        print(
+            "Release the button with a " + str(held_button_number) + " in any position"
+        )
     else:
         print("Push then immediately release the button")
 
@@ -133,7 +135,7 @@ def buttons():
 def maze():
     # data input
     print(
-        "All Coordinates are to be entered like so : x,y  (e.g. (3,5) would be 3,5 )"
+        "All Coordinates are to be entered like so : xy  (e.g. (3,5) would be 35 )"
         "\n Top Left (1,1)"
     )
     green_1_input = input("Please enter the coordinate of the green circle : ")
@@ -142,17 +144,11 @@ def maze():
     end_position_input = input("Please enter the coordinate of the red triangle : ")
     print("\n")  # quality of life new line
 
-    # Formatting
-    green_1 = green_1_input.split(",")
-    green_2 = green_2_input.split(",")
-    start_position = start_position_input.split(",")
-    end_position = end_position_input.split(",")
-
     # str to int
-    green_1 = list(map(int, green_1))
-    green_2 = list(map(int, green_2))
-    start_position = list(map(int, start_position))
-    end_position = list(map(int, end_position))
+    green_1 = list(map(int, green_1_input.strip("")))
+    green_2 = list(map(int, green_2_input.strip("")))
+    start_position = list(map(int, start_position_input.strip("")))
+    end_position = list(map(int, end_position_input.strip("")))
 
     # subtracts 1 so that the maze pathfinding works
     for i in range(len(start_position)):
@@ -245,9 +241,9 @@ def memory():
             input("Please enter the number displayed on the screen of the module: ")
         )
         button_numbers = input(
-            "Please enter the numbers on the keys from left to right with a comma separating each value. i.e. '4,2,1,3"
+            "Please enter the numbers on the keys from left to right i.e. 4213:\n"
         )
-        number_list = list(map(int, button_numbers.split(",")))
+        number_list = list(map(int, button_numbers.strip("")))
         position, label = solvers.memory(
             displayed_number, position_list, label_list, stage, number_list
         )
@@ -386,11 +382,9 @@ def morse():
     solved = False
     words = solvers.morse_word_list()
     while solved is False:
-        text = input("Please enter as many letters as you have decoded: ")  # input
-        text_list = list(text.lower())
-        for i in range(len(text_list)):
-            words = solvers.morse_smart_sort(text_list[i], words)
-            print("Options Remaining :{}".format(words))
+        letters = input("Please enter as many letters as you have decoded: ")  # input
+        words = solvers.morse_smart_sort(letters, words)
+        print("Options Remaining :{}".format(words))
         if len(words) == 1:
             solved = True
     rich.print(
@@ -479,4 +473,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

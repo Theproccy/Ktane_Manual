@@ -142,3 +142,4 @@ cython_debug/
 *.code-workspace
 /Assets/
 /Backups/
+scratch.py

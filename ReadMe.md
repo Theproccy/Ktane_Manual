@@ -25,7 +25,11 @@ For Symbols, I recommend using the manual page as that is the most effective way
 ## Known issues:
 As far as i am aware the program functions as intended now.  there will be more testing. 
 
-morce module has been rewritten.
+fixes
+maze when no data is enterd
+simon says fix deplay text
+
+
 
 
 

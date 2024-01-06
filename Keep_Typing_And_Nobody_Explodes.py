@@ -229,7 +229,7 @@ def simon_says():
             color_output_list = solvers.simon_says(
                 info_dict["serial_number_list"], strikes, color_input_list
             )
-            rich.print("[bold green]" + color_output_list + "[/bold green]")
+            rich.print("[bold green]{}[/bold green]\n".format(color_output_list))
 
 
 def memory():
@@ -317,7 +317,7 @@ def passwords():
     first_letter_list = list(first_letter_input.strip())
     second_letter_list = list(second_letter_input.strip())
     third_letter_list = list(third_letter_input.strip())
-    answers = solvers.passwords(
+    answers = solvers.password_list(
         first_letter_list, second_letter_list, third_letter_list
     )
 

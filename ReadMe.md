@@ -21,19 +21,10 @@ person needing to have an exceptional understanding of the game. It may just hel
 
 For Symbols, I recommend using the manual page as that is the most effective way we have discovered through testing.
 
-
-## Known issues:
-As far as i am aware the program functions as intended now.  there will be more testing. 
-
-fixes
-maze when no data is enterd
-simon says fix deplay text
-
-
-
-
-
-
+## Roadmap
+1. TODOs
+1. Complete Tests
+2. Fixes
 
 ## How to run
 1. Unzip the file

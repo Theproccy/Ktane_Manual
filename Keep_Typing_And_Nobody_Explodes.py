@@ -1,8 +1,6 @@
 import json
-
 import cutie
 import rich
-
 import ktane_modules_solvers as solvers
 
 # global declare
@@ -98,11 +96,11 @@ def buttons():
         "Detonate",
         "Hold",
         "Press",
-    ]  # all the label Options for the button
+    ]  # all the label options for the button
     # Data entry
     print("Choose the colour of the button;")
     color_select = cutie.select(button_color_list)
-    print("Select the lable on the button")
+    print("Select the label on the button")
     label_select = cutie.select(button_label_list)
     # int str conversion
     color = button_color_list[color_select]
@@ -229,7 +227,7 @@ def simon_says():
             color_output_list = solvers.simon_says(
                 info_dict["serial_number_list"], strikes, color_input_list
             )
-            rich.print("[bold green]{}[/bold green]\n".format(color_output_list))
+            rich.print(f"[bold green]{color_output_list}[/bold green]\n")
 
 
 def memory():
@@ -384,13 +382,11 @@ def morse():
     while solved is False:
         letters = input("Please enter as many letters as you have decoded: ")  # input
         words = solvers.morse_smart_sort(letters, words)
-        print("Options Remaining :{}".format(words))
+        print(f"Options Remaining :{words}")
         if len(words) == 1:
             solved = True
     rich.print(
-        "[bold green] {} [/bold green]".format(
-            solvers.morse_word_to_frequency(words[0].lower())
-        )
+        f"[bold green] {solvers.morse_word_to_frequency(words[0].lower())} [/bold green]"
     )
 
 
@@ -465,7 +461,7 @@ def main():
             whose_on_first()
 
         elif selection == 11:
-            pass  # symbols() TODO
+            pass  # symbols() #TODO
 
         elif selection == 0:
             new_bomb()

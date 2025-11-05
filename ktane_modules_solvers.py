@@ -1,4 +1,4 @@
-""" A Library of solvers for the included modules in the game Keep talking nobody explodes"""
+"""A Library of solvers for the included modules in the game Keep talking nobody explodes"""
 
 import find_path as pathfinder
 
@@ -38,9 +38,8 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
         elif temp == "White":
             number_of_white_wires += 1
 
-    # Solver N.B. the if/elif/else statements are not combined when the results have the same outputs due to the fact
-    # that multiple statements can be true and so it is necessary to run them in the same order of the manual.
-    # todo tidy up this comment.
+    # Solver N.B. the if/elif/else statements are not combined regardless of if the results have the same outputs due to the possibility of multiple statements being true and so it is necessary to run them in the same order of the manual.
+
     answer = 0
     if number_of_wires == 3:
         if wire_list == ["Blue", "Blue", "Red"] or number_of_red_wires == 0:
@@ -689,7 +688,7 @@ def wire_sequences(color: str, color_history_dict: dict):  # todo test
         "Blue": 3,
         "Black": 2
     }
-    :return: the terminals that if connect to the wire should be cut.  todo improve
+    :return: The terminals that if connected to, the wire should be cut.
     """
 
     red = color_history_dict["Red"]

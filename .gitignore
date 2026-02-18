@@ -144,3 +144,4 @@ cython_debug/
 /Backups/
 scratch.py
 shell.nix
+.vscode/launch.json

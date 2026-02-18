@@ -54,7 +54,6 @@ def wires(serial_num: list, wire_list: list):  # Module for Simple wires
                 temp_wire_color = wire_list[temp_num]
                 if temp_wire_color == "Red":
                     answer = number_of_wires - i  # "Cut The Last red Wire"
-                    break
         elif wire_list[-1] == "Yellow" and number_of_red_wires == 0:
             answer = 0  # "Cut The First Wire"
         elif number_of_blue_wires == 1:

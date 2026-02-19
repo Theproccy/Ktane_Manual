@@ -230,7 +230,7 @@ def test_simon_says():  # todo fill out
     return temp
 
 
-# print(test_wires())
-# print(test_button())
-# print(test_maze())
+print(test_wires())
+print(test_button())
+print(test_maze())
 print(test_simon_says())

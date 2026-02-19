@@ -144,3 +144,5 @@ cython_debug/
 /Backups/
 scratch.py
 shell.nix
+.vscode/settings.json
+.cspell/custom-dictionary-workspace.txt
